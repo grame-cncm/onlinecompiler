@@ -1,0 +1,67 @@
+#OSC_ALLOWED
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+
+PROCARCH := 32bits
+
+applname := $(faustfile:.dsp=)
+cppfile := $(faustfile:.dsp=.cpp)
+readme := ../../../images/element/README
+pkgdir := $(faustfile:.dsp=-pkg)
+pkgfile := $(pkgdir).zip
+svgdir := $(faustfile)-svg
+svgfile := $(svgdir)/process.svg
+
+localPath := pwd
+
+### Customize these elements
+binaryfile 	:= $(applname)
+compBinaryfile	:= $(applname)
+ARCH		:= jack-console.cpp 
+LIB		:= -I gui -I audio -I. `pkg-config --cflags --libs jack` $(OSCLIB)
+### End Customize
+
+ifeq ($(PROCARCH), 32bits)
+ARCHPROC := -m32 -L/usr/lib32
+else
+ARCHPROC := -m64
+endif
+
+binary : $(binaryfile)
+	echo $(compBinaryfile) > binaryfilename.txt
+
+source : $(cppfile)
+
+source-pkg : $(pkgfile) 
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(cppfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(pkgfile) 
+	
+
+$(cppfile) : $(faustfile)
+	if test -d gui; then dep=0; else mkdir gui && mkdir audio && cp /usr/local/lib/faust/misc.h $(DSPDEPTS) . && cp /usr/local/lib/faust/gui/console.h ./gui && cp /usr/local/lib/faust/gui/GUI.h ./gui && cp /usr/local/lib/faust/gui/UI.h ./gui && cp /usr/local/lib/faust/audio/jack-dsp.h ./audio && cp /usr/local/lib/faust/audio/audio.h ./audio && cp /usr/local/lib/faust/audio/dsp.h ./audio;fi
+	$(osclibcp)
+
+	faust -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log	
+
+$(svgfile) : $(cppfile)
+	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
+	
+$(binaryfile) : $(cppfile)
+	g++ $(cppfile) -O3 $(OSCCTRL) $(ARCHPROC) $(LIB) -o $(binaryfile)
+	zip -r $(compBinaryfile) $(binaryfile)
+	
+$(pkgfile) : $(faustfile) $(cppfile)
+	mkdir $(pkgdir)
+	cp $(readme) $(faustfile) $(cppfile) Makefile $(pkgdir)
+	cp -r ./gui ./audio misc.h $(pkgdir)
+	zip -r $(pkgfile) $(pkgdir)
+

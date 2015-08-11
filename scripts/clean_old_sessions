@@ -1,0 +1,19 @@
+#!/bin/bash
+
+for n in tmp/*
+do
+  res=""
+  if [ -d $n ]
+  then
+    cd $n
+    res=`find -name history.txt -amin +10`
+    cd ../../
+    if [ "$res" = "./history.txt" ]
+    then
+      if [ "$n" != "./tmp" ]
+      then
+        rm -r $n
+      fi
+    fi
+  fi
+done

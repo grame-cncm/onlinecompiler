@@ -1,0 +1,57 @@
+//-----------------------------------------------
+// 		Simulation d'une harpe avec controle
+//		gestuel par messages OSC
+//-----------------------------------------------
+
+declare name  	"Harpe";
+declare author  "Astree";
+
+process = harpe(11); // : library("effect.lib").zita_rev1;
+
+
+//-----------------------------------------------
+// 		Generateur de bruit blanc
+//-----------------------------------------------
+noise 	= random / RANDMAX
+	with {
+		random 		= +(12345) ~ *(1103515245);
+		RANDMAX		= 2147483647.0;
+	};
+
+
+//-----------------------------------------------
+// 		Simulation d'une corde de harpe
+//		(basé sur Karplus-Strong)
+//-----------------------------------------------
+corde(freq, att, level, trig) = noise*level
+							: *(trig : trigger(freq2samples(freq)))
+							: resonator(freq2samples(freq), att)
+	with {
+		resonator(d, a) = (+ : @(d-1)) ~ (average : *(1.0-a)) ;
+		average(x)	= (x+x')/2;
+		trigger(n) 	= upfront : + ~ decay(n) : >(0.0); 
+		upfront(x) 	= (x-x') > 0.0;
+		decay(n,x)	= x - (x>0.0)/n;
+		freq2samples(f) = 44100.0/f;
+	};
+
+
+//-----------------------------------------------
+// 		Construction de la harpe à N corde
+//		Chaque corde est déclenchée par une 
+//		position de la main (entre 0 et 1)
+//-----------------------------------------------
+harpe(N) = 	hand <: par(i, N, position((i+0.5)/N) 
+							: corde( 440 * 2.0^(i/5.0), att, lvl)
+							: pan((i+0.5)/N) )
+				 :> _,_
+	with {
+		lvl  = hslider("level [osc:/accxyz/0 -10 10]", 0, 0, 1, 0.01)^2;
+		att  = hslider("attenuation [osc:/1/fader3]", 0.005, 0, 0.01, 0.001);
+		hand = hslider("hand[osc:/accxyz/1 -10 10]", 0, 0, 1, 0.01);
+		pan(p) = _ <: *(sqrt(1-p)), *(sqrt(p));
+		position(a,x) = (min(x,x') < a) & (a < max(x, x'));
+	};
+		
+
+			

@@ -1,0 +1,9 @@
+declare name        "MSdecoder";
+declare version     "1.0";
+declare author      "Robin Gareus";
+declare license     "BSD";
+declare copyright   "(c) 2013 Robin Gareus <robin@gareus.org>";                                                                                
+
+outL (x) = * (1.0) , * (1.0) : + ;
+outR (x) = * (1.0) , * (-1.0) : + ;
+process = _,_ <: outL,outR;

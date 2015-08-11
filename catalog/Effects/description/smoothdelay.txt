@@ -1,0 +1,1 @@
+A stereo smooth delay with a feedback control. This example shows how to use sdelay, a delay that doesn't click and doesn't transpose when the delay time is changed.

@@ -1,0 +1,3 @@
+karplus32 is an enriched version of karplus (so to understand the working of karplus32, please start by reading the explanations for karplus), with 32 resonators in parallel, instead of one resonator only. This resonator network has a detuning function that allows to attribute to each resonator a different reverberation time.
+
+

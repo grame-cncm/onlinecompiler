@@ -1,0 +1,57 @@
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+
+PROCARCH := 64bits
+
+applname := $(faustfile:.dsp=)
+cppfile := $(faustfile:.dsp=.cpp)
+pkgdir := $(faustfile:.dsp=-pkg)
+pkgfile := $(pkgdir).zip
+svgdir := $(faustfile)-svg
+svgfile := $(svgdir)/process.svg
+
+### Customize these elements
+binaryfile 	:= $(applname)
+compBinaryfile	:= $(applname).zip
+ARCH		:= matlabplot.cpp 
+
+system		:= $(shell uname -s)
+
+ifeq ($(PROCARCH), 32bits)
+ARCHPROC := -arch32
+else
+ARCHPROC := -arch64
+endif
+### End Customize
+
+
+binary : $(binaryfile)
+
+source : $(cppfile)
+
+source-pkg : $(cppfile) 
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(cppfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(compBinaryfile) $(cppfile) $(svgdir)
+
+$(cppfile) : $(faustfile)
+	if test -d $(DSPDEPTS);then dep=0;else cp $(DSPDEPTS) .;fi
+	faust -uim -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+	
+$(svgfile) : $(cppfile)
+	faust $(faustfile) -svg $(OPT) >/dev/null 2> errors.log
+
+$(binaryfile) : $(cppfile)
+	faust2plot $(OPT) $(ARCHPROC) $(faustfile)
+	zip -r $(compBinaryfile) $(binaryfile)
+	rm $(binaryfile)
+	echo $(compBinaryfile) > binaryfilename.txt
+

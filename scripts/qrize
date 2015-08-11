@@ -1,0 +1,2 @@
+#!/bin/bash
+qrencode -o qr.png $1

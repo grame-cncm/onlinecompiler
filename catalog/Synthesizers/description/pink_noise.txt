@@ -1,0 +1,2 @@
+Pink noise (1/f noise) generator (third-order approximation)<br>
+<a href="https://ccrma.stanford.edu/~jos/sasp/Example_Synthesis_1_F_Noise.html">https://ccrma.stanford.edu/~jos/sasp/Example_Synthesis_1_F_Noise.html</a>

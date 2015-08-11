@@ -1,0 +1,44 @@
+#####################################################################################
+#
+#	cross compile headless alsa-console applications for the raspberry pi with an
+# embedded HTTP web interface
+#
+#####################################################################################
+
+
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+
+applname := $(faustfile:.dsp=)
+cppfile := $(faustfile:.dsp=.cpp)
+pkgfile := $(applname).zip
+svgdir := $(faustfile)-svg
+svgfile := $(svgdir)/process.svg
+
+################################## server targets ####################################
+
+binary : $(pkgfile)
+	echo $(pkgfile) > binaryfilename.txt
+
+source : $(cppfile)
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(cppfile)
+	faust2mathdoc $(faustfile)
+	
+################################## implementation ####################################
+
+$(cppfile) : $(faustfile)
+	faust $(faustfile) -i -a alsa-console.cpp $(OPT) -o $(cppfile) 2> errors.log
+	
+$(svgfile) : $(faustfile)
+	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
+	
+$(pkgfile) : $(faustfile) $(cppfile)
+	faust2rpialsaconsole -httpd $(faustfile)
+	zip -r $(pkgfile) $(applname)
+

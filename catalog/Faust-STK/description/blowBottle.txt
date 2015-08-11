@@ -1,0 +1,1 @@
+This object implements a helmholtz resonator (biquad filter) with a polynomial jet excitation (a la Cook).

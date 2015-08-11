@@ -1,0 +1,1 @@
+The multibandfilter function is an evolution of bandfilter. It is in fact a series of filters with different center frequencies. That way, you can modify the signal range of frequencies by range of frequencies. Multibandfilter could also have been called equalizer. 

@@ -1,0 +1,6 @@
+#!/bin/bash
+for n in catalog/"$1"/src/*.dsp
+do
+  echo `basename ${n%.*}`
+done
+echo "#";

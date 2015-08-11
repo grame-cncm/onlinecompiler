@@ -1,0 +1,2 @@
+karplus imitates the sound produced by a string excitation. The excitation is then passed through a resonator which parameters (reverberation time, and efficency) can be chosen to modify the final sound.
+

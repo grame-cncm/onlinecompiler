@@ -1,0 +1,99 @@
+#!/bin/bash
+
+#on verifie que l'utilisateur a donne un nom de dossier
+if [ $# -ne 1 ]
+then
+    echo Usage: $0 dossier_exemple 
+    echo Ce script met a jour la base de donnees faust avec les exemples presents dans le dossier "dossier_exemple"
+    exit 1
+fi
+
+#on verifie que l'utilisateur est root
+if [ $(whoami) != "root" ]
+then
+  echo "You must be logged as root to run this script."
+  exit 1
+fi
+
+if [ $1 = "clean" ]
+then
+  rm -r ../exemples/*/*
+  mkdir ../exemples/exec
+    mkdir ../exemples/exec/jack-gtk
+    mkdir ../exemples/exec/jack-console
+    mkdir ../exemples/exec/alsa-gtk
+    mkdir ../exemples/exec/oss-gtk
+    mkdir ../exemples/exec/bench
+    mkdir ../exemples/exec/sndfile
+    mkdir ../exemples/exec/supercollider
+    mkdir ../exemples/exec/q
+  mkdir ../exemples/src
+  mkdir ../exemples/diagram
+  mkdir ../exemples/capture
+  mkdir ../exemples/pdf
+  mkdir ../exemples/description
+  exit 1;
+fi
+######################### COPIE DES FICHIERS #######################
+
+echo copie des fichiers .dsp ...
+#copie des fichiers .dsp
+for n in $1/src/*.dsp 
+do
+#echo copie $n
+cp $n ../exemples/src/.
+done
+
+echo copie des fichiers .png ...
+#copie des fichiers .png
+for n in $1/capture/*.png 
+do
+#echo copie $n
+cp $n ../exemples/capture/.
+done
+
+echo copie des executables ...
+#copie des executables
+for n in $1/exec/*
+do
+for m in $n/* 
+do
+#echo copie $m
+cp $m ../exemples/exec/`basename $n`/.
+done
+done
+
+echo copie des fichiers .svg ...
+#copie des fichiers .svg
+for n in $1/diagram/* 
+do
+mkdir ../exemples/diagram/`basename ${n%.*}`/
+for m in $n/*.svg 
+do
+#echo copie $m
+cp $m ../exemples/diagram/`basename $n`/.
+done
+done
+
+echo copie des fichiers pdf ...
+#copie des fichiers pdf
+for n in $1/pdf/*.pdf 
+do
+#echo copie $n
+cp $n ../exemples/pdf/.
+done
+
+echo copie des descriptions ...
+#copie des fichiers txt
+for n in $1/description/*.txt 
+do
+#echo copie $n
+cp $n ../exemples/description/.
+done
+
+# installer : http://www.imagemagick.org/script/download.php
+echo creations des captures reduites ...
+for I in ../exemples/capture/*.png
+do 
+  convert -filter Cubic -resize 200x150 -quality 1000 $I ${I%.*}_compr.png 
+done

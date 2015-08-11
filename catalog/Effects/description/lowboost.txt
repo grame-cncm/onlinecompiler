@@ -1,0 +1,1 @@
+The process lowboost amplifies the frequencies of its input signal that are situated under a threshold frequency. In this function, the threshold frequency (or cut frequency) can be chosen in the whole audible range (from 20Hz to 20kHz).

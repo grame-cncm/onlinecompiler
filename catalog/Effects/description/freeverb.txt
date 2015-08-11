@@ -1,0 +1,2 @@
+The freeverb function allows to simulate the sound reverberated by a room of a certain size, and to mix it with the original sound. It is based on a 8 parallel comb filters, plugged in a series of 4 allpass filters.
+

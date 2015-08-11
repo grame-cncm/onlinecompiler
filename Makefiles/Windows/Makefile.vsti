@@ -1,0 +1,95 @@
+### The system we are running on
+system		:= $(shell uname -s)
+processor 	:= $(shell uname -p)
+
+# we need a target OS (Linux, OSX, Windows) if not already declared
+ifndef OS
+	ifeq ($(system), Darwin)
+		OS := OSX
+	else
+		OS := Windows
+	endif
+endif
+
+#------------------------------------------------------------------------------
+# 1/ VST SDK Should be installed somewhere
+VST=/usr/local/lib/vstsdk2.4
+
+
+################################## SETTINGS FOR WINDOWS TARGET #####################################
+ifeq ($(OS), Windows)
+
+	ifeq ($(system), Linux)
+		# we are crosscompiling using mingw crosscompiler ('mingw32' package on Ubuntu)
+		CROSS := i586-mingw32msvc-
+	endif
+
+	# the tools we are going to use
+	CXX := $(CROSS)g++
+	CXXFLAGS := -O3 -mfpmath=sse -msse -ffast-math -I$(VST) -I$(VST)/public.sdk/source/vst2.x -DBUILDING_DLL -mno-cygwin
+	LDFLAGS :=
+	DLLWRAP := $(CROSS)dllwrap --target=i386-mingw32 -mno-cygwin
+	STRIP := $(CROSS)strip
+
+	# the binary file we want to produce
+	binaryfile := $(faustfile:.dsp=.dll)
+
+endif
+
+
+################################ COMMON SETTINGS FOR ALL TARGETS ###################################
+
+##faustfile := $(wildcard *.dsp) Now defined explicitely
+applname := $(faustfile:.dsp=)
+cppfile := $(faustfile:.dsp=.cpp)
+objfile := $(faustfile:.dsp=.o)
+pkgdir := $(faustfile:.dsp=-pkg)
+pkgfile := $(pkgdir).tgz
+svgdir := $(faustfile)-svg
+svgfile := $(svgdir)/process.svg
+deffile := $(faustfile:.dsp=.def)
+
+
+### Customize these elements
+ARCH		:= vst.cpp
+### End Customize
+
+
+############################################ TARGETS #############################################
+
+binary :
+	faust2w32vst $(faustfile)
+	echo $(binaryfile) > binaryfilename.txt
+
+source : $(cppfile)
+
+source-pkg : $(pkgfile)
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(faustfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf *.o *.cpp *.def $(svgdir) $(pkgdir) $(binaryfile) $(pkgfile)
+
+
+$(cppfile) : $(faustfile)
+	faust -i -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+
+$(svgfile) : $(faustfile)
+	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
+
+$(pkgfile) : $(faustfile) $(cppfile) $(deffile)
+	mkdir $(pkgdir)
+	cp $(faustfile) $(cppfile) $(deffile) Makefile $(pkgdir)
+	tar czf $(pkgfile) $(pkgdir)
+
+# we need to create the .def file needed to generate the .dll
+$(deffile) :
+	@echo LIBRARY     $(applname) 						> $@
+	@echo DESCRIPTION \'Faust generated VST plugin\' 	>> $@
+	@echo EXPORTS     main=VSTPluginMain 				>> $@

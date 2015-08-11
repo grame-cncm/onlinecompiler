@@ -1,0 +1,1 @@
+A nonlinear version of the extended Karplus-Strong.

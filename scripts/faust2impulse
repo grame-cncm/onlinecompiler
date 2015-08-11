@@ -1,0 +1,97 @@
+#!/bin/bash
+
+#-------------------------------------------------------------------
+# Check darwin specifics
+#
+if [[ $(uname) == Darwin ]]; then
+    MARCH=""
+else 
+    MARCH="-march=native"
+fi
+	
+#-------------------------------------------------------------------
+# Default compilation flags for gcc and icc :
+#
+MYGCCFLAGS="-O3 $MARCH -mfpmath=sse -msse -msse2 -msse3 -ffast-math -ftree-vectorize"
+MYICCFLAGS="-O3 -xHost -ftz -fno-alias -fp-model fast=2"
+
+CXX=g++
+CXXFLAGS=$MYGCCFLAGS
+
+f=$1
+impLength=$2
+impType=$3
+winSize=$4
+Fs=44100
+
+if [[ $impType == "Spectrogram" ]]; then
+    faust -a scripts/matlabplot.cpp $f -o "$f.spec.cpp"
+    (
+	${CXX=g++} ${CXXFLAGS=-O3} "$f.spec.cpp" -o "${f%.dsp}"
+    ) > /dev/null
+    specLength=$(echo "scale=3;$Fs*($impLength/1000)" | bc)
+    ./"${f%.dsp}" -n $specLength > "${f%.dsp}.m"
+    echo "
+specgram(faustout,$winSize,$Fs);
+print -djpeg ${f%.dsp}.spec.jpeg" >> ${f%.dsp}.m
+    octave ${f%.dsp}.m  > /dev/null
+    rm $f.spec.cpp ${f%.dsp} ${f%.dsp}.m
+else
+    echo "process = 1-1' <: component(\"$f\");" > $f.imp
+	
+# compile faust to c++
+    faust -a scripts/matlabplot.cpp -xml "$f.imp" -o "$f.imp.cpp"
+
+# compile c++ to binary
+    (
+	${CXX=g++} ${CXXFLAGS=-O3} "$f.imp.cpp" -o "${f%.dsp}"
+    ) > /dev/null
+
+# run binary to generate data file
+    ./"${f%.dsp}" -n $impLength > "${f%.dsp}.m"
+
+    inputNum=`cat $f.imp.xml | grep "<outputs>" | sed 's/\(.*\)\([0-9]\)\(.*\)/\2/'`
+
+    i=1
+    legend="legend("
+    while [ $i -le $inputNum ]
+    do
+	legend="$legend'channel $i'"
+	if [[ $i < $inputNum ]]; then
+	    legend="$legend,"
+	fi
+	i=$(( $i + 1 ))
+    done
+    legend="$legend);"
+
+    if [[ $impType == "Impulse-Response" ]]; then
+	echo "
+plot(faustout);
+xlabel('Time (samples)');
+ylabel('Amplitude');
+$legend
+print -dsvg ${f%.dsp}.imp.svg" >> ${f%.dsp}.m
+    else
+	i=1
+	while [ $i -le $inputNum ]
+	do
+	    fftPlot="$fftPlot plot(f,abs(Y(1:NFFT/2+1,$i)),\"$i\");"
+	    i=$(( $i + 1 ))
+	done
+	echo "
+Fs = 44100;
+L = $impLength;
+NFFT = 2^nextpow2(L);
+Y = fft(faustout,NFFT);
+f = Fs/2*linspace(0,1,NFFT/2+1);
+hold on;
+$fftPlot
+xlabel('Frequency (Hz)');
+ylabel('|Y(f)|');
+$legend
+hold off;
+print -dsvg ${f%.dsp}.impspec.svg" >> ${f%.dsp}.m
+    fi
+octave ${f%.dsp}.m  > /dev/null
+rm $f.imp $f.imp.xml $f.imp.cpp ${f%.dsp} #${f%.dsp}.m
+fi

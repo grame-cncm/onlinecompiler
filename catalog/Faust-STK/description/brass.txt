@@ -1,0 +1,1 @@
+A simple brass instrument waveguide model, a la Cook (TBone, HosePlayer).

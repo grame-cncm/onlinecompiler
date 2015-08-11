@@ -1,0 +1,1 @@
+The process bandfilter is a classical second order filter. It is used to change the volume of a band of frequencies of the input signal located around a center frequency. The program allows to choose the width of the band (Q factor), the modification of the volume (Gain) , and the center frequency (freq). The higher Q factor is, the thinner the band is.

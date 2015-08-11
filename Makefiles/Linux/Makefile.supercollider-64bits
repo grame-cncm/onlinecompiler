@@ -1,0 +1,80 @@
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+
+system := $(shell uname -s)
+faustfile := $(wildcard *.dsp)
+applname := $(faustfile:.dsp=)
+cppfile := $(faustfile:.dsp=.cpp)
+xmlfile := $(faustfile).xml
+pkgdir := $(faustfile:.dsp=-pkg)
+pkgfile := $(pkgdir).zip
+svgdir := $(faustfile)-svg
+svgfile := $(svgdir)/process.svg
+
+binpkg := $(faustfile:.dsp=-bin.tgz)
+
+### Customize these elements
+#binaryfile 	:= $(applname).so
+patchfile 	:= $(applname).sc
+ARCH		:= supercollider.cpp 
+LIB		:= `pkg-config --cflags libscsynth` -fPIC -shared
+### End Customize
+
+#if the makefile is not used in the frame of the onlinecompiler
+OS ?= Linux
+
+ifeq ($(system), Darwin)
+	$(OS)-binaryfile 	:= $(applname).scx
+else
+	ifeq ($(OS),OSX)
+		$(OS)-binaryfile 	:= $(applname).scx
+	else
+		$(OS)-binaryfile 	:= $(applname).so
+	endif
+endif
+
+binary : $(binpkg) 
+	echo $(binpkg) > binaryfilename.txt
+
+source : $(cppfile)
+
+patch : $(patchfile)
+
+source-pkg : $(pkgfile) 
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(faustfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(pkgfile) 
+	
+###---------------------------------------------------------------
+
+$(cppfile) : $(faustfile)
+	faust -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+	
+$(svgfile) : $(faustfile)
+	faust $(faustfile) -svg $(OPT) >/dev/null 2> errors.log
+	
+$(Linux-binaryfile) : $(faustfile)
+	faust2supercollider $(faustfile) 2> errors.log
+
+$(OSX-binaryfile) : $(faustfile)
+	ssh faust@macyann "mkdir onlineComp/$(SESSIONID)"
+	scp $(faustfile) faust@macyann:~/onlineComp/$(SESSIONID)
+	ssh faust@macyann "faust2supercollider ~/onlineComp/$(SESSIONID)/$(faustfile) 2> errors.log"
+	scp faust@macyann:~/onlineComp/$(SESSIONID)/$@ .
+	ssh faust@macyann "rm -r onlineComp/$(SESSIONID)"
+	
+$(pkgfile) : $(faustfile) $(cppfile)
+	mkdir $(pkgdir)
+	cp $(faustfile) $(cppfile) Makefile $(pkgdir)
+	tar czf $(pkgfile) $(pkgdir)
+	
+$(binpkg) : $($(OS)-binaryfile)
+	zip -r $(binpkg) $($(OS)-binaryfile) $(patchfile)	

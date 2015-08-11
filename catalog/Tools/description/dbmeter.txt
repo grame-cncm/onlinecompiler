@@ -1,0 +1,1 @@
+The dbmeter is a tool that shows in a bar graph the level of the signal it is analysing. The level expressed in dB, can move from -96 up to +10.

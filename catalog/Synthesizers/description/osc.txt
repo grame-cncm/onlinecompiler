@@ -1,0 +1,1 @@
+The osc function generates a sinusoidal signal at the frequency indicated by the slider. Frequencies from 0Hz up to 24000Hz can be generated. You can also choose the volume of the signal. This oscillator approximates the value of each sample to its integer value. For a more precise oscillator (with linear interpolation), see the osci function.

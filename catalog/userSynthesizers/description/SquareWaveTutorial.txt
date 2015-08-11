@@ -1,0 +1,3 @@
+by <a href="mailto:harryhaaren@gmail.com">HarryVanHaaren</a>: 
+Square wave generator tutorial from the Faust Tutorial.pdf
+<br>Voted: 0

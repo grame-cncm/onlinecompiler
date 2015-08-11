@@ -1,0 +1,35 @@
+declare name        "squareModBassFiltered";
+
+import("effect.lib"); // for smooth(), 
+import("oscillator.lib"); // for smooth()
+
+// frequency input
+    freq = hslider("freq", 40, 20, 400, 1);
+
+// LFO inputs
+    lfoFreq   = hslider("lfo freq", 0, 0, 20, 1);
+    lfoAmount = hslider("lfo amount", 0, 0, 0.5, 0.001);
+    lfoOffset = hslider("lfo offset", 0, 0, 1, 0.001);
+    lfoOut    = lfoOffset + osc(lfoFreq) * lfoAmount;
+
+// modulation input
+    modulation = hslider("modulation", 0, 0, 20, 0.001);
+
+
+// generate sin wave modulation
+    modOut = 1 + osc( freq );
+
+// ammended modulation wave
+    amendedModOut = freq + (modulation*modOut*freq  * lfoOut);
+
+// Generate a square wave
+    mainOut = saw1( amendedModOut );
+
+
+// Lowpass filter: smooth the input freq, avoid clicks.
+    lopCutoff =  hslider("lopcutoff", 4000, 200, 4000, 1) * (1 + lfoOut); //: smooth( 0.99 );
+    lopFilter = lowpass( 4 , lopCutoff ); // 4 represents 4th order (steep)
+
+
+// process generates sound, filters, and outputs in mono
+    process = mainOut : lopFilter : _ ;

@@ -1,0 +1,1 @@
+This function is the same than the balance button on an stereo audio system. It shares out the signal volume between the two channels. Negative values give a louder volume in output 0, than in output 1 and the opposit occurs with positive values.

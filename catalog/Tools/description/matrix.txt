@@ -1,0 +1,1 @@
+This program is an 8*8 audio matrix. Each output is a mixer in which you can set individually the volume of the 8 inputs. Then you can use separately the 8 outputs.

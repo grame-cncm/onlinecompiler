@@ -1,0 +1,2 @@
+Stereo Dynamic Range Compressor<br>
+<a href="http://en.wikipedia.org/wiki/Dynamic_range_compression">http://en.wikipedia.org/wiki/Dynamic_range_compression</a>

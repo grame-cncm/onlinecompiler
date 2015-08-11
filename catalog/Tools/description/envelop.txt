@@ -1,0 +1,1 @@
+This function generates a white noise formed by an envelop. The noise is sustained as long as you push the "play" button. Several parameters are used to shape the envelop; the attack length, the decay duration, the sustain volume percentage, and the release duration. 

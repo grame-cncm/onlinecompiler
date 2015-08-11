@@ -1,0 +1,556 @@
+body {
+margin : 0;
+font-family: arial, sans-serif;
+font-size: 12px;
+}
+
+#global {
+width : 850px; /*712*/
+position: relative;
+background-color: #F0F0F0;
+}
+
+#filedrag
+{
+	/*display: none;*/
+	font-weight: bold;
+	text-align: center;
+	padding: 1em 0;
+	margin: 1em 0;
+	color: #555;
+	border: 2px dashed #555;
+	border-radius: 7px;
+	cursor: default;
+}
+
+#filedrag.hover
+{
+	color: #f00;
+	border-color: #f00;
+	border-style: solid;
+	box-shadow: inset 0 3px 4px #888;
+}
+
+/***********************************************************
+EXAMPLE SAVER
+***********************************************************/
+
+#exampleSaver{
+/*height: 200px;*/
+text-align: left;
+background-color: #E8E8E8;
+position: relative;
+top: 5px;
+width: 690px;
+left: 10px;
+border: 1px solid #555555;
+margin-bottom: 10px;
+}
+
+#hideExampleSaver{
+color: #C44B16;
+position: relative;
+height: 25px;
+top: 5px;
+cursor: pointer;
+left: 35px;
+float: left;
+width: 200px;
+}
+
+#hideExampleSaver:hover{
+opacity: 0.5;
+}
+
+#showExampleSaver{
+color: #C44B16;
+position: relative;
+height: 25px;
+top: 5px;
+cursor: pointer;
+left: 35px;
+float: left;
+width: 200px;
+}
+
+#showExampleSaver:hover{
+opacity: 0.5;
+}
+
+#exampleSaverContent{
+margin:8px;
+}
+
+#descriptionArea{
+width : 668px;
+height : 100px;
+}
+
+#saveButton{
+position: relative;
+float: right;
+top: 2px;
+}
+
+#saveButton:hover{
+opacity: 0.5;
+}
+
+#saverHelpButton{
+position: relative;
+float: right;
+cursor: pointer;
+}
+
+#saverHelpButton:hover{
+opacity: 0.5;
+}
+
+/***********************************************************
+CATALOG STYLE
+***********************************************************/
+
+#catalog{
+height: 200px;
+text-align: left;
+background-color: #FFFFFF;
+position: relative;
+margin-bottom: 5px;
+width: 825px;
+left: 10px;
+border: 1px solid #555555;
+}
+
+.catalogStaticTitle{
+font-size:14px;
+font-weight: bold;
+font-family:Arial;
+color: #C44B16;
+}
+
+.catalogChooseElement{
+position: relative;
+}
+
+.catalogSectionTitle{
+font-family: arial;
+cursor: pointer;
+}
+
+#catalogSectionTitles{
+margin-top: 7px;
+}
+
+#catalogNavigation{
+position: relative;
+width: 150px;
+height: 200px;
+max-width: 150px;
+overflow: auto;
+float: left;
+border-right: solid 1px;
+}
+
+#catalogSectionContent{
+position: relative;
+width: 220px;
+max-width: 220px;
+height: 200px;
+overflow: auto;
+float: left;
+border-right: solid 1px;
+}
+
+#catalogSectionItemsTop{
+margin-top: 7px;
+}
+
+.catalogItem{
+cursor: pointer;
+left: 5px;
+position: relative;
+width: 170px;
+}
+
+#catalogItemDescriptionSec{
+overflow:auto;
+width: 453px;
+/*max-width: 344px;*/
+height:200px;
+}
+
+.catalogItemDescriptionContent{
+position: relative;
+left: 5px;
+max-width: 440px;
+margin-top: 7px;
+}
+
+#voteButton{
+position: relative;
+float: right;
+/*left: 3px;*/
+width: 75px;
+}
+
+.catalogImg{
+float: left;
+margin-right: 5px;
+}
+
+#showCatalog{
+font-family: arial;
+color: #C44B16;
+position: relative;
+height: 25px;
+width: 150px;
+/*text-align: center;*/
+top: 5px;
+cursor: pointer;
+float: left;
+}
+
+#showCatalog:hover{
+opacity: 0.5;
+}
+
+#hideCatalog{
+font-family: arial;
+color: #C44B16;
+position: relative;
+height: 25px;
+width: 150px;
+/*text-align: center;*/
+top: 5px;
+cursor: pointer;
+float: left;
+}
+
+#hideCatalog:hover{
+opacity: 0.5;
+}
+
+.CodeMirror {
+background-color: #FFFFFF;
+border: 1px solid #555555;
+height: 780px;
+text-align: left;
+width: 825px;
+position: relative;
+left: 9px;
+top: 10px;
+}
+
+#catalogHelpButton{
+position: relative;
+cursor: pointer;
+float: left;
+top: 5px;
+left: 2px;
+}
+
+#catalogHelpButton:hover{
+opacity: 0.5;
+}
+
+#fullScreen{
+position: relative;
+height: 25px;
+top: 5px;
+cursor: pointer;
+float: right;
+right:20px;
+}
+
+#fullScreen:hover{
+opacity: 0.5;
+}
+
+#displayModes{
+position: relative;
+height: 35px;
+text-align: center;
+left: 10px;
+}
+
+/********************************************************
+NAVIGATION BAR
+********************************************************/
+
+#navigation{
+width: 848px;
+height: 32px;
+position: relative;
+left: 1px;
+}
+
+
+#ed-faust {
+position : absolute;
+left:3px;
+}
+
+#ed-faust:hover {
+opacity:0.5;
+}
+
+#see-cpp {
+position : absolute;
+left:171px;
+}
+
+#see-cpp:hover {
+opacity:0.5;
+}
+
+#see-svg {
+position : absolute;
+left:339px;
+}
+
+#see-svg:hover {
+opacity:0.5;
+}
+
+#auto-doc {
+position : absolute;
+left:507px;
+}
+
+#auto-doc:hover {
+opacity:0.5;
+}
+
+#exec-file {
+position : absolute;
+left:675px;
+}
+
+#exec-file:hover {
+opacity:0.5;
+}
+
+#exec-java {
+    position : absolute;
+    left:460px;
+    top: 7px;
+    z-index : 1;
+}
+
+/*Frame Position*/
+
+#cadre1 {
+position : relative;
+left:3px;
+}
+
+#cadre2 {
+left: 171px;
+position: relative;
+}
+
+#cadre3 {
+position : relative;
+left:675px;
+top: 0px;
+}
+
+#cadre4 {
+position : relative;
+left:338px;
+top: 0px;
+}
+
+#cadre5 {
+position : relative;
+left:507px;
+top: 0px;
+}
+
+/******************************************************
+PAGE CONTENT
+******************************************************/
+
+#welcome{
+text-align: justify;
+}
+
+#optionName{
+position: relative;
+float: left;
+}
+
+#optionEnrob{
+position: relative;
+float: left;
+}
+
+#optionArch{
+position: relative;
+float: left;
+}
+
+#optionOS{
+position: relative;
+float: left;
+}
+
+#optionOSC{
+position: relative;
+float: left;
+}
+
+#optionOptions{
+position: relative;
+float: left;
+}
+
+#options {
+position: relative;
+top: 4px;
+left: 8px;
+height: 12px; 
+}
+
+#edit {
+background-color: #F0F0F0;
+width: 846px;
+border: 1px solid #555555;
+}
+
+/*
+#edit.hover{
+color: #f00;
+border-color: #f00;
+border-style: solid;
+box-shadow: inset 0 3px 4px #888;
+}
+*/
+
+#code {
+width : 830px;
+height : 800px;
+}
+
+#resultat-file {
+position : relative ;
+top: 10px;
+left: 8px;
+text-align : left;
+height: 30px;
+}
+
+#codeC {
+text-align : left;
+overflow : auto;
+width : 830px;
+min-height : 780px;
+max-height : 780px;
+position: relative;
+left: 9px;
+margin-top: 10px;
+background-color: #FFFFFF;
+}
+
+#mdoc-title{
+position : absolute;
+top: 130px;
+}
+
+#mdoc-viewer {
+position : relative;
+width : 820px;
+}
+
+#cadre_svg{
+position : relative;
+top: 15px;
+left : 5px;
+width : 836px;
+height : 635px;
+max-height : 635px;
+max-width : 836px;
+}
+
+
+a {
+    text-decoration: none;
+    color: #555555;
+  }
+a img {
+  border : 0 ;
+}
+a:hover {
+    background: none;
+}
+a span { 
+    display: none;
+  }
+a:hover span {
+    display: block;
+    position: absolute;
+    top : 50px;
+    left: 150px;
+    color : black;
+    background-color: #FFCC99;
+    opacity:.85;
+    border: 1px solid #060C6F;
+    width: 400px;
+    z-index : 2;
+}
+
+#refresh{
+position:relative;
+float: left;
+height: 30px;
+width: 30px;
+left: 3px;
+top: 11px;
+cursor: pointer;
+}
+
+#refresh:hover{
+opacity: 0.5;
+}
+
+#helpOpt{
+position:relative;
+float: right;
+height: 20px;
+width: 20px;
+right: 18px;
+cursor: pointer;
+}
+
+#helpOpt:hover{
+opacity: 0.5;
+}
+
+#helpCatalog{
+text-align: justify;
+}
+
+#helpSaver{
+text-align: justify;
+}
+
+#helpCompiler{
+text-align: justify;
+}
+
+/*colors for C++ code*/
+body.hl	{ background-color:#FFFFFF; }
+pre.hl	{ color:#000000; background-color:#FFFFFF; font-size:10pt; font-family:DejaVu Sans Mono, Courier;}
+.num	{ color:#2928ff; }
+.esc	{ color:#ff00ff; }
+.str	{ color:#ff0000; }
+.dstr	{ color:#818100; }
+.slc	{ color:#838183; font-style:italic; }
+.com	{ color:#838183; font-style:italic; }
+.dir	{ color:#008200; }
+.sym	{ color:#000000; }
+.line	{ color:#555555; }
+.kwa	{ color:#000000; font-weight:bold; }
+.kwb	{ color:#830000; }
+.kwc	{ color:#000000; font-weight:bold; }
+.kwd	{ color:#010181; }

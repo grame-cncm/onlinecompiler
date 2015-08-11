@@ -1,0 +1,1 @@
+Graphic Equalizer: Each filter-bank output signal routes through a fader.

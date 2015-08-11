@@ -1,0 +1,1 @@
+This program is an 8 voices spatializer. It is made to be used with a set of 8 loudspeaker, in order to calculate the output volume of each loudspeaker that will give to the listener the feeling that the source is located at a certain distance, and emitting with a certain angle. Those distances and angles can be selected with sliders.

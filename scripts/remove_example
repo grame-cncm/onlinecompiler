@@ -1,0 +1,5 @@
+#!/bin/bash
+rm catalog/$1/description/$2.txt catalog/$1/capture/$2_compr.* 
+deleteTime=$(date +%H-%M-%m%d%y)
+mv catalog/$1/uinfo/$2.txt catalog/$1/uinfo/deleted/$2.txt_DEL_$deleteTime
+mv catalog/$1/src/$2.dsp catalog/$1/src/deleted/$2.dsp_DEL_$deleteTime

@@ -1,0 +1,1 @@
+This instrument implements a sitar plucked string physical model based on the Karplus-Strong algorithm using a randomly modulated delay line.

@@ -1,0 +1,1 @@
+The tester function allows you to send 3 different kinds of signal (white noise, pink noise or a sine wave with a chosen frequency) to 8 different chanels, at the volume you desire. As its names suggests it, you can for instance useit to test or configure a set of 8 loudspeakers.

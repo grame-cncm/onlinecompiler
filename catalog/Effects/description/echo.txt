@@ -1,0 +1,1 @@
+This function adds echo to the input signal. You can choose the duration of the echo, from 0 to 1s by steps of 1ms, and the feedback percentage, from 0% to 100%.

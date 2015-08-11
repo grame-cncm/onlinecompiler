@@ -1,0 +1,7 @@
+declare name        "delayline";
+declare version     "1.0";
+declare author      "Robin Gareus";
+declare license     "BSD";
+declare copyright   "(c) 2012 Robin Gareus <robin@gareus.org>";
+
+process         = @(hslider("delay (samples)", 0, 0, 48000, 1));

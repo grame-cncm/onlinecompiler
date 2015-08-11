@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for m in exemples/exec/*
+do
+  if [ -e "$m/$1" ] || [ -e "$m/$1.so" ] || [ -e "$m/$1-bin.tgz" ] 
+  then
+    echo `basename $m`
+  fi
+done
+echo "#";

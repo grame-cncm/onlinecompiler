@@ -1,0 +1,1 @@
+Switch between two stereo sources. Useful to compare these two sources.

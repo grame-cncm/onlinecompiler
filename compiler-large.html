@@ -1,0 +1,461 @@
+<!--
+\file compiler.html
+\brief This html page contain the whole html code used to build the Faust 
+online compiler.
+\author Romain Michon - Damien Cramet
+
+Copyright (C) 2003-2011 GRAME, Centre National de Creation Musicale
+---------------------------------------------------------------------
+This file is free software; you can redistribute it 
+and/or modify it under the terms of the GNU General Public License 
+as published by the Free Software Foundation; either version 3 of 
+the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License 
+along with this program; If not, see <http://www.gnu.org/licenses/>.
+
+EXCEPTION : As a special exception, you may create a larger work 
+that contains this FAUST architecture section and distribute  
+that work under terms of your choice, so long as this FAUST 
+architecture section is not modified. 
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Faust Online Compiler</title>
+    <link rel="shortcut icon" href="images/icon.ico">
+    <link href="styles-large.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+    <!-- Code Mirror is used to edit the Faust Code  -->
+    <script src="codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <script src="codemirror/mode/faust/faust.js"></script>
+    <link rel="stylesheet" href="codemirror/theme/default.css">
+
+    <!-- jquery is used to animate the GUI -->
+    <script src="js/jqueryui/js/jquery-1.6.2.min.js"></script>
+    <link type="text/css" href="js/jqueryui/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />	
+    <script type="text/javascript" src="js/jqueryui/js/jquery-ui-1.8.16.custom.min.js"></script>
+  </head>
+  <body>
+    <div id="global">
+      <!-- header -->
+
+      <!-- navigation -->
+      <div id = "navigation">
+	__edFaust__
+	__seeCPP__
+	__seeSVG__
+	__autoDoc__
+	__getExec__
+	__cadre__
+	__navigForm__
+      </div>
+      <!-- script for the navigation  -->
+      <SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+	function goto_codeFaust(){
+	document.forms["formOptions"].action="goto_codeFaust.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_codeFaust3(){
+	document.forms["formNavigation"].action="goto_codeFaust.php";
+	document.forms["formNavigation"].submit();
+	}
+	function goto_codeC() 
+	{
+	document.getElementById("faustcode").value = editor.getValue();
+	document.forms["formOptions"].action="goto_codeC.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_codeC2() 
+	{
+	document.forms["formOptions"].action="goto_codeC.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_codeC3() 
+	{
+	document.forms["formNavigation"].action="goto_codeC.php";
+	document.forms["formNavigation"].submit();
+	}
+	function goto_exec() {
+	document.getElementById("faustcode").value = editor.getValue();
+	document.forms["formOptions"].action="goto_exec.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_exec2() {
+	document.forms["formOptions"].action="goto_exec.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_exec3() {
+	document.forms["formNavigation"].action="goto_exec.php";
+	document.forms["formNavigation"].submit();
+	}
+	function goto_mdoc() {
+	document.getElementById("faustcode").value = editor.getValue();
+	document.forms["formOptions"].action="goto_mdoc.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_mdoc2() {
+	document.forms["formOptions"].action="goto_mdoc.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_mdoc3() {
+	document.forms["formNavigation"].action="goto_mdoc.php";
+	document.forms["formNavigation"].submit();
+	}
+	function goto_SVG() {
+	document.getElementById("faustcode").value = editor.getValue();
+	document.forms["formOptions"].action="goto_SVG.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_SVG2() {
+	document.forms["formOptions"].action="goto_SVG.php";
+	document.forms["formOptions"].submit();
+	}
+	function goto_SVG3() {
+	document.forms["formNavigation"].action="goto_SVG.php";
+	document.forms["formNavigation"].submit();
+	}
+	function check_enrobage()  {
+	menu=document.getElementsByName('enrobagemenu')[0];
+	value= menu.options[menu.selectedIndex].value;
+	ICheck_enrobage(value);
+	}
+	function get_enrobage()  {
+	menu=document.getElementsByName('enrobagemenu')[0];
+	return menu.options[menu.selectedIndex].value;
+	}
+      </SCRIPT>
+      <div id = "edit">
+      <!-- /navigation -->
+
+      <!-- catalog -->
+      <div id="displayModes">
+	<div id = "showCatalog">
+	  <img src="images/showCatalog.png">
+	</div>
+	<div id = "hideCatalog">
+	  <img src="images/hideCatalog.png">
+	</div>
+	<div id="catalogHelpButton">
+	  <img src="images/helpButton.png">
+	</div>
+	<div id="fullScreen">
+	  <img src="images/fullScreen-large.png">
+	</div>
+	__displayModeSaver__
+      </div>
+    <div id = "catalog" class="ui-widget-content">
+      <div id = "catalogNavigation">
+	<div class = "catalogStaticTitle">Categories</div>
+	<div id = "catalogSectionTitles">
+	__catalogSectionTitles__
+	</div>
+	<script>
+	$(document).ready(function() {
+	__catalogScript__
+	});
+	</script>
+	</div>
+	<div id = "catalogSectionContent">
+	  <div class = "catalogStaticTitle">Category Content</div>
+	  <div id = "catalogSectionItemsTop">
+	  <div id = "catalogSectionItemsBase"><div class =
+    "catalogSectionItems">
+	    <div class = "catalogItem">Select a category to diplay its content...</div></div></div>
+	__catalogSectionItems__
+	  </div>
+	</div>
+	<div id = "catalogItemDescriptionSec">
+	__catalogItemDescription__
+	<div id = "catalogItemDescriptionBase">
+	<div class = "catalogItemDescription">
+	<div class = "catalogStaticTitle">Description</div>
+	<div class = "catalogItemDescriptionContent">Description of the selected item...</div>
+	</div>
+	</div>
+	</div>
+    </div>
+    <script>
+    $(function(){$("#catalog").resizable({minWidth:690,maxWidth:690,alsoResize:"#catalogSectionContent,#catalogNavigation,#catalogItemDescriptionSec"});});
+    $(document).ready(function() { 
+    __catalogDisplayScript__
+    $('#helpCatalog').hide();
+    function displayHelpCatalog(){
+    $('#helpCatalog').dialog({width: 430},{position: 'top'});
+    $('#helpCatalog').show();
+    }
+    $('#catalogHelpButton').click(function() {
+    $('#helpCatalog').dialog({width: 430},{position: 'top'});
+    $('#helpCatalog').show();
+    });
+    $('#showCatalog').click(function() {
+    $('#catalog').slideToggle('slow');
+    $('#hideCatalog').show();
+    $('#showCatalog').hide();
+    document.getElementById("catalogDisplay1").value = 1;
+    });
+    $('#hideCatalog').click(function() {
+    $('#catalog').slideUp('slow');
+    $('#hideCatalog').hide();
+    $('#showCatalog').show();
+    document.getElementById("catalogDisplay1").value = 2;
+    });
+    });
+    $('#fullScreen').click(function() {
+    __sendFaustCodeScript__
+    document.getElementById("fullScreenMode").value = 0;
+    document.forms["formOptions"].action="full_screen.php";
+    document.forms["formOptions"].submit();
+    });
+    </script>
+    <!-- /catalog -->
+
+    <!-- exampleSaver -->
+    <div id = "exampleSaver">
+    <div id = "exampleSaverContent">
+      <form name="formCodeSaver" method="post" action="goto_codeFaust.php" enctype="multipart/form-data">
+	<input type="text" name="exampleName" size=12 maxlength=30 value = "__exampleName__"><font color="red">*</font>
+	<input type="text" name="userName" size=12 maxlength=30 value = "__userName__"><font color="red">*</font>
+	<input type="text" name="userEmail" size=12 maxlength=30 value = "__userEmail__"><font color="red">*</font>
+	<div id="saverHelpButton">
+	  <img src="images/helpButton.png">
+	</div>
+	<textarea id="descriptionArea" name="descriptionArea">__descriptionArea__</textarea>
+	<a>Screenshot Picture:<input type="file" name="descriptionPicture" id="descriptionPicture" size="5">
+	Choose a category:__catMenu__
+	<div id="saveButton">
+	  <a href="javascript:saveCode()"><img src="images/saveButton.png"></a>
+	</div>
+	<input type="hidden" name="faustcodeSaved" id="faustcodeSaved"/>
+	<input type="hidden" name="exampleSaverDisplay" id="exampleSaverDisplay"/>
+	<input type="hidden" name="submitExample" value="saveExample"/>
+	<font color="red">*</font>Required fields
+	<!-- <input type = "submit" name = "submitExample" value = "Save Example">--> 
+	</form>
+	<script>
+	__displayExampleSaver__
+	$('#helpSaver').hide();
+	function displayHelpSaver(){
+	$('#helpSaver').dialog({width: 430},{position: 'top'});
+	$('#helpSaver').show();
+	}
+	$('#saverHelpButton').click(function() {
+	$('#helpSaver').dialog({width: 430},{position: 'top'});
+	$('#helpSaver').show();
+	});
+	$('#showExampleSaver').click(function() {
+	$('#exampleSaver').slideToggle('slow');
+	$('#hideExampleSaver').show();
+	$('#showExampleSaver').hide();
+	document.getElementById("exampleSaverDisplay").value = 1;
+	});
+	$('#hideExampleSaver').click(function() {
+	$('#exampleSaver').slideUp('slow');
+	$('#hideExampleSaver').hide();
+	$('#showExampleSaver').show();
+	});
+	function saveCode() {
+	document.getElementById("faustcodeSaved").value = editor.getValue();
+	document.forms["formCodeSaver"].action="goto_codeFaust.php";
+	document.forms["formCodeSaver"].submit();
+	}
+      </script>
+    </div>
+    </div>
+    <!-- /exampleSaver -->
+      
+    <!-- compOptions -->
+    <div id = "options">
+      <form name = "formOptions" method = "post" action = __action__>
+	<div id="optionName">__name__<br><input type="text" name="nomApplication" size=10 maxlength=30 value = "__titre__"></div>
+	<div id="optionOS">__enrobage__<br>
+	  __osMenu__
+	</div>
+	<div id="optionEnrob"><br>__menuallenrobage__</div>
+	<div id="optionOSC">__OSC__<br><input id="OSCbox" type="checkbox" name="OSCselect" value="OSC=1" __OSCvalue__></div>
+	<div id="optionOptions">__options__<br><input type="text" name="options" size=10
+			    maxlength=30 value ="__options_value__"></div>
+	<div id="refresh">
+	  <img src="images/refreshButton.png">
+	</div>
+	<div id="helpOpt">
+	  <img src="images/helpButton.png">
+	</div>
+	<input type="hidden" name="faustcode" id="faustcode"/>
+	<input type="hidden" name="catalogDisplay1" id="catalogDisplay1"/>
+      </form>
+      <script>
+	function disableOSC(){
+	document.getElementById("OSCbox").disabled=true;
+	}
+	function allowOSC(){
+	document.getElementById("OSCbox").disabled=false;
+	}
+	$('#helpCompiler').hide();
+	function diplayHelpOpt (){
+	$('#helpCompiler').dialog();
+	$('#helpCompiler').show();
+	}
+	$('#helpOpt').click(function() {
+	$('#helpCompiler').dialog({width: 430},{position: 'top'});
+	$('#helpCompiler').show();
+	});
+	$('#refresh').click(function() {
+	__refreshGoto__;
+	});
+      </script>
+    </div>
+    <br><br>
+    <!-- /compOptions -->
+      
+    <!-- atelier -->
+    <div id = "code">
+      <form method="post" action="compiler.php">
+	<textarea id="faustarea" name="faustcodearea" class="codepress faust">__code__</textarea>
+	<script>
+	  var editor = CodeMirror.fromTextArea(document.getElementById("faustarea"), {
+	  lineNumbers: true
+	  });
+	</script>
+      </form>
+      
+      <form name = "formOptions" method = "post">
+	<input type="hidden" name="fullScreenMode" id="fullScreenMode"/>
+	<input type="hidden" name="faustcode" id="faustcode"/>
+	<input type="hidden" name="catalogDisplay1" id="catalogDisplay1"/>
+	<input type="hidden" name="firstCodeSubmit" id="firstCodeSubmit" value="1"/>
+      </form>
+      
+    </div>
+    <!-- /atelier -->
+
+    <!-- welcome -->
+    <div id="welcome" title="Welcome!">
+      Welcome on the Faust online compiler! With this tool, you can use most of Faust's features directly in your web browser. It makes it possible to compile any Faust code as a C++ code, to see its diagram representation as well as its automatically generated docuementation. Most of Faust's architectures can be used and compiled whether from the online compiler for different platforms, whether from your own system even without having Faust installed just by downloading a package.<br>
+      You'll find in the catalog section many examples of Faust codes directly usable with the compiler.<br>
+      Finally, you can add your own examples to the catalog through the "example saver".<br>
+      <br>
+      Enjoy!<br>
+      <br>
+      <b>Other Topics:</b><br>
+      - <a href="javascript:diplayHelpOpt()">Compiler Help</a><br>
+      - <a href="javascript:displayHelpSaver()">Example Saver Help</a><br>
+      - <a href="javascript:displayHelpCatalog()">Catalog Help</a><br>
+      <script>
+	$('#welcome').dialog({width: 430},{position: 'top'});
+      </script>
+    </div>
+    <!-- /welcome -->
+
+    <!-- helpCompiler -->
+    <div id="helpCompiler" title="Compiler Help">
+      The Faust code written in the edition area can be turned into different elements by going from one tab to another (respectively: C++ Code, SVG Diagram, Automatic Doc and Exec File). The Faust compilation options can be provided through the "Opts" text area while the different Faust architectures available for each operating system can be found in the "Architecture" menu. While browsing this menu, other options might appear (to allow OSC support for example).<br>
+In the C++ and the Exec File tabs, changing the architecture will automatically update the result.<br>
+If the Faust compilation was successful and if an architecture other than "none" was selected, a "Get the source package" button will appear. The pointed package will contain the .dsp file you wrote, the generated C++ file as well as all the files required for the C++ compilation to work. These files will be different for every architectures. You'll also find a MakeFile to easily build your example. To learn more on how to use this MakeFile, just have a look at the README that will also be provided.<br>
+It is possible that the file downloadable in the "ExecFile" tab will not work on your system because of an architecture issue. Please repport any problem at: rmnmichon_AT_gmail_DOT_com.    
+    </div>
+    <!-- /helpCompiler -->
+
+    <!-- helpSaver -->
+    <div id="helpSaver" title="Example Saver Help">
+      With the example saver, you can add your own Faust code to the catalog.<br> 
+      This might sounds obvious but the first thing you need to do is to write some code in the code edition area. Then, you have to choose a name for your example. You must also provide your name, your e-mail address, the category where you want your example to be saved and optionally a descirption and a screenshot of it (.png or .jpg). If the name you choosed is already used by another example in the category where you want to save your code, the existing example will be erased and replaced by yours. You will be then listed as an "editor" of this example and you will receive an e-mail everytime it is modified by someone else.<br>
+      Please, in order to avoid the catalog to become too messy, be very cautious when saving your examples: choose relevant names and try not to submit code having the same goal than an example already present in the catalog.<br>
+      You can help us to maintain a good order in the "user categories" by "voting" for your favorite user examples in the catalog.
+    </div>
+    <!-- /helpSaver -->
+    
+    <!-- helpCatalog -->
+    <div id="helpCatalog" title="Catalog Help">
+      The catalog contains a set of examples of Faust codes sorted in different categories. To use an example in the tab where you are located (Faust Code, C++ code, etc.), you can double click on it or press the "choose it" button in the description column.<br>
+Categories whose name start with "user" contains code examples saved by users. You can delete or modify these examples through the example saver.<br>
+In order to help us maintain a good order in the "user categories", you can "vote" for your favorite user examples just by clicking on the "Vote!" button in the description column. 
+    </div>
+    <!-- /helpCatalog -->
+
+    <!-- package -->
+    <div id = "resultat-file">
+      <form method="post" action="result_compilation_faust.php">
+        <div id = "resultat-button"><input type = "submit" name = "submit" value = "Get the source package"></div>
+      </form>
+    </div>
+    <!-- /package -->
+      
+    <!-- resultat -->
+    <div id = "code">
+      <div id = "codeC">
+	__resultat__
+      </div>
+    </div>
+    <!-- /resultat -->
+
+    <!-- diagram -->
+    <div id="optionSVG">
+      <form method="post" name="menuOptionSVG">
+	__menuOptionSVG__
+      </form>
+    </div>
+    <script>
+      function submitOptionSVG(){
+      document.forms["menuOptionSVG"].action="goto_SVG.php";
+      document.forms["menuOptionSVG"].submit();
+      }
+    </script>
+    <div id = "cadre_svg">
+      __diagram__
+    </div>
+    <!-- /diagram -->
+
+    <!-- mdoc -->
+    <div id = "resultat-file">
+      <form method="post" action="result_compilation_mdoc.php">
+        <div id = "resultat-button"><input type = "submit" name = "submit" value = "Get the documentation"></div> 
+      </form>
+    </div>
+    <!-- /mdoc -->
+    
+    <!-- resultatmdoc -->
+    <div id = "mdoc-viewer">
+      <pre>  __resultat__ </pre>
+      <br>
+    </div>
+    <!-- /resultatmdoc -->
+
+    <!-- exec -->
+    <div id = "resultat-file">
+      <form method="post" action="result_compilation_C.php">
+        <div id = "resultat-button"><input type = "submit" name = "submit" value = "Download the executable file"></div> 
+      </form>
+    </div>
+    <!-- /exec -->
+
+    <!-- dropFile -->
+    <div id="dropFile">
+      <div id="filedrag">__textDrop__</div>
+      <form id="upload" action="fileDroped.php" method="POST" enctype="multipart/form-data">
+	<input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+      </form>
+      <script>
+      __scriptDropFile__
+      </script>
+    </div>
+    <!-- /dropFile -->
+	  
+    <!-- footer -->
+      </div>
+    </div>
+  </body>
+</html>
+
+

@@ -1,0 +1,1 @@
+This function simply changes the volume of its input signal, and makes it its output signal. 

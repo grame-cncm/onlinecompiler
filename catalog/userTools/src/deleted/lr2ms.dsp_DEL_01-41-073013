@@ -1,0 +1,12 @@
+plus = _,_<:+;
+minus = _,_<:-;
+
+stereo2midside = _,_<:plus/2,minus/2;
+
+midside2stereo = _,_<:plus,minus;
+
+cross2 = _,_,_,_ <: _,!,_,!,!,_,!,_;
+
+switch2stereo(bpc) = cross2 : select2(bpc), select2(bpc);
+
+process = _,_<:switch2stereo(checkbox("MS to LR"),stereo2midside,midside2stereo);

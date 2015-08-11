@@ -1,0 +1,3 @@
+by <a href="mailto:numosh@gmail.com">nmsh</a>:
+A simple tutorial how to include libraries, use the "oscillator.lib" saw1 generator, and apply an ADSR from "music.lib".
+<br>Voted: 1

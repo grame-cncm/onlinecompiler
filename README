@@ -1,0 +1,56 @@
+/////////////////////////////////INSTALLATION///////////////////////////////
+
+- importer les exemples : - se placer dans le repertoire scripts
+                          - (executer maj_bd clean)
+                          - executer "maj_bd chemin" avec chemin = chemin complet 
+                            du dossier contenant les exemples
+- Verifier que les fichiers du dossier "scripts" sont executables
+- Verifier les droits d'acces sur /tmp (rw pour 'ugo')
+- reinstaller highlight (voir INSTALL dans dossier highlight)
+- config php : - ajouter le dossier php dans le include_path de php.ini
+               - verifier que les sessions sont activees
+               - de preference mettre register_globals a Off
+
+
+////////////////////////////////SCRIPTS//////////////////////////////////
+
+- maj_bd nouvel_exemple
+  avec le dossier nouvel_exemple de la forme
+
+  nouvel_exemple/
+  -- src/
+     -- toto.dsp
+  -- diagram/
+  -- -- toto-svg/
+  -- -- -- process.svg
+  -- -- -- ...
+  -- exec/
+  -- -- jack-gtk/
+  -- -- -- toto*
+  -- -- alsa-gtk/
+  -- -- ...
+  -- pdf/
+  -- -- toto.pdf  
+  -- description/
+  -- -- toto.dsp
+  -- capture/
+  -- -- toto.png
+  
+- new_session cree un dossier de session pour l'utilisateur dans le dossier
+  faust/tmp pour stocker les fichiers qu'il va generer
+
+- clean_old_sessions supprime les dossiers utilisateurs inchanges depuis plus
+  de 120 minutes. Il est appele par new_session.
+
+- liste_exemples construit la liste des noms du catalogue a partir du dossier
+  exemples/src
+
+- liste_enrobages construit la liste des enrobages disponibles a partir du dossier arch.
+
+- liste_enrobages_exec construit la liste d'enrobages diponibles pour un executable toto en recherchant son nom dans les sous-dossiers de exemples/exec.
+
+////////////////////////////////COMPILATION//////////////////////////////
+Le fichier Makefile contient toutes les commandes de compilation utilisees
+par le site.
+
+

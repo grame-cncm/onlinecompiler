@@ -1,0 +1,43 @@
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+
+applname := $(faustfile:.dsp=)
+cppfile := $(faustfile:.dsp=.cpp)
+readme := ../../../images/element/README
+pkgdir := $(faustfile:.dsp=-pkg)
+pkgfile := $(pkgdir).tgz
+svgdir := $(faustfile)-svg
+svgfile := $(svgdir)/process.svg
+
+binary : $(cppfile)
+	echo no binary allowed for $(faustfile) > errors.log
+	g++ $(cppfile)
+	
+source : $(cppfile)
+
+source-pkg : $(pkgfile) 
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(cppfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(pkgfile) 
+	
+
+$(cppfile) : $(faustfile)
+	if test -d $(DSPDEPTS);then dep=0;else cp $(DSPDEPTS) .;fi
+	faust $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+	
+$(svgfile) : $(cppfile)
+	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
+	
+	
+$(pkgfile) : $(faustfile) $(cppfile)
+	mkdir $(pkgdir)
+	cp $(readme) $(faustfile) $(cppfile) Makefile $(pkgdir)
+	tar czf $(pkgfile) $(pkgdir)

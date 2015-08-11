@@ -1,0 +1,3 @@
+by <a href="mailto:lebreton@grame.fr">Christophe Lebreton</a>:
+This example include some metadata for iOS and Android sensors.
+<br>Voted: 1

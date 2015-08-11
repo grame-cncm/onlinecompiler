@@ -1,0 +1,1 @@
+This function allows the user to mix an 8 channel signals into a stereo (2 outputs) signal. Each input is provided with a VUmeter which shows its level, a pan button which shares out the signal between the two output channels, and a checkbox which allows to mute it. 

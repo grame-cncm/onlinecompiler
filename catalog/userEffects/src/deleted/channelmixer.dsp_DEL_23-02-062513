@@ -1,0 +1,15 @@
+declare name       "Channel Mixer";
+declare author     "Steve Daulton";
+declare copyright  "(c) Steve Daulton 2012";
+declare version "1.00";
+declare license "GPL";
+
+left0 = hslider("Left_from_left _input", 0 , -1 , 1 , 0.01);
+left1 = hslider("Left_from_right_input", 0 , -1 , 1 , 0.01);
+right0 = hslider("Right_from_left _input", 0 ,-1 ,1 , 0.01);
+right1 = hslider("Right_from _right_input", 0 , -1 , 1 , 0.01);
+
+newleft (x) = * (left0) , * (left1) : + ;
+newright (x) = * (right0) , * (right1) : + ;
+
+process = _,_ <: newleft,newright;

@@ -1,0 +1,4 @@
+foo(x) = x+x':/(2);
+faa(x) = x+x'+x'':/(3);
+
+process = foo, faa; 

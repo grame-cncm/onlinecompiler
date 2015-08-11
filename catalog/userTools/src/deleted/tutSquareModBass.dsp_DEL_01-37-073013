@@ -1,0 +1,22 @@
+declare name        "squareModBass";
+
+import("effect.lib"); // for smooth()
+import("oscillator.lib"); // for smooth()
+
+// frequency input
+freq = hslider("freq", 40, 20, 400, 1);
+
+// modulation input
+modulation = hslider("modulation", 0, 0, 20, 0.001);
+
+// generate sin wave modulation
+modOut = 1 + osc( freq );
+
+// ammended modulation wave
+amendedModOut = freq + (modulation*modOut*freq);
+
+// Generate a square wave
+mainOut = squarewave( amendedModOut );
+
+// we define process to output the generated sound in mono
+process = mainOut : _ ;

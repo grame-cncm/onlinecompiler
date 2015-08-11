@@ -1,0 +1,3 @@
+Moog "Voltage Controlled Filter" (VCF) in "analog" form<br>
+Moog VCF implemented using the same logical block diagram as the classic analog circuit.  As such, it neglects the one-sample delay associated with the feedback path around the four one-poles. This extra delay alters the response, especially at high frequencies<br>
+<a href="https://ccrma.stanford.edu/~stilti/papers/moogvcf.pdf">https://ccrma.stanford.edu/~stilti/papers/moogvcf.pdf</a>

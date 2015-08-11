@@ -1,0 +1,3 @@
+by <a href="mailto:baptiste.chatel@gmail.com">Baptiste Chatel</a>:
+Adjust middle and side gains of a stereo input.
+<br>Voted: 2

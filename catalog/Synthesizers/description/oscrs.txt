@@ -1,0 +1,2 @@
+Sinusoidal oscillator based on 2D vector rotation<br>
+<a href="https://ccrma.stanford.edu/~jos/pasp/Normalized_Scattering_Junctions.html">https://ccrma.stanford.edu/~jos/pasp/Normalized_Scattering_Junctions.html</a>

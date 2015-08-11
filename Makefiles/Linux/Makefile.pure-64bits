@@ -1,0 +1,77 @@
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+
+applname := $(faustfile:.dsp=)
+cppfile := $(faustfile:.dsp=.cpp)
+readme := ../../../images/element/README
+pkgdir := $(faustfile:.dsp=-pkg)
+pkgfile := $(pkgdir).zip
+svgdir := $(faustfile)-svg
+svgfile := $(svgdir)/process.svg
+compBinaryfile := $(applname).zip
+
+#if the makefile is not used in the frame of the onlinecompiler
+OS ?= Linux
+$(OS)-binaryfile := $(applname).so
+
+# Setting the processor architecture
+ifeq ($(PROCARCH), 32bits)
+	Linux-ARCHPROC := -m32 -L/usr/lib32
+	OSX-ARCHPROC := -arch i386 -arch x86_64
+	Windows-ARCHPROC := -m32
+endif
+ifeq ($(PROCARCH), 64bits)
+	Linux-ARCHPROC := -m64
+	OSX-ARCHPROC := -arch i386 -arch x86_64
+	Windows-ARCHPROC := -m32 #64bits not working for windows with cross-compile
+endif
+
+binary : $($(OS)-binaryfile)
+	echo $(compBinaryfile) > binaryfilename.txt
+
+source : $(cppfile)
+
+source-pkg : $(pkgfile) 
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(cppfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(pkgfile) 
+
+$(cppfile) : $(faustfile)
+	if test -d $(DSPDEPTS);then dep=0;else cp $(DSPDEPTS) .;fi
+	faust -a pure.cpp $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+	
+$(svgfile) : $(cppfile)
+	faust $(faustfile) -svg $(OPT) >/dev/null 2> errors.log
+	
+#General case: Linux and other platforms if not used with the online compiler
+$(Linux-binaryfile) : $(cppfile)
+	g++ -O3 -fPIC -shared $($(OS)-ARCHPROC) -Dmydsp=$(applname) -o $($(OS)-binaryfile) $(cppfile)
+	zip -r $(compBinaryfile) $($(OS)-binaryfile)
+
+#OSX case with the online compiler
+$(OSX-binaryfile) : $(cppfile)
+	ssh faust@macyann "mkdir onlineComp/$(SESSIONID)"
+	scp $(cppfile) faust@macyann:~/onlineComp/$(SESSIONID)
+	ssh faust@macyann "cd onlineComp/$(SESSIONID) && g++ -O3 -fPIC -shared $($(OS)-ARCHPROC) -Dmydsp=$(applname) -o $($(OS)-binaryfile) $(cppfile)"
+	scp faust@macyann:~/onlineComp/$(SESSIONID)/$@ .
+	ssh faust@macyann "rm -r onlineComp/$(SESSIONID)"
+	zip -r $(compBinaryfile) $($(OS)-binaryfile)
+
+#Windows case with the online compiler
+$(Windows-binaryfile) : $(cppfile)
+	i586-mingw32msvc-g++ -O3 -fPIC -shared $($(OS)-ARCHPROC) -Dmydsp=$(applname) -o $($(OS)-binaryfile) $(cppfile)
+	zip -r $(compBinaryfile) $($(OS)-binaryfile)
+
+$(pkgfile) : $(faustfile) $(cppfile)
+	mkdir $(pkgdir)
+	cp $(readme) $(faustfile) $(cppfile) Makefile $(pkgdir)
+	zip -r $(pkgfile) $(pkgdir)
+

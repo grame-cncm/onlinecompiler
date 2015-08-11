@@ -1,0 +1,1 @@
+This function, as implied by its name, is a VUmeter. It shows the volume of its input signal. The output signal is strictly the same as the input.

@@ -1,0 +1,1 @@
+A bowed string model, a la Smith (1986), after McIntyre, Schumacher, Woodhouse (1983).

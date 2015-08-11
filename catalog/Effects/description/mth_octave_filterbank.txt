@@ -1,0 +1,2 @@
+Graphic Equalizer: Each filter-bank output signal routes through a fader<br>
+<a href="http://asa.aip.org/publications.html">http://asa.aip.org/publications.html</a>

@@ -1,0 +1,1 @@
+The noise generator is very usefull; it gives random values to each sample of its output signal so that this signal ideally has a flat frequency spectrum, and can be used fot instance to test filters.

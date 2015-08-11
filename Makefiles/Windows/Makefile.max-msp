@@ -1,0 +1,168 @@
+### Check for control variables
+#ifndef faustfile
+#	echo "error variable $faustfile not defined"
+#	exit 1
+#else ifndef OS
+#	echo "error variable $OS not defined"
+#	exit 1
+#endif
+
+### The system we are running on
+system		:= $(shell uname -s)
+processor 	:= $(shell uname -p)
+
+PROCARCH := 32bits
+
+ifeq ($(system), Linux)
+OS := Windows
+endif
+
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+applname 	:= $(faustfile:.dsp=)
+cppfile 	:= $(faustfile:.dsp=.cpp)
+objfile 	:= $(faustfile:.dsp=.o)
+readme 		:= ../../../images/element/README
+xmlfile 	:= $(faustfile).xml
+pkgdir 		:= $(faustfile:.dsp=-pkg)
+pkgfile 	:= $(pkgdir).zip
+svgdir 		:= $(faustfile)-svg
+svgfile 	:= $(svgdir)/process.svg
+deffile 	:= $(faustfile:.dsp=.def)
+
+### OSX related targets
+OSX-binaryfile  	:= $(applname)~.mxo
+OSX-binaryzip   	:= $(applname)~.mxo.zip
+
+### Windows related targets
+Windows-binaryfile 	:= $(applname)~.mxe
+Windows-binaryzip   := $(applname)~.mxe
+
+
+################################## SETTINGS FOR WINDOWS TARGET #####################################
+ifeq ($(OS), Windows)
+
+# MAX/MSP SDK is installed here
+MAXSDK := /usr/local/lib/maxmspsdk
+
+ifeq ($(system), Linux)
+	# we are crosscompiling using mingw crosscompiler ('mingw32' package on Ubuntu)
+	CROSS:=/usr/bin/i586-mingw32msvc-
+endif
+
+CXX:=$(CROSS)g++
+LDFLAGS=
+DLLWRAP:=$(CROSS)dllwrap --target=i386-mingw32 -mno-cygwin
+STRIP:=$(CROSS)strip
+LIBS :=  $(MAXSDK)/c74support/max-includes/MaxAPI.lib $(MAXSDK)/c74support/msp-includes/MaxAudio.lib
+CXXINCS :=  -I"$(MAXSDK)/c74support/max-includes"  -I"$(MAXSDK)/c74support/msp-includes" -I/usr/local/lib/faust
+CXXFLAGS := $(CXXINCS) -DWIN_VERSION -DWIN_EXT_VERSION     -O3 -march=pentium4 -mfpmath=sse -msse -ffast-math
+
+endif
+####################################################################################################
+
+
+################################### SETTINGS FOR OSX TARGET ########################################
+ifeq ($(OS), OSX)
+LIB  := -I gui -I audio -I . -fPIC -shared
+INC	 := -I/usr/local/include/c74support/max-includes -I/usr/local/include/c74support/msp-includes
+endif
+####################################################################################################
+
+
+
+executable : $($(OS)-binaryfile)
+
+binary : $($(OS)-binaryzip)
+	echo $($(OS)-binaryzip) > binaryfilename.txt
+
+source : $(cppfile)
+
+source-pkg : $(pkgfile)
+	echo toto
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(cppfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(pkgfile) *.xml *.cpp
+
+###---------------------------------------------------------------
+
+$(cppfile) : $(faustfile)
+	faust -i -a max-msp/max-msp.cpp $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+
+OLD-$(cppfile) : $(faustfile)
+	if test -d gui; then dep=0; else mkdir gui && mkdir audio && cp /usr/local/lib/faust/misc.h $(DSPDEPTS) . && cp /usr/local/lib/faust/gui/GUI.h ./gui && cp /usr/local/lib/faust/gui/UI.h ./gui && cp /usr/local/lib/faust/audio/dsp.h ./audio;fi
+	faust -i -a max-msp.cpp $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+
+$(svgfile) : $(cppfile)
+	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
+
+$(pkgfile) : $(faustfile) $(cppfile)
+	if test -d $(pkgdir);then rm -r $(pkgdir);fi
+	mkdir $(pkgdir)
+	cp $(readme) $(faustfile) $(cppfile) Makefile $(pkgdir)
+	cp -r ./gui ./audio misc.h $(pkgdir)
+	zip -r $(pkgfile) $(pkgdir)
+
+
+
+$(OSX-binaryfile) : $(cppfile) Info.plist.template
+ifeq ($(processor), i386)
+	install -d $@/Contents/MacOS
+	g++ -arch i386 -O3 -mfpmath=sse -ffast-math -msse -msse2 $(INC)  -c $(cppfile) -o i386.o
+	g++  -framework MaxAPI -framework Carbon -framework MaxAudioAPI -arch i386 -Wl,-Y,1455 -bundle i386.o -o i386~
+	sed s/FOO/$(applname)~/ <Info.plist.template >$@/Contents/Info.plist
+	lipo -create i386~ -output $@/Contents/MacOS/$(applname)~
+	rm -f i386~ i386.o Info.plist.template
+else
+	install -d $@/Contents/MacOS
+	g++ -arch ppc -fpascal-strings -fasm-blocks -g -O3 $(INC)  -c $(cppfile) -o ppc.o
+	g++  -framework Carbon -framework MaxAPI -framework MaxAudioAPI -arch ppc -Wl,-Y,1455 -bundle ppc.o -o ppc~
+	sed s/FOO/$(applname)~/ <Info.plist.template >$@/Contents/Info.plist
+	lipo -create ppc~ -output $@/Contents/MacOS/$(applname)~
+	rm -f ppc~ ppc.o Info.plist.template
+endif
+
+
+Info.plist.template :
+	echo '<?xml version="1.0" encoding="UTF-8"?>' > Info.plist.template
+	echo '<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">'  >> Info.plist.template
+	echo '<plist version="1.0">'  		>> Info.plist.template
+	echo '<dict>'  				>> Info.plist.template
+	echo '	<key>CFBundleExecutable</key>'  >> Info.plist.template
+	echo '	<string>FOO</string>'  		>> Info.plist.template
+	echo '	<key>CFBundleName</key>'  	>> Info.plist.template
+	echo '	<string>FOO</string>'  		>> Info.plist.template
+	echo '	<key>CFBundlePackageType</key>'  >> Info.plist.template
+	echo '	<string>iLaX</string>'  	>> Info.plist.template
+	echo '</dict>'  			>> Info.plist.template
+	echo '</plist>'  			>> Info.plist.template
+
+# the following target being is used by the server (remote compile on a Mac via ssh)
+$(OSX-binaryzip) :
+	scp $(faustfile) faust@macyann:~/onlineComp
+	ssh faust@macyann "cd onlineComp && /usr/local/bin/faust2msp $(OPT) $(faustfile) && zip -r $@ $(OSX-binaryfile)"
+	scp faust@macyann:~/onlineComp/$@ .
+
+
+OLD-$(Windows-binaryfile) : $(cppfile) $(deffile)
+	$(CXX) $(CXXFLAGS) -c $(cppfile) -o tmp.o
+	$(DLLWRAP) --driver-name $(CXX) --def $(deffile) tmp.o  $(LIBS) -o $@
+	$(STRIP) $@
+
+$(Windows-binaryfile) :
+	faust2w32max6 $(faustfile)
+
+
+# we need to create the .def file needed to generate the .dll
+$(deffile) :
+	@echo LIBRARY     $(applname)~ 						 > $@
+	@echo DESCRIPTION \'Faust generated MAX plugin\' 	>> $@
+	@echo EXPORTS     main 								>> $@

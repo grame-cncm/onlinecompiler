@@ -1,0 +1,149 @@
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+
+PROCARCH := 32bits
+OS := Windows
+
+applname := $(faustfile:.dsp=)
+cppfile := $(faustfile:.dsp=.cpp)
+readme := ../../../images/element/README
+xmlfile := $(faustfile).xml
+pkgdir := $(faustfile:.dsp=-pkg)
+pkgfile := $(pkgdir).zip
+svgdir := $(faustfile)-svg
+svgfile := $(svgdir)/process.svg
+
+
+#binpkgdir  := $(faustfile:.dsp=-bin)
+binpkg     := $(faustfile:.dsp=-bin.zip)
+
+
+#-------------------------------------------------------------------
+# Check plateform specifics
+#
+system	:= $(shell uname -s)
+
+ARCH	:= puredata.cpp
+patchfile 	:= $(applname).pd
+
+ifeq ($(system), Darwin)
+	LIB			:= -DPD -Wall -I/Applications/Pd-extended.app/Contents/Resources/include/ -bundle -undefined suppress -flat_namespace
+	binaryfile 	:= $(applname)~.pd_darwin
+	ifeq ($(PROCARCH), 32bits)
+		ARCHPROC := -arch i386 -arch x86_64
+	else
+		ARCHPROC := -arch i386 -arch x86_64
+	endif
+else
+	ifeq ($(system), Linux)
+		ifeq ($(OS), Windows)
+			LIB 		:= -I/home/faust/www/compiler/include/pd -enable-auto-import -shared /home/faust/www/compiler/include/pd/pd.dll
+			binaryfile 	:= $(applname)~.dll
+			ifeq ($(PROCARCH), 32bits)
+				ARCHPROC := -m32
+			else
+				ARCHPROC := -m32
+			endif
+		else
+			ifeq ($(OS), OSX)
+				LIB			:= -DPD -Wall -I/Applications/Pd-extended.app/Contents/Resources/include/ -bundle -undefined suppress -flat_namespace
+				binaryfile 	:= $(applname)~.pd_darwin
+				ifeq ($(PROCARCH), 32bits)
+					ARCHPROC := -arch i386 -arch x86_64
+				else
+					ARCHPROC := -arch i386 -arch x86_64
+				endif
+			else
+				binaryfile 	:= $(applname)~.pd_linux
+				ifeq ($(PROCARCH), 32bits)
+					ARCHPROC := -m32 -L/usr/lib32
+					LIB	 := -I/usr/include/pd -fPIC -shared
+				else
+					ARCHPROC := -m64
+					LIB	 := -I/usr/include/pd -fPIC -shared
+				endif
+			endif
+		endif
+	else
+		echo "unsupported plateform"
+		exit 1
+	endif
+endif
+
+
+executable : $(binaryfile)
+
+binary : $(binpkg)
+	echo $(binpkg) > binaryfilename.txt
+
+source : $(cppfile)
+
+patch : $(patchfile)
+
+source-pkg : $(pkgfile)
+	echo toto
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(cppfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(pkgfile)
+
+###---------------------------------------------------------------
+
+$(cppfile) : $(faustfile)
+	if test -d $(DSPDEPTS);then dep=0;else cp $(DSPDEPTS) .;fi
+	faust -xml $(faustfile) -o /dev/null 2> errors.log
+	faust -i -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+
+$(svgfile) : $(cppfile)
+	faust $(faustfile) -svg $(OPT) >/dev/null 2> errors.log
+
+# compile for linux
+$(applname)~.pd_linux : $(cppfile)
+	g++ -O3 $(ARCHPROC) -mfpmath=sse -msse -ffast-math $(LIB) -Dmydsp=$(applname) -o $@ $(cppfile)
+
+# or cross-compile for windows
+$(applname)~.dll : $(cppfile)
+	i586-mingw32msvc-g++ -O3 $(ARCHPROC) -mfpmath=sse -msse -ffast-math $(LIB) -Dmydsp=$(applname) -o $@ $(cppfile)
+
+# or compile for darwin
+ifeq ($(system), Darwin)
+
+# native darwin
+$(applname)~.pd_darwin : $(cppfile)
+	g++ $(ARCHPROC) -O3 -mfpmath=sse -msse -ffast-math $(LIB) -Dmydsp=$(applname) -o $@ $(cppfile)
+
+else
+
+#cross compiling via ssh
+$(applname)~.pd_darwin : $(cppfile)
+	ssh faust@macyann "mkdir onlineComp/$(SESSIONID)"
+	scp $(cppfile) faust@macyann:~/onlineComp/$(SESSIONID)
+	ssh faust@macyann "cd onlineComp/$(SESSIONID) && g++ $(ARCHPROC) -O3 -mfpmath=sse -msse -ffast-math $(LIB) -Dmydsp=$(applname) -o $@ $(cppfile)"
+	scp faust@macyann:~/onlineComp/$(SESSIONID)/$@ .
+	ssh faust@macyann "rm -r onlineComp/$(SESSIONID)"
+
+endif
+
+
+
+$(pkgfile) : $(faustfile) $(cppfile) $(patchfile)
+	mkdir $(pkgdir)
+	cp $(patchfile) /usr/lib/pd/extra-faust/*.pd $(pkgdir)
+	cp $(readme) $(faustfile) $(cppfile) Makefile $(pkgdir)
+	zip -r $(pkgfile) $(pkgdir)
+
+
+$(patchfile) : $(cppfile)
+	faust2pd -s $(xmlfile)
+
+$(binpkg) : 
+	faust2w32puredata $(OPT) $(faustfile)
+	cp $(wildcard 	/usr/lib/pd/extra/faust*.pd  /usr/local/lib/pd/extra/faust*.pd /opt/lib/pd/extra/faust*.pd) .
+	zip -r $(binpkg) $(faustfile:.dsp=~.dll) *.pd

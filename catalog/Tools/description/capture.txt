@@ -1,0 +1,1 @@
+The capture function allows you to record up to 8s of mono signal. It then loops it until you record another sequence, or leave the program. You can also choose the volume of the playback moving the horizontal slider.

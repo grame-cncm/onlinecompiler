@@ -1,0 +1,3 @@
+by <a href="mailto:faurep43@gmail.com">pied</a>: 
+A simple tutorial how to include libraries, use the "oscillator.lib" saw1 generator, and apply an ADSR from "music.lib".
+<br>Voted: 1

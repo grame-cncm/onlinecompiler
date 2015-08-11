@@ -1,0 +1,2 @@
+A simple one zero filter.<br>
+Doc: <a href="https://ccrma.stanford.edu/~jos/filters/One_Zero.html">https://ccrma.stanford.edu/~jos/filters/One_Zero.html</a>

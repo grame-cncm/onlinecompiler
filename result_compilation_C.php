@@ -59,8 +59,8 @@ if($_SESSION['enrobagemenu'] == "none" || $_SESSION['enrobagemenu'] == ""){
     $assoc['__resultat__'] = "Please, select an architecture in the architeture menu.";
     if($_SESSION['code_faust'] == "Enter Faust code here") $assoc['__resultat__'] = $assoc['__resultat__']."<br>Please, enter some Faust code in the \"Faust Code\" tab or drag a Faust file in the area above.";
 }else{
-    //$qrpath = "/home/faust/www/compiler/tmp/".$_SESSION['id']."/workdir/qr.png";
-    $qrpath = "http://".$_SERVER['SERVER_NAME']."/compiler/tmp/".$_SESSION['id']."/workdir/qr.png";
+    //$qrpath = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/qr.png";
+    $qrpath = "http://".$_SERVER['SERVER_NAME']."/onlinecompiler/tmp/".$_SESSION['id']."/workdir/qr.png";
     //$assoc['__resultat__'] =  $_SESSION['reponse_g++']."<br><img src=\"".$qrpath."\">";
     $assoc['__resultat__'] =  $_SESSION['reponse_g++'];
 }

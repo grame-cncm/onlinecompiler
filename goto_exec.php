@@ -49,7 +49,7 @@ if ($_SESSION['htmlCode'] != "" ){
 
   //the g++ compilation is processed
   if ($_SESSION['comp_C_done'] != 1){
-    $workdirname = "/home/faust/www/compiler/tmp/".$_SESSION['id']."/workdir/";
+    $workdirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/";
     $workdirurl = "tmp/".$_SESSION['id']."/workdir/";
     $dspdepts = "DSPDEPTS=\"".$_SESSION['dspDept']."\"";
     $logfile = $workdirname."errors.log";

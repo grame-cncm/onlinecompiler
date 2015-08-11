@@ -14,7 +14,7 @@ echo "Full Screen mode has been opened in a New Window.";
 //jump to index.php
 echo "<script type=\"text/javascript\">";
 if($_SESSION['fullScreenMode'] == 1){
-  echo "window.open(\"http://faust.grame.fr/compiler/index.php\")";
+  echo "window.open(\"http://faust.grame.fr/onlinecompiler/index.php\")";
 }
 if($_SESSION['fullScreenMode'] == 0) echo "window.open(\"http://faust.grame.fr/index.php/online-examples\",\"_self\")";
 echo "</script> ";

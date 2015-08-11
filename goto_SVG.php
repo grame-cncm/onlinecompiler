@@ -68,8 +68,8 @@ if ($_SESSION['htmlCode'] != "" ){
       else $_SESSION['winSize'] = $_POST['winSize'];
     }
 
-    $sessiondirname = "/home/faust/www/compiler/tmp/".$_SESSION['id']."/";
-    ##$sessiondirname = "http://faust.grame.fr/compiler/tmp/".$_SESSION['id']."/";
+    $sessiondirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/";
+    ##$sessiondirname = "http://faust.grame.fr/onlinecompiler/tmp/".$_SESSION['id']."/";
     $workdirname = $sessiondirname."workdir/";
     $appliName = $workdirname.$_SESSION['appli_name'].".dsp";
     $dspdepts = "DSPDEPTS=".$_SESSION['dspDept'];

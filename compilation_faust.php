@@ -13,31 +13,20 @@
 
   Copyright (C) 2003-2011 GRAME, Centre National de Creation Musicale
   ---------------------------------------------------------------------
-  This file is free software; you can redistribute it 
-  and/or modify it under the terms of the GNU General Public License 
-  as published by the Free Software Foundation; either version 3 of 
+  This file is free software; you can redistribute it
+  and/or modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3 of
   the License, or (at your option) any later version.
+  See <http://www.gnu.org/licenses/>.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License 
-  along with this program; If not, see <http://www.gnu.org/licenses/>.
-
-  EXCEPTION : As a special exception, you may create a larger work 
-  that contains this FAUST architecture section and distribute  
-  that work under terms of your choice, so long as this FAUST 
-  architecture section is not modified.  
 */
 
 if (!defined("__compilation_faust__"))
 {
   define("__compilation_faust__", 1);
-	
+
   if (session_id()=="") session_start();
-        
+
   require "inc/mess.inc";
   require "php/functions.php";
   require "php/make_element.php";
@@ -45,7 +34,7 @@ if (!defined("__compilation_faust__"))
   //get the html code
   if ($_SESSION['htmlCode'] == "" ) $_SESSION['htmlCode'] = read_file ("compiler.html");
   $html = $_SESSION['htmlCode'];
-  
+
   //the top of the page is displayed
   display_header($html);
   display_navigation($html,0);
@@ -57,12 +46,12 @@ if (!defined("__compilation_faust__"))
   //if the faust code area is empty, an error message is returned
   if ( $codeAcompiler == "" | $codeAcompiler == "$mess_code" ){
     $_SESSION['resultat_faust'] = -1;
-  } 
+  }
   //otherwise the compilation is carried out
   else {
-    $sessiondirname = "/home/faust/www/compiler/tmp/".$_SESSION['id']."/";
+    $sessiondirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/";
     $workdirname = $sessiondirname."workdir/";
-    ##$workdirname = "/home/faust/www/compiler/tmp/".$_SESSION['id']."/workdir/";
+    ##$workdirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/";
     $fileName = $workdirname.$_SESSION['appli_name'].".dsp";
     $cppFileName = $workdirname.$_SESSION['appli_name'].".cpp";
     $javaFileName = $workdirname.$_SESSION['appli_name'].".java";
@@ -73,28 +62,28 @@ if (!defined("__compilation_faust__"))
     $opt = $_SESSION['compil_options'];
     $oscControl = $_SESSION['OSCselect'];
     $dspdepts = "DSPDEPTS=\"".$_SESSION['dspDept']."\"";
-    
+
     //generates the colored c++ code
     exec("make ".$oscControl." ".$dspdepts." -C $workdirname highlighted 2>> $logfile", $none, $ret1);
     //generates the source package
     exec("make ".$oscControl." ".$dspdepts." -C $workdirname source 2>> $logfile", $none, $ret2);
 
-    if($_SESSION['langMenu'] == "java"){ 
+    if($_SESSION['langMenu'] == "java"){
       exec("faust -lang ".$_SESSION['langMenu']." $fileName >> ".$javaFileName, $none, $retJava);
       $_SESSION['codeJava'] = read_file($javaFileName);
     }
-    
-    if($_SESSION['langMenu'] == "js"){ 
+
+    if($_SESSION['langMenu'] == "js"){
       exec("faust -lang ".$_SESSION['langMenu']." $fileName >> ".$jsFileName);
       $_SESSION['codeJs'] = read_file($jsFileName);
     }
 
-    if($_SESSION['langMenu'] == "c"){ 
+    if($_SESSION['langMenu'] == "c"){
       exec("faust -lang ".$_SESSION['langMenu']." $fileName >> ".$cFileName);
       $_SESSION['codeC'] = read_file($cFileName);
     }
 
-    if($_SESSION['langMenu'] == "llvm"){ 
+    if($_SESSION['langMenu'] == "llvm"){
       exec("faust -lang ".$_SESSION['langMenu']." $fileName >> ".$llvmFileName);
       $_SESSION['codeLLVM'] = read_file($llvmFileName);
     }
@@ -104,7 +93,7 @@ if (!defined("__compilation_faust__"))
       $_SESSION['resultat_faust'] = 1;
       //$_SESSION['code_C_h'] = extract_code(read_file($workdirname."highlighted"));
       $_SESSION['code_C_h'] = read_file($cppFileName);
-    } 
+    }
     else {
       $_SESSION['resultat_faust'] = 0;
       $_SESSION['erreur_faust'] = read_file($logfile);
@@ -118,5 +107,5 @@ echo "<script type=\"text/javascript\">";
 echo "document.location.replace(\"result_compilation_faust.php\")";
 echo "</script> ";
 }
- 
+
 ?>

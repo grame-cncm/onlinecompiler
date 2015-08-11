@@ -40,8 +40,8 @@ $diag = get_section($html, "diagram");
 
 //compute pathname to process.svg file
 $applname 	= $_SESSION['appli_name'];
-//$sessiondirname	= "/home/faust/www/compiler/tmp/".$_SESSION['id']."/";
-$sessiondirname	= "/compiler/tmp/".$_SESSION['id']."/";
+//$sessiondirname	= "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/";
+$sessiondirname	= "/onlinecompiler/tmp/".$_SESSION['id']."/";
 $workdirname	= $sessiondirname."workdir/";
 $blockDiagram 	= $workdirname.$applname."-svg/process.svg";
 $signalGraph  = $workdirname.$applname.".dsp.svg";

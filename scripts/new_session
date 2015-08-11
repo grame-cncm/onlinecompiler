@@ -1,6 +1,6 @@
 #!/bin/bash
-if ( ! [ -d /home/faust/www/compiler/tmp/$1 ] ) then
-    mkdir -m ugo+w /home/faust/www/compiler/tmp/$1 /home/faust/www/compiler/tmp/$1/uploads 
-    touch /home/faust/www/compiler/tmp/$1/history.txt
+if ( ! [ -d /home/faust/www/onlinecompiler/tmp/$1 ] ) then
+    mkdir -m ugo+w /home/faust/www/onlinecompiler/tmp/$1 /home/faust/www/onlinecompiler/tmp/$1/uploads
+    touch /home/faust/www/onlinecompiler/tmp/$1/history.txt
     ###`scripts/clean_old_sessions`
 fi

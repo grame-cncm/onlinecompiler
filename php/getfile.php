@@ -29,7 +29,7 @@ if (!defined("__getfile__"))
                 //telechargement d'un exemple
 		if ($enrob!="") $fichier = "exemples/exec/".$enrob."/".$fichier;
                 //telechargement d'un fichier compile par l'utilisateur
-		else $fichier = "/home/faust/www/compiler/tmp/".$_SESSION['id']."/".$_SESSION['appli_name']."/".$fichier;
+		else $fichier = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/".$_SESSION['appli_name']."/".$fichier;
 		$tailleFichier = filesize($fichier);
 		//Configuration du navigateur
 		header('Content-Type: application/x-executable-file');
@@ -86,7 +86,7 @@ if (!defined("__getfile__"))
 		if (session_id()=="") session_start();
 
 		$filename 	= $_SESSION['appli_name']."-pkg.zip";
-		$workdirname	= "/home/faust/www/compiler/tmp/".$_SESSION['id']."/workdir/";
+		$workdirname	= "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/";
 		$fullname 	= $workdirname.$filename;
 		$size 		= filesize($fullname);
 
@@ -109,7 +109,7 @@ if (!defined("__getfile__"))
 	{
 		if (session_id()=="") session_start();
 
-		$workdirname	= "/home/faust/www/compiler/tmp/".$_SESSION['id']."/workdir/";
+		$workdirname	= "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/";
 		$fullname 	= $workdirname.$filename;
 		$size 		= filesize($fullname);
 
@@ -130,7 +130,7 @@ function getDocPdf()
 
 		$appName = $_SESSION['appli_name'];
 		$filename 	= $appName.".pdf";
-		$workdirname	= "/home/faust/www/compiler/tmp/".$_SESSION['id']."/workdir/";
+		$workdirname	= "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/";
 		$fullname 	= $workdirname.$appName."-mdoc/pdf/".$filename;
 		$size 		= filesize($fullname);
 

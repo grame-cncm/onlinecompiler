@@ -7,9 +7,9 @@
 
   Copyright (C) 2003-2011 GRAME, Centre National de Creation Musicale
   ---------------------------------------------------------------------
-  This file is free software; you can redistribute it 
-  and/or modify it under the terms of the GNU General Public License 
-  as published by the Free Software Foundation; either version 3 of 
+  This file is free software; you can redistribute it
+  and/or modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3 of
   the License, or (at your option) any later version.
 
   This program is distributed in the hope that it will be useful,
@@ -17,13 +17,13 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License 
+  You should have received a copy of the GNU General Public License
   along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-  EXCEPTION : As a special exception, you may create a larger work 
-  that contains this FAUST architecture section and distribute  
-  that work under terms of your choice, so long as this FAUST 
-  architecture section is not modified. 
+  EXCEPTION : As a special exception, you may create a larger work
+  that contains this FAUST architecture section and distribute
+  that work under terms of your choice, so long as this FAUST
+  architecture section is not modified.
 */
 
 //session is started
@@ -41,7 +41,7 @@ system("scripts/new_session ".$_SESSION['id'], $ret);
 if ($ret != 0) {erreur("result_compilation_mdoc.php: Unable to start a new session. Please, try later."); return 1;}
 
 //download the pdf file
-if ($_POST['submit'] == "Get the documentation") { 
+if ($_POST['submit'] == "Get the documentation") {
   getDocPdf();
   exit;
 }
@@ -62,11 +62,11 @@ if ($_SESSION['resultat_mdoc'] == 1)
 {
 error_log("SERVER : ".$_SERVER['DOCUMENT_ROOT'],0);
   $mdoc = get_section ($html, "mdoc");
-  $googleViewer = "<iframe src=\"http://docs.google.com/viewer?url=http%3A%2F%2Ffaust.grame.fr%2Fcompiler%2Ftmp%2F".$_SESSION['id']."%2Fworkdir%2F".$_SESSION['appli_name']."-mdoc%2Fpdf%2F".$_SESSION['appli_name'].$_SESSION['randMdoc'].".pdf&embedded=true\" width=\"".$boxWidth."\" height=\"780\" style=\"border: none;\"></iframe>";
+  $googleViewer = "<iframe src=\"http://docs.google.com/viewer?url=http%3A%2F%2Ffaust.grame.fr%2Fonlinecompiler%2Ftmp%2F".$_SESSION['id']."%2Fworkdir%2F".$_SESSION['appli_name']."-mdoc%2Fpdf%2F".$_SESSION['appli_name'].$_SESSION['randMdoc'].".pdf&embedded=true\" width=\"".$boxWidth."\" height=\"780\" style=\"border: none;\"></iframe>";
   $assoc['__resultat__'] =  $googleViewer;
 }
 else
-{ 
+{
   if($_SESSION['code_faust'] == "Enter Faust code here") $assoc['__resultat__'] = "Please, enter some Faust code in the \"Faust Code\" tab or drag a Faust file in the area above.";
   else $assoc['__resultat__'] =  "Woops, something went wrong... Please try again.";
 }

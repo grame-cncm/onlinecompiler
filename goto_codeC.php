@@ -4,30 +4,30 @@
   \brief This file links any page to the compilation pages
   \author Romain Micon - Damien Cramet
 
-  This page is called by the Javascript function goto_codeC(). 
-  It updates the SESSION values and, according to the current 
-  state, it launchs the Faust compilation or display the result 
+  This page is called by the Javascript function goto_codeC().
+  It updates the SESSION values and, according to the current
+  state, it launchs the Faust compilation or display the result
   if the code is already compiled.
 
   Copyright (C) 2003-2011 GRAME, Centre National de Creation Musicale
   ---------------------------------------------------------------------
-  This file is free software; you can redistribute it 
-  and/or modify it under the terms of the GNU General Public License 
-  as published by the Free Software Foundation; either version 3 of 
+  This file is free software; you can redistribute it
+  and/or modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3 of
   the License, or (at your option) any later version.
 
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
-  You should have received a copy of the GNU General Public License 
+
+  You should have received a copy of the GNU General Public License
   along with this program; If not, see <http://www.gnu.org/licenses/>.
-  
-  EXCEPTION : As a special exception, you may create a larger work 
-  that contains this FAUST architecture section and distribute  
-  that work under terms of your choice, so long as this FAUST 
-  architecture section is not modified. 
+
+  EXCEPTION : As a special exception, you may create a larger work
+  that contains this FAUST architecture section and distribute
+  that work under terms of your choice, so long as this FAUST
+  architecture section is not modified.
 */
 
 //session is started
@@ -46,7 +46,7 @@ if ($_SESSION['htmlCode'] != "" ){
   display_navigation($html,0);
 
   //update and processing actions
-  update_catalog();
+  //update_catalog();
   update();
 
   display_footer($html);

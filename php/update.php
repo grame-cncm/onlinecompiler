@@ -4,7 +4,7 @@
   \brief This file contains the function "update"
   \author Romain Michon - Damien Cramet
 
-  Copyright (C) 2003-2011 GRAME, Centre National de Creation Musicale
+  Copyright (C) 2003-2015 GRAME, Centre National de Creation Musicale
   ---------------------------------------------------------------------
   This file is free software; you can redistribute it
   and/or modify it under the terms of the GNU General Public License

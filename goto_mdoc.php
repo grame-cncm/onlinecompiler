@@ -40,7 +40,7 @@ if ($_SESSION['htmlCode'] != "" ){
   display_navigation($html,0);
 
   //update and process
-  update_catalog();
+  //update_catalog();
   update();
 
   //global variable to set the position of the frame on the navigation bar

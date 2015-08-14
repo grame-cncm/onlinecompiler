@@ -1,9 +1,6 @@
 ### The behaviour of this Makefile will only be correct if
 ### only one .dsp file exists in the folder
 
-PROCARCH := 64bits
-OS := OSX
-
 applname := $(faustfile:.dsp=)
 cppfile := $(faustfile:.dsp=.cpp)
 readme := ../../../images/element/README

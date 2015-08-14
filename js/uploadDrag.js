@@ -25,6 +25,9 @@
 
 		xhr.open('post','fileDroped.php');
 		xhr.send(formData);
+
+		// goto marker will be replaced here
+		window.setTimeout('__goto__', 250);
 	};
 
 }());

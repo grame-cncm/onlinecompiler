@@ -74,7 +74,7 @@ $resultat = fill_template($resultat, $assoc);
 
 //the html page is displayed
 display_header($html);
-display_catalog($html,"goto_mdoc.php");
+// display_catalog($html,"goto_mdoc.php");
 display_navigation($html,0);
 display_dropFile($html,"document.location.replace(\"goto_mdoc.php\")");
 print $mdoc ;

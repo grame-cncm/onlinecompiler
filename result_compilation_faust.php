@@ -6,9 +6,9 @@
 
   Copyright (C) 2003-2011 GRAME, Centre National de Creation Musicale
   ---------------------------------------------------------------------
-  This file is free software; you can redistribute it 
-  and/or modify it under the terms of the GNU General Public License 
-  as published by the Free Software Foundation; either version 3 of 
+  This file is free software; you can redistribute it
+  and/or modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3 of
   the License, or (at your option) any later version.
 
   This program is distributed in the hope that it will be useful,
@@ -16,13 +16,13 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License 
+  You should have received a copy of the GNU General Public License
   along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-  EXCEPTION : As a special exception, you may create a larger work 
-  that contains this FAUST architecture section and distribute  
-  that work under terms of your choice, so long as this FAUST 
-  architecture section is not modified. 
+  EXCEPTION : As a special exception, you may create a larger work
+  that contains this FAUST architecture section and distribute
+  that work under terms of your choice, so long as this FAUST
+  architecture section is not modified.
 */
 
 //session is started
@@ -41,7 +41,7 @@ if ($ret != 0) {erreur("result_compilation_faust.php: Unable to start a new sess
 
 //download the source package id it was created
 if (isset($_POST['submit'])) {
-  if ($_POST['submit'] == "Get the source package") { 
+  if ($_POST['submit'] == "Get the source package") {
     getpackage($fichier, $_SESSION['enrobagemenu']);
     exit;
   }
@@ -62,18 +62,18 @@ if ($_SESSION['resultat_faust'] == 1) {
     $assoc['__resultat__'] = $_SESSION['codeJava'];
     $assoc['__mode__'] = "\"clike\"";
     $dis = "disableOthers";
-  }  
-  elseif($_SESSION['langMenu'] == "js"){ 
+  }
+  elseif($_SESSION['langMenu'] == "js"){
     $assoc['__resultat__'] = $_SESSION['codeJs'];
     $assoc['__mode__'] = "\"javascript\"";
     $dis = "disableOthers";
   }
-  elseif($_SESSION['langMenu'] == "c"){ 
+  elseif($_SESSION['langMenu'] == "c"){
     $assoc['__resultat__'] = $_SESSION['codeC'];
     $assoc['__mode__'] = "\"javascript\"";
     $dis = "disableOthers";
   }
-  elseif($_SESSION['langMenu'] == "llvm"){ 
+  elseif($_SESSION['langMenu'] == "llvm"){
     $assoc['__resultat__'] = $_SESSION['codeLLVM'];
     $assoc['__mode__'] = "\"javascript\"";
     $dis = "disableOthers";
@@ -100,7 +100,7 @@ $resultat = fill_template($resultat, $assoc);
 
 //the html page is displayed
 display_header($html);
-display_catalog($html,"goto_codeC.php");
+// display_catalog($html,"goto_codeC.php");
 display_navigation($html,1);
 display_options($html,"resultat_compilation_faust.php","goto_codeC2()",$dis);
 display_dropFile($html,"goto_codeC2()");

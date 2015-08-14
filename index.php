@@ -48,7 +48,7 @@ $html = $_SESSION['htmlCode'];
 
 //the html page is built
 display_header($html);
-display_catalog($html,"goto_codeFaust.php");
+// display_catalog($html,"goto_codeFaust.php");
 display_exampleSaver($html);
 display_navigation($html,2);
 display_dropFile($html,"goto_codeFaust()");

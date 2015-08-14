@@ -38,7 +38,7 @@ if (!defined("__compilation_faust__"))
   //the top of the page is displayed
   display_header($html);
   display_navigation($html,0);
-  display_catalog($html,"goto_codeC.php");
+  // display_catalog($html,"goto_codeC.php");
 
   //getting the code to be compiled
   $codeAcompiler = $_SESSION['code_faust'];

@@ -37,7 +37,7 @@ if ($_SESSION['htmlCode'] != "" ){
   $html = $_SESSION['htmlCode'];
 
   display_header($html);
-  display_catalog($html,"goto_codeFaust.php");
+  // display_catalog($html,"goto_codeFaust.php");
   display_navigation($html,0);
 
   //update and processing action

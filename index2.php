@@ -6,9 +6,9 @@
 
   Copyright (C) 2003-2011 GRAME, Centre National de Creation Musicale
   ---------------------------------------------------------------------
-  This file is free software; you can redistribute it 
-  and/or modify it under the terms of the GNU General Public License 
-  as published by the Free Software Foundation; either version 3 of 
+  This file is free software; you can redistribute it
+  and/or modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 3 of
   the License, or (at your option) any later version.
 
   This program is distributed in the hope that it will be useful,
@@ -16,13 +16,13 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License 
+  You should have received a copy of the GNU General Public License
   along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-  EXCEPTION : As a special exception, you may create a larger work 
-  that contains this FAUST architecture section and distribute  
-  that work under terms of your choice, so long as this FAUST 
-  architecture section is not modified. 
+  EXCEPTION : As a special exception, you may create a larger work
+  that contains this FAUST architecture section and distribute
+  that work under terms of your choice, so long as this FAUST
+  architecture section is not modified.
 */
 
 error_reporting(E_ALL);
@@ -34,7 +34,7 @@ require "php/functions.php";
 require "php/make_element.php";
 
 //session variables are updated
-$_SESSION['orig_editor'] = 1; 
+$_SESSION['orig_editor'] = 1;
 $_SESSION['goto'] = "faustCode";
 
 //creating the session folder on the server id it doesn't already exists
@@ -52,7 +52,7 @@ $html = $_SESSION['htmlCode'];
 
 //the html page is built
 display_header($html);
-display_catalog($html,"goto_codeFaust.php");
+// display_catalog($html,"goto_codeFaust.php");
 display_exampleSaver($html);
 display_navigation($html,2);
 display_dropFile($html,"goto_codeFaust()");

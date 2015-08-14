@@ -1,4 +1,3 @@
-
 (function  () {
 
 	var dropzone = document.getElementById('filedrag');

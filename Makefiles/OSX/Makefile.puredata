@@ -19,7 +19,7 @@ binpkg     := $(faustfile:.dsp=-bin.zip)
 binary :
 	remoteOSX faust2puredata $(faustfile) $(oscOPT) $(httpdOPT)
 	mv binary.zip $(compBinaryfile)
-	echo $(binpkg) > binaryfilename.txt
+	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)
 

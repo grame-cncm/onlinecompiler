@@ -14,7 +14,7 @@ TMP 		:= ./tmp/$(applname)
 binary :
 	remoteOSX faust2vst $(faustfile) $(oscOPT) $(httpdOPT)
 	mv binary.zip $(compBinaryfile)
-	echo $(binpkg) > binaryfilename.txt
+	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)
 

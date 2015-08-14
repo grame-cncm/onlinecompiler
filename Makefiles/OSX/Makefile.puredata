@@ -12,6 +12,7 @@ pkgdir := $(faustfile:.dsp=-pkg)
 pkgfile := $(pkgdir).zip
 svgdir := $(faustfile)-svg
 svgfile := $(svgdir)/process.svg
+compBinaryfile 	:= $(applname).zip
 
 
 #binpkgdir  := $(faustfile:.dsp=-bin)

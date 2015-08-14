@@ -79,11 +79,11 @@ if ($_SESSION['htmlCode'] != "" ){
       $zipedDiagram = $_SESSION['appli_name']."-svg/process.svg";
     }
     if($_SESSION['svgtype'] == "Signal-Graph"){
-      exec("faust2signal $appliName", $none, $ret);
-      $zipedDiagram = $_SESSION['appli_name'].".dsp.svg";
+      exec("faust2sig -svg $appliName", $none, $ret);
+      $zipedDiagram = $_SESSION['appli_name'].".dsp.sig.svg";
     }
     if($_SESSION['svgtype'] == "Task-Graph"){
-      exec("faust2task $appliName", $none, $ret);
+      exec("faust2graph -svg $appliName", $none, $ret);
       $zipedDiagram = $_SESSION['appli_name'].".dsp.graph.svg";
     }
     if($_SESSION['svgtype'] == "Impulse-Response (Effect)"){

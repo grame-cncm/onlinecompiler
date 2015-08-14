@@ -13,7 +13,7 @@ if [ -d "$1" ]; then
 		cd "$1"
 		git pull
 		# update the production website
-		rsync -av . "$DSTD"
+		rsync -av --exclude '.git' . "$DSTD"
 		if [ ! -d "$DSTD/tmp" ]; then
 		  mkdir "$DSTD/tmp"
 		fi

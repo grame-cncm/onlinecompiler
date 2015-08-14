@@ -12,7 +12,9 @@ compBinaryfile 	:= $(applname).zip
 ARCH		:= supercollider.cpp
 TMP 		:= ./tmp/$(applname)
 
-binary : $(binaryfile)
+binary :
+	remoteOSX faust2supercollider $(faustfile) $(oscOPT) $(httpdOPT)
+	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)
@@ -29,21 +31,10 @@ mdoc : $(cppfile)
 
 clean :
 	rm -rf $(svgdir) $(pkgdir) $(compBinaryfile) $(cppfile) $(binaryfile)-svg
-	
+
 $(cppfile) : $(faustfile)
 	if test -d $(DSPDEPTS);then dep=0;else cp $(DSPDEPTS) .;fi
 	faust -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
-	
+
 $(svgfile) : $(cppfile)
 	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
-
-$(binaryfile) : $(cppfile)
-	ssh faust@macyann "mkdir onlineComp/$(SESSIONID)"
-	scp $(faustfile) faust@macyann:onlineComp/$(SESSIONID)
-	ssh faust@macyann "source /etc/profile; /usr/local/bin/faust2supercollider $(OPT) $(oscOPT) onlineComp/$(SESSIONID)/$(faustfile)"
-	scp -r faust@macyann:onlineComp/$(SESSIONID) files
-	ssh faust@macyann "rm -r onlineComp/$(SESSIONID)"
-	rm files/$(faustfile)
-	zip -r $(compBinaryfile) files
-	rm -r files
-

@@ -35,25 +35,12 @@ require "php/make_element.php";
 //the html page is displayed
 if ($_SESSION['htmlCode'] != "" ){
   $html = $_SESSION['htmlCode'];
-
-  display_header($html);
-  // display_catalog($html,"goto_codeFaust.php");
-  display_navigation($html,0);
-
-  //update and processing action
-  //update_catalog();
-  process_sent_example();
   update();
-
-  display_footer($html);
 
   //global variable to set the position of the frame in the navigation bar
   $_SESSION['goto'] = "faustCode";
 }
 
-//jump to index.php
-echo "<script type=\"text/javascript\">";
-echo "document.location.replace(\"index.php\")";
-echo "</script> ";
+require("index.php");
 
 ?>

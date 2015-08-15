@@ -41,37 +41,36 @@ require "php/make_element.php";
 if ($_SESSION['htmlCode'] != "" ){
   $html = $_SESSION['htmlCode'];
 
-  display_header($html);
+  //display_header($html);
   // display_catalog($html,"goto_codeC.php");
-  display_navigation($html,0);
+  //display_navigation($html,0);
 
   //update and processing actions
   //update_catalog();
   update();
 
-  display_footer($html);
+  //display_footer($html);
 
   //global variable to set the position of the frame in the navigation bar
   $_SESSION['goto'] = "faust";
 
   //if the code is alreay compiled, then we directly go the result
   if ($_SESSION['comp_faust_done']==1){
-    echo "<script type=\"text/javascript\">";
-    echo "document.location.replace(\"result_compilation_faust.php\")";
-    echo "</script> ";
+    // echo "<script type=\"text/javascript\">";
+    // echo "document.location.replace(\"result_compilation_faust.php\")";
+    // echo "</script> ";
+    require("result_compilation_faust.php");
+  } else {
+    // echo "<script type=\"text/javascript\">";
+    // echo "document.location.replace(\"compilation_faust.php\")";
+    // echo "</script> ";
+    require("compilation_faust.php");
   }
-  else {
-    echo "<script type=\"text/javascript\">";
-    echo "document.location.replace(\"compilation_faust.php\")";
-    echo "</script> ";
-  }
-}
-
-//if session is lost, get back to index.php
-else {
-  echo "<script type=\"text/javascript\">";
-  echo "document.location.replace(\"index.php\")";
-  echo "</script> ";
+} else {
+  // echo "<script type=\"text/javascript\">";
+  // echo "document.location.replace(\"index.php\")";
+  // echo "</script> ";
+  require("index.php");
 }
 
 ?>

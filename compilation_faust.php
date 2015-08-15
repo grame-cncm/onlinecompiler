@@ -36,8 +36,8 @@ if (!defined("__compilation_faust__"))
   $html = $_SESSION['htmlCode'];
 
   //the top of the page is displayed
-  display_header($html);
-  display_navigation($html,0);
+  //display_header($html);
+  //display_navigation($html,0);
   // display_catalog($html,"goto_codeC.php");
 
   //getting the code to be compiled
@@ -100,12 +100,12 @@ if (!defined("__compilation_faust__"))
     }
   }
 
-display_footer($html);
+//display_footer($html);
 
 //resultat_compilation is opened to diplay the result
-echo "<script type=\"text/javascript\">";
-echo "document.location.replace(\"result_compilation_faust.php\")";
-echo "</script> ";
+//echo "<script type=\"text/javascript\">";
+//echo "document.location.replace(\"result_compilation_faust.php\")";
+//echo "</script> ";
 }
-
+require ("result_compilation_faust.php");
 ?>

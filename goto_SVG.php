@@ -31,9 +31,9 @@ require "php/make_element.php";
 if ($_SESSION['htmlCode'] != "" ){
   $html = $_SESSION['htmlCode'];
 
-  display_header($html);
+  // display_header($html);
   // display_catalog($html,"goto_SVG.php");
-  display_navigation($html,0);
+  // display_navigation($html,0);
 
   //update and process
   //update_catalog();
@@ -46,8 +46,7 @@ if ($_SESSION['htmlCode'] != "" ){
   $codeToCompile = $_SESSION['code_faust'];
   if ( $codeToCompile == "" | $codeToCompile == "$mess_code" ) {
     $_SESSION['resultat_faust'] = -1;
-  }
-  else {
+  } else {
     if($_SESSION['svgtype'] == "") $_SESSION['svgtype'] = "Block-Diagram";
     if($_POST['svgtype'] != "") $_SESSION['svgtype'] = $_POST['svgtype'];
     if($_SESSION['imptype'] == "") $_SESSION['imptype'] = "Impulse-Response";
@@ -99,19 +98,20 @@ if ($_SESSION['htmlCode'] != "" ){
 
     $_SESSION['diagramDone'] = 1;
     $_SESSION['resultat_faust'] = 1;
-    echo "<script type=\"text/javascript\">";
-    echo "document.location.replace(\"display_svg.php\")";
-    echo "</script> ";
+    // echo "<script type=\"text/javascript\">";
+    // echo "document.location.replace(\"display_svg.php\")";
+    // echo "</script> ";
+    require "display_svg.php";
   }
 
-  display_footer($html);
-}
+  // display_footer($html);
 
-//if session was lost
-else{
-  echo "<script type=\"text/javascript\">";
-  echo "document.location.replace(\"index.php\")";
-  echo "</script> ";
+} else {
+    
+  // echo "<script type=\"text/javascript\">";
+  // echo "document.location.replace(\"index.php\")";
+  // echo "</script> ";
+  require "index.php";
 }
 
 ?>

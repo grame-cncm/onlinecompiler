@@ -31,12 +31,6 @@ require "php/make_element.php";
 if ($_SESSION['htmlCode'] != "" ){
   $html = $_SESSION['htmlCode'];
 
-  // display_header($html);
-  // display_catalog($html,"goto_SVG.php");
-  // display_navigation($html,0);
-
-  //update and process
-  //update_catalog();
   update();
 
   //global variable to set the position of the frame on the navigation bar
@@ -98,19 +92,10 @@ if ($_SESSION['htmlCode'] != "" ){
 
     $_SESSION['diagramDone'] = 1;
     $_SESSION['resultat_faust'] = 1;
-    // echo "<script type=\"text/javascript\">";
-    // echo "document.location.replace(\"display_svg.php\")";
-    // echo "</script> ";
     require "display_svg.php";
   }
 
-  // display_footer($html);
-
 } else {
-    
-  // echo "<script type=\"text/javascript\">";
-  // echo "document.location.replace(\"index.php\")";
-  // echo "</script> ";
   require "index.php";
 }
 

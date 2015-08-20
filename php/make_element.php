@@ -131,7 +131,7 @@ if (!defined("__make_element__"))
 	$_SESSION['descriptionArea'] = $_POST['descriptionArea'];
 
 	//test if the given Faust code is correct
-	$testDirectory = "/home/faust/www/onlinecompiler/tmp/processExample/".$_SESSION['id'];
+	$testDirectory = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/processExample/".$_SESSION['id'];
 	$testFile = $testDirectory."/test.dsp";
 	$testCppFile = $testDirectory."/test.cpp";
 	exec("mkdir ".$testDirectory,$none,$ret);

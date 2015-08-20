@@ -158,7 +158,7 @@ if (!defined("__functions__"))
 
         function put_in_tmp_file($code, $template, $suffixe)
         {
-          $tmp1 = tempnam( "/home/faust/www/onlinecompiler/tmp", $template );
+          $tmp1 = tempnam( $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp", $template );
           if ($tmp1)
           {
             $tmp = $tmp1.$suffixe;

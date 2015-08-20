@@ -49,10 +49,10 @@ if ($_SESSION['htmlCode'] != "" ){
 
   //the g++ compilation is processed
   if ($_SESSION['comp_C_done'] != 1){
-    $workdirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/";
-    $workdirurl = "tmp/".$_SESSION['id']."/workdir/";
+    $workdirname = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id']."/workdir";
+    $workdirurl = "tmp/".$_SESSION['id']."/workdir";
     $dspdepts = "DSPDEPTS=\"".$_SESSION['dspDept']."\"";
-    $logfile = $workdirname."errors.log";
+    $logfile = "$workdirname/errors.log";
     $pconfpath = "/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/kde3/lib/pkgconfig:/opt/gnome/lib/pkgconfig:/opt/gnome/lib/pkgconfig:/opt/gnome/share/pkgconfig";
     $oscControl = $_SESSION['OSCselect'];
     //$OS = "OS=".$_SESSION['osMenu'];
@@ -64,8 +64,8 @@ if ($_SESSION['htmlCode'] != "" ){
     //successful compilation
     if ($ret == 0) {
       $_SESSION['resultat_C'] = 1;
-      $_SESSION['exec_file'] = substr(read_firstline($workdirname."binaryfilename.txt"),0,-1);
-      $fileURL = $workdirurl.$_SESSION['exec_file'];
+      $_SESSION['exec_file'] = substr(read_firstline("$workdirname/binaryfilename.txt"),0,-1);
+      $fileURL = $workdirurl."/".$_SESSION['exec_file'];
       $_SESSION['reponse_g++'] = "The file <a href=\"".$fileURL."\">". $_SESSION['exec_file'] . "</a> as been succesfuly generated and can now be downloaded";
       echo "<script type=\"text/javascript\">";
       echo "document.location.replace(\"result_compilation_C.php\")";

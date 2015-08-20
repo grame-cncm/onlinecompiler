@@ -20,8 +20,8 @@ You should have received a copy of the GNU General Public License
 along with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
-//error_reporting(E_ERROR | E_WARNING | E_PARSE);
-error_reporting(E_ERROR);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//error_reporting(E_ERROR);
 
 //if no session is found, a new one is started
 if (session_id()=="") session_start();
@@ -35,7 +35,10 @@ $_SESSION['goto'] = "faustCode";
 
 //creating the session folder on the server id it doesn't already exists
 $_SESSION['id'] = session_id();
-system("scripts/new_session ".$_SESSION['id'], $ret);
+// another comment
+$_SESSION['path'] = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id'];
+// and another one
+system("scripts/new_session {$_SESSION['path']}", $ret);
 if ($ret != 0) {erreur("index.php: Unable to start a new session. Please, try later."); return 1;}
 
 //get the code of compiler.html

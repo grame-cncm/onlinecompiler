@@ -49,9 +49,8 @@ if (!defined("__compilation_faust__"))
   }
   //otherwise the compilation is carried out
   else {
-    $sessiondirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/";
+    $sessiondirname = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id']."/";
     $workdirname = $sessiondirname."workdir/";
-    ##$workdirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/";
     $fileName = $workdirname.$_SESSION['appli_name'].".dsp";
     $cppFileName = $workdirname.$_SESSION['appli_name'].".cpp";
     $javaFileName = $workdirname.$_SESSION['appli_name'].".java";

@@ -39,7 +39,8 @@ $_SESSION['goto'] = "faustCode";
 
 //creating the session folder on the server id it doesn't already exists
 $_SESSION['id'] = session_id();
-system("scripts/new_session ".$_SESSION['id'], $ret);
+$_SESSION['path'] = "$_SERVER['DOCUMENT_ROOT']/onlinecompiler/tmp/$_SESSION['id']";
+system("scripts/new_session ".$_SESSION['path'], $ret);
 if ($ret != 0) {erreur("index.php: Unable to start a new session. Please, try later."); return 1;}
 
 //get the code of compiler.html

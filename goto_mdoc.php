@@ -47,15 +47,15 @@ if ($_SESSION['htmlCode'] != "" ){
   $_SESSION['goto'] = "mdoc";
 
   //the faust code is processed in the local package genrerated by update()
-  $sessiondirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/";
-  $workdirname	= $sessiondirname."workdir/";
+  $sessiondirname = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id'];
+  $workdirname	= "$sessiondirname/workdir";
   $appname = $_SESSION['appli_name'];
   $dspdepts = "DSPDEPTS=".$_SESSION['dspDept'];
 
   //a second version of the file with a random name is created to chisel the google viewer cache
   $randMdoc = rand(0,40000);
   $_SESSION['randMdoc'] = $randMdoc;
-  exec("LD_RUN_PATH=/usr/X11R6/lib; export LD_RUN_PATH; make ".$dspdepts." -C $workdirname mdoc; cp $workdirname$appname-mdoc/pdf/$appname.pdf $workdirname$appname-mdoc/pdf/$appname$randMdoc.pdf", $none, $ret);
+  exec("LD_RUN_PATH=/usr/X11R6/lib; export LD_RUN_PATH; make $dspdepts -C $workdirname mdoc; cp $workdirname/$appname-mdoc/pdf/$appname.pdf $workdirname/$appname-mdoc/pdf/$appname$randMdoc.pdf", $none, $ret);
   if ($ret == 0) {
     $_SESSION['resultat_mdoc'] = 1;
   }

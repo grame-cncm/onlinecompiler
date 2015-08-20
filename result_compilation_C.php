@@ -36,7 +36,8 @@ require "php/make_element.php";
 
 //create a new session folder if it doesn't exist
 if($_SESSION['id'] == "") $_SESSION['id'] = session_id();
-system("scripts/new_session ".$_SESSION['id'], $ret);
+$_SESSION['path'] = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id'];
+system("scripts/new_session ".$_SESSION['path'], $ret);
 if ($ret != 0) {erreur("result_compilation_C.php: Unable to start a new session. Please, try later."); return 1;}
 
 //global variable to set the position of the frame on the navigation bar
@@ -59,7 +60,7 @@ if($_SESSION['enrobagemenu'] == "none" || $_SESSION['enrobagemenu'] == ""){
     $assoc['__resultat__'] = "Please, select an architecture in the architeture menu.";
     if($_SESSION['code_faust'] == "Enter Faust code here") $assoc['__resultat__'] = $assoc['__resultat__']."<br>Please, enter some Faust code in the \"Faust Code\" tab or drag a Faust file in the area above.";
 }else{
-    //$qrpath = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/workdir/qr.png";
+    //$qrpath = "$_SERVER['DOCUMENT_ROOT']/onlinecompiler/tmp/".$_SESSION['id']."/workdir/qr.png";
     $qrpath = "http://".$_SERVER['SERVER_NAME']."/onlinecompiler/tmp/".$_SESSION['id']."/workdir/qr.png";
     //$assoc['__resultat__'] =  $_SESSION['reponse_g++']."<br><img src=\"".$qrpath."\">";
     $assoc['__resultat__'] =  $_SESSION['reponse_g++'];

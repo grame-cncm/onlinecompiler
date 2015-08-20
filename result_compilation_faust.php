@@ -36,7 +36,8 @@ require "php/make_element.php";
 
 //create a new session folder if it doesn't exist
 if($_SESSION['id'] == "") $_SESSION['id'] = session_id();
-system("scripts/new_session ".$_SESSION['id'], $ret);
+$_SESSION['path'] = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id'];
+system("scripts/new_session ".$_SESSION['path'], $ret);
 if ($ret != 0) {erreur("result_compilation_faust.php: Unable to start a new session. Please, try later."); return 1;}
 
 //download the source package id it was created

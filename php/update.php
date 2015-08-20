@@ -53,7 +53,7 @@ function update()
   }
 
   //the history file is created
-  exec("touch /home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/history.txt", $none, $ret);
+  exec("touch ".$_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id']."/history.txt", $none, $ret);
   if ($ret != 0) {erreur("Update.php : Probleme avec le dossier de session"); return 1;}
 
   //in the case where an object from the catalog has been selected...
@@ -79,7 +79,7 @@ function update()
   }
 
   if ($_SESSION['fileDroped'] == 1){
-    $dropedFilePath = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/uploads/".$_SESSION['dropedFileName'];
+    $dropedFilePath = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id']."/uploads/".$_SESSION['dropedFileName'];
     $_SESSION['code_faust'] = Remove_CR(read_file($dropedFilePath));
     //the faust program name is created in function of the name of the .dsp file
     $_POST['nomApplication'] = exec("echo ".$_SESSION['dropedFileName']." | cut -d \. -f 1", $none, $ret);
@@ -166,7 +166,7 @@ function update()
     $options = $_SESSION['compil_options'];
     $faustcode = traiter_chaine(Remove_CR($_SESSION['code_faust']));
 
-    $sessiondirname = "/home/faust/www/onlinecompiler/tmp/".$_SESSION['id']."/";
+    $sessiondirname = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id']."/";
     $workdirname = $sessiondirname."workdir/";
     $faustfilename = $workdirname.$applname.".dsp";
     if($architecture == "none") $srcmakefile = "Makefiles/Makefile.none";

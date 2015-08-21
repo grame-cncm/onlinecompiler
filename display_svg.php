@@ -104,8 +104,8 @@ $diag = fill_template($diag, $assoc);
 //display the html page
 display_header($html);
 // display_catalog($html,"goto_SVG.php");
-display_navigation($html,0);
 display_dropFile($html,"document.location.replace(\"goto_SVG.php\")");
+display_navigation($html,0);
 print $diag;
 display_footer($html);
 

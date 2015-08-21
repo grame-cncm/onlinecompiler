@@ -74,9 +74,9 @@ $resultat = fill_template($resultat, $assoc);
 //the html page is displayed
 display_header($html);
 // display_catalog($html,"goto_exec.php");
+display_dropFile($html,"goto_exec2()");
 display_navigation($html,1);
 display_options($html,"result_compilation_C.php","goto_exec2()","disableLang");
-display_dropFile($html,"goto_exec2()");
 print $exec;
 print $resultat ;
 //echo "voila : ".$_SESSION['OSCselect'];

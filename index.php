@@ -52,11 +52,11 @@ $html = $_SESSION['htmlCode'];
 //the html page is built
 display_header($html);
 // display_catalog($html,"goto_codeFaust.php");
-display_exampleSaver($html);
-display_navigation($html,2);
+// display_exampleSaver($html);
 display_dropFile($html,"goto_codeFaust()");
+display_navigation($html,2);
 display_atelier($html);
-display_welcome($html);
+// display_welcome($html);
 display_footer($html);
 
 ?>

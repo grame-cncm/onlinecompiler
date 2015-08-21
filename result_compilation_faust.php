@@ -102,9 +102,9 @@ $resultat = fill_template($resultat, $assoc);
 //the html page is displayed
 display_header($html);
 // display_catalog($html,"goto_codeC.php");
+display_dropFile($html,"goto_codeC2()");
 display_navigation($html,1);
 display_options($html,"resultat_compilation_faust.php","goto_codeC2()",$dis);
-display_dropFile($html,"goto_codeC2()");
 //print $exec;
 print $resultat;
 //print $_SESSION['codeJava'];

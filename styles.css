@@ -1,5 +1,6 @@
 body {
-margin : 0;
+margin :5px;
+background-color: #F0F0F0;
 font-family: arial, sans-serif;
 font-size: 12px;
 }
@@ -9,7 +10,7 @@ font-size: 16px;
 }
 
 #global {
-width : 712px;
+/*width : 712px;*/
 position: relative;
 background-color: #F0F0F0;
 }
@@ -21,18 +22,18 @@ background-color: #F0F0F0;
 	text-align: center;
 	padding: 1em 0;
 	margin: 1em 0;
-	color: #555;
-	border: 2px dashed #555;
-	border-radius: 7px;
+	color: #888;
+	border: 1px dashed #888;
+	border-radius: 5px;
 	cursor: default;
 }
 
 #filedrag.hover
 {
-	color: #f00;
-	border-color: #f00;
-	border-style: solid;
-	box-shadow: inset 0 3px 4px #888;
+	border: 1px solid #1FB2FF;
+
+	/*border-style: solid;
+	box-shadow: inset 0 3px 4px #888;*/
 }
 
 /***********************************************************
@@ -236,12 +237,12 @@ opacity: 0.5;
 
 .CodeMirror {
 background-color: #FFFFFF;
-border: 1px solid #555555;
+/*border: 1px solid #555555;*/
 height: 780px;
 text-align: left;
-width: 690px;
+/*width: 690px;*/
 position: relative;
-left: 9px;
+/*left: 9px;*/
 top: 10px;
 }
 
@@ -282,10 +283,13 @@ NAVIGATION BAR
 ********************************************************/
 
 #navigation{
-width: 710px;
+/*width: 710px;*/
 height: 26px;
 position: relative;
-left: 1px;
+/*left: 1px;*/
+border-bottom-width: 1px;
+border-bottom-style: solid;
+border-bottom-color: #1FB2FF;
 }
 
 
@@ -417,7 +421,7 @@ float: left;
 position: relative;
 top: 4px;
 left: 8px;
-height: 12px; 
+height: 12px;
 }
 
 #impLength {
@@ -434,8 +438,8 @@ width: 52px;
 
 #edit {
 background-color: #F0F0F0;
-width: 710px;
-border: 1px solid #555555;
+/*width: 710px;
+border: 1px solid #555555;*/
 }
 
 /*
@@ -448,8 +452,10 @@ box-shadow: inset 0 3px 4px #888;
 */
 
 #code {
-width : 710px;
-height : 800px;
+/*width : 710px;
+height : 800px;*/
+position: absolute;
+width: 100%;
 }
 
 #resultat-file {
@@ -461,15 +467,16 @@ height: 30px;
 }
 
 #codeC {
+position: relative;
 text-align : left;
 overflow : auto;
-width : 690px;
-min-height : 780px;
-max-height : 780px;
-position: relative;
+/*width : 690px;*/
+/*min-height : 780px;
+max-height : 780px;*/
 left: 9px;
-margin-top: 10px;
-background-color: #FFFFFF;
+top: 20px;
+/*margin-top: 10px;
+background-color: #FFFFFF;*/
 }
 
 #mdoc-title{
@@ -485,13 +492,25 @@ width : 690px;
 #cadre_svg{
 position : relative;
 top: 15px;
-left : 5px;
+/*left : 5px;
 width : 680px;
-height : 635px;
+height : 635px;*/
 max-height : 635px;
 max-width : 680px;
+padding : 10px;
+margin-left: auto;
+margin-right: auto;
+
 }
 
+embed {
+	/*border-width: 1px;
+	border-style: solid;
+	border-color: #999;*/
+	background-color: white;
+	box-shadow: 1px 1px 5px 2px #C8C8C8;
+
+}
 
 a {
     text-decoration: none;
@@ -503,7 +522,7 @@ a img {
 a:hover {
     background: none;
 }
-a span { 
+a span {
     display: none;
   }
 a:hover span {

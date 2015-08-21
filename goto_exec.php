@@ -36,9 +36,9 @@ require "php/make_element.php";
 //get the html code
 if ($_SESSION['htmlCode'] != "" ){
   $html = $_SESSION['htmlCode'];
-  display_header($html);
+  // display_header($html);
   // display_catalog($html,"goto_exec.php");
-  display_navigation($html,0);
+  // display_navigation($html,0);
 
   //update and process
   //update_catalog();
@@ -67,35 +67,25 @@ if ($_SESSION['htmlCode'] != "" ){
       $_SESSION['exec_file'] = substr(read_firstline("$workdirname/binaryfilename.txt"),0,-1);
       $fileURL = $workdirurl."/".$_SESSION['exec_file'];
       $_SESSION['reponse_g++'] = "The file <a href=\"".$fileURL."\">". $_SESSION['exec_file'] . "</a> as been succesfuly generated and can now be downloaded";
-      echo "<script type=\"text/javascript\">";
-      echo "document.location.replace(\"result_compilation_C.php\")";
-      echo "</script> ";
-    }
-    /////<a href=\"http://www.w3schools.com\">Visit W3Schools</a>
-    //unsuccessful compilation
-    else {
+    //   echo "<script type=\"text/javascript\">";
+    //   echo "document.location.replace(\"result_compilation_C.php\")";
+    //   echo "</script> ";
+    } else {
       $_SESSION['resultat_C'] = 0;
       $_SESSION['reponse_g++'] = read_file($logfile);
-      echo "<script type=\"text/javascript\">";
-      echo "document.location.replace(\"result_compilation_C.php\")";
-      echo "</script> ";
+    //   echo "document.location.replace(\"result_compilation_C.php\")";
+    //   echo "</script> ";
+    //   echo "<script type=\"text/javascript\">";
     }
   }
-  //if the code has already been compiled, the result is directly displayed
-  else{
-    echo "<script type=\"text/javascript\">";
-    echo "document.location.replace(\"result_compilation_C.php\")";
-    echo "</script> ";
-  }
 
-  display_footer($html);
-}
-
-//if session was lost
-else{
-  echo "<script type=\"text/javascript\">";
-  echo "document.location.replace(\"index.php\")";
-  echo "</script> ";
+  require("result_compilation_C.php");
+  // display_footer($html);
+} else {
+  // echo "<script type=\"text/javascript\">";
+  // echo "document.location.replace(\"index.php\")";
+  // echo "</script> ";
+  require("index.php");
 }
 
 ?>

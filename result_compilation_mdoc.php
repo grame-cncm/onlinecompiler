@@ -63,7 +63,7 @@ if ($_SESSION['resultat_mdoc'] == 1)
 {
 error_log("SERVER : ".$_SERVER['DOCUMENT_ROOT'],0);
   $mdoc = get_section ($html, "mdoc");
-  $googleViewer = "<iframe src=\"http://docs.google.com/viewer?url=http%3A%2F%2Ffaust.grame.fr%2Fonlinecompiler%2Ftmp%2F".$_SESSION['id']."%2Fworkdir%2F".$_SESSION['appli_name']."-mdoc%2Fpdf%2F".$_SESSION['appli_name'].$_SESSION['randMdoc'].".pdf&embedded=true\" width=\"".$boxWidth."\" height=\"780\" style=\"border: none;\"></iframe>";
+  $googleViewer = "<iframe src=\"http://docs.google.com/viewer?url=http%3A%2F%2Ffaust.grame.fr%2Fonlinecompiler%2Ftmp%2F".$_SESSION['id']."%2Fworkdir%2F".$_SESSION['appli_name']."-mdoc%2Fpdf%2F".$_SESSION['appli_name'].$_SESSION['randMdoc'].".pdf&embedded=true\" height=\"780\" style=\"border: none;\"></iframe>";
   $assoc['__resultat__'] =  $googleViewer;
 }
 else

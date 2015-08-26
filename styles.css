@@ -490,17 +490,17 @@ width : 690px;
 }
 
 #cadre_svg{
-position : relative;
-top: 15px;
-/*left : 5px;
-width : 680px;
-height : 635px;*/
-max-height : 635px;
-max-width : 680px;
-padding : 10px;
-margin-left: auto;
-margin-right: auto;
-
+	position : relative;
+	top: 15px;
+	/*left : 5px;
+	width : 680px;
+	height : 635px;*/
+	/*max-height : 635px;*/
+	width : 80%;
+	/*max-width : 80%;*/
+	padding : 10px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 embed {
@@ -508,8 +508,26 @@ embed {
 	border-style: solid;
 	border-color: #999;*/
 	background-color: white;
+	padding:20px;
+	width: 90%;
 	box-shadow: 1px 1px 5px 2px #C8C8C8;
+	box-sizing: border-box;
+	margin-left: 5%;
+	margin-top: 40px;
+}
 
+
+iframe {
+	/*border-width: 1px;
+	border-style: solid;
+	border-color: #999;*/
+	background-color: white;
+	padding:20px;
+	width: 90%;
+	box-shadow: 1px 1px 5px 2px #C8C8C8;
+	box-sizing: border-box;
+	margin-left: 5%;
+	margin-top: 40px;
 }
 
 a {
@@ -566,6 +584,7 @@ opacity: 0.5;
 }
 
 #menuOptionSVG{
+	margin-top: 10px;
 }
 
 #helpButtonDiagram{

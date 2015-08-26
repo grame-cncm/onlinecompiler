@@ -55,19 +55,34 @@ $zipedDiagram = $workdirname."diagram.zip";
 if($_SESSION['fullScreenMode'] == 1) $boxWidth = 836;
 else $boxWidth = 700;
 
+// //fill the html page with the embeded diagram
+// if($_SESSION['code_faust'] == "Enter Faust code here") $assoc['__diagram__'] = "Please, enter some Faust code in the \"Faust Code\" tab or drag a Faust file in the area above.";
+// else if($_SESSION['svgtype'] == "Signal-Graph") $assoc['__diagram__'] = "<embed src=".$signalGraph." align=\"center\" width = \"".$boxWidth."\" height =\"600\" type=\"image/svg+xml\" />";
+// else if($_SESSION['svgtype'] == "Task-Graph") $assoc['__diagram__'] = "<embed src=".$taskGraph." align=\"center\" width = \"".$boxWidth."\" height =\"600\" type=\"image/svg+xml\" />";
+// else if($_SESSION['svgtype'] == "Impulse-Response (Effect)"){
+//     if($_SESSION['imptype'] == "FFT") $impulseResponseFile = $impulseResponseSpec;
+//     else $impulseResponseFile = $impulseResponse;
+//     $assoc['__diagram__'] = "<embed src=".$impulseResponseFile." align=\"center\" width = \"".$boxWidth."\" height =\"600\" type=\"image/svg+xml\" />";
+// }
+// else if($_SESSION['svgtype'] == "Spectrogram (Instrument)") $assoc['__diagram__'] = "<img src=".$spectrogram." align=\"center\" width = \"".$boxWidth."\" />";
+// else{
+//     $assoc['__diagram__'] = "<embed src=".$blockDiagram." align=\"center\" width = \"".$boxWidth."\" height =\"600\" type=\"image/svg+xml\" />";
+//     $downloadFile = $blockDiagram;
+// }
+
 //fill the html page with the embeded diagram
 if($_SESSION['code_faust'] == "Enter Faust code here") $assoc['__diagram__'] = "Please, enter some Faust code in the \"Faust Code\" tab or drag a Faust file in the area above.";
-else if($_SESSION['svgtype'] == "Signal-Graph") $assoc['__diagram__'] = "<embed src=".$signalGraph." align=\"center\" width = \"".$boxWidth."\" height =\"600\" type=\"image/svg+xml\" />";
-else if($_SESSION['svgtype'] == "Task-Graph") $assoc['__diagram__'] = "<embed src=".$taskGraph." align=\"center\" width = \"".$boxWidth."\" height =\"600\" type=\"image/svg+xml\" />";
+else if($_SESSION['svgtype'] == "Signal-Graph") $assoc['__diagram__'] = "<embed src=".$signalGraph." type=\"image/svg+xml\" />";
+else if($_SESSION['svgtype'] == "Task-Graph") $assoc['__diagram__'] = "<embed src=".$taskGraph." type=\"image/svg+xml\" />";
 else if($_SESSION['svgtype'] == "Impulse-Response (Effect)"){
-  if($_SESSION['imptype'] == "FFT") $impulseResponseFile = $impulseResponseSpec;
-  else $impulseResponseFile = $impulseResponse;
-  $assoc['__diagram__'] = "<embed src=".$impulseResponseFile." align=\"center\" width = \"".$boxWidth."\" height =\"600\" type=\"image/svg+xml\" />";
+    if($_SESSION['imptype'] == "FFT") $impulseResponseFile = $impulseResponseSpec;
+    else $impulseResponseFile = $impulseResponse;
+    $assoc['__diagram__'] = "<embed src=".$impulseResponseFile." type=\"image/svg+xml\" />";
 }
-else if($_SESSION['svgtype'] == "Spectrogram (Instrument)") $assoc['__diagram__'] = "<img src=".$spectrogram." align=\"center\" width = \"".$boxWidth."\" />";
+else if($_SESSION['svgtype'] == "Spectrogram (Instrument)") $assoc['__diagram__'] = "<img src=".$spectrogram." />";
 else{
-  $assoc['__diagram__'] = "<embed src=".$blockDiagram." align=\"center\" width = \"".$boxWidth."\" height =\"600\" type=\"image/svg+xml\" />";
-  $downloadFile = $blockDiagram;
+    $assoc['__diagram__'] = "<embed src=".$blockDiagram." type=\"image/svg+xml\" />";
+    $downloadFile = $blockDiagram;
 }
 
 $listSVG[0] = "Block-Diagram";

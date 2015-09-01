@@ -72,8 +72,8 @@ if (!defined("__make_element__"))
     $js = fill_template($js, $assocJS);
     $dropArea = get_section($html, "dropFile");
     $assoc['__scriptDropFile__'] = $js;
-    if ($goto == "goto_codeFaust()") $assoc['__textDrop__'] = "Drop your .dsp file here (Firefox and Google Chrome only) or write your Faust code below";
-    else $assoc['__textDrop__'] = "Drop your .dsp file here (Firefox and Google Chrome only)";
+    if ($goto == "goto_codeFaust()") $assoc['__textDrop__'] = "Drop your .dsp file here or write your Faust code below";
+    else $assoc['__textDrop__'] = "Drop your .dsp file here";
     print fill_template($dropArea, $assoc);
   }
 
@@ -627,7 +627,7 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
     else if ($_SESSION['infos_atelier'] !="") $assoc = $_SESSION['infos_atelier'];
 
     //otherwise the code area is filled we a default message
-    else $assoc['__code__'] = "Enter Faust code here";
+    else $assoc['__code__'] = "// Enter Faust code here\n\nprocess = +;";
 
     //the atelier section is filled
     $ret =  fill_template ($atelier, $assoc);

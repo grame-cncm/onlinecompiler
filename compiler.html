@@ -9,6 +9,7 @@
     <!-- Code Mirror is used to edit the Faust Code  -->
     <script src="codemirror/lib/codemirror.js"></script>
     <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <script src="codemirror/addon/edit/matchbrackets.js"></script>
     <script src="codemirror/mode/clike/clike.js"></script>
     <script src="codemirror/mode/faust/faust.js"></script>
     <link rel="stylesheet" href="codemirror/theme/eclipse.css">
@@ -22,7 +23,7 @@
 </head>
 <body>
     <div id="global">
-        
+
 <!-- header -->
 
 <!-- navigation -->
@@ -314,6 +315,7 @@ function get_enrobage() {
                         mode: "application/faust",
                         indentUnit: 4,
                         indentWithTabs: true,
+                        matchBrackets: true,
                         theme: "eclipse"
                     });
                     </script>
@@ -398,6 +400,7 @@ function get_enrobage() {
         readOnly: true,
         indentUnit: 4,
         indentWithTabs: true,
+        matchBrackets: true,
         // indentUnit: 1,
         theme: "eclipse",
         mode: __mode__

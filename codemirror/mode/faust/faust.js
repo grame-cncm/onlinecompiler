@@ -11,12 +11,11 @@
 })(function(CodeMirror) {
   "use strict";
 
-  var keywords = ("process component import library declare").split(" ");
+  var keywords = "process component import library declare".split(" ");
   var blockKeywords = "with environment waveform".split(" ");
-  var atoms = "ffunction fconstant fvariable".split(" ");
-  var builtins = "mem rdtable rwtable select2 select3"
-  +   " vslider hslider nentry button checkbox vbargraph hbargraph"
-  +   " vgroup hgroup tgroup".split(" ");
+  var builtins = "";
+  //var atoms = "ffunction fconstant fvariable".split(" ");
+  var atoms = "mem prefix int float rdtable rwtable select2 select3 ffunction fconstant fvariable button checkbox vslider hslider nentry vgroup hgroup tgroup vbargraph hbargraph attach acos asin atan atan2 cos sin tan exp log log10 pow sqrt abs min max fmod remainder floor ceil rint".split(" ");
 
   function set(words) {
     var obj = {};

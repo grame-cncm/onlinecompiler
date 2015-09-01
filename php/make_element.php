@@ -512,7 +512,7 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
   function display_options($html,$action,$goto,$dis)
   {
     if (session_id()=="") session_start();
-    require "./inc/mess.inc";
+    // require "./inc/mess.inc";
     require "php/form.php";
     require "php/functions.php";
 
@@ -596,7 +596,7 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
   function display_atelier($html)
   {
     if (session_id()=="") session_start();
-    require "./inc/mess.inc";
+    // require "./inc/mess.inc";
     require "php/functions.php";
 
     $atelier = get_section($html, "atelier");

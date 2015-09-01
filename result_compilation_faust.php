@@ -31,7 +31,7 @@ if (session_id()=="") session_start();
 require "php/functions.php";
 require "php/form.php";
 require "php/getfile.php";
-require "inc/mess.inc";
+// require "inc/mess.inc";
 require "php/make_element.php";
 
 //create a new session folder if it doesn't exist
@@ -61,26 +61,26 @@ $resultat = get_section($html, "resultat");
 if ($_SESSION['resultat_faust'] == 1) {
   if($_SESSION['langMenu'] == "java"){
     $assoc['__resultat__'] = $_SESSION['codeJava'];
-    $assoc['__mode__'] = "\"clike\"";
+    $assoc['__mode__'] = "\"text/x-java\"";
     $dis = "disableOthers";
   }
   elseif($_SESSION['langMenu'] == "js"){
     $assoc['__resultat__'] = $_SESSION['codeJs'];
-    $assoc['__mode__'] = "\"javascript\"";
+    $assoc['__mode__'] = "\"text/javascript\"";
     $dis = "disableOthers";
   }
   elseif($_SESSION['langMenu'] == "c"){
     $assoc['__resultat__'] = $_SESSION['codeC'];
-    $assoc['__mode__'] = "\"javascript\"";
+    $assoc['__mode__'] = "\"text/x-csrc\"";
     $dis = "disableOthers";
   }
   elseif($_SESSION['langMenu'] == "llvm"){
     $assoc['__resultat__'] = $_SESSION['codeLLVM'];
-    $assoc['__mode__'] = "\"javascript\"";
+    $assoc['__mode__'] = "\"text/x-llvm\"";
     $dis = "disableOthers";
   }
   else{
-    $assoc['__mode__'] = "\"clike\"";
+    $assoc['__mode__'] = "\"text/x-c++src\"";
     $assoc['__resultat__'] = $_SESSION['code_C_h'];
     $dis = "";
   }
@@ -93,7 +93,7 @@ if ($_SESSION['resultat_faust'] == 1) {
 else {
   if($_SESSION['code_faust'] == "Enter Faust code here") $assoc['__resultat__'] = "Please, enter some Faust code in the \"Faust Code\" tab or drag a Faust file in the area above.";
   else $assoc['__resultat__'] = $_SESSION['erreur_faust'];
-  $assoc['__mode__'] = "\"clike\"";
+  $assoc['__mode__'] = "\"text/x-faust\"";
 }
 
 $typeresultat = fill_template($typeresultat, $assoc);

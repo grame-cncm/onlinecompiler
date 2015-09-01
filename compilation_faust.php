@@ -27,7 +27,7 @@ if (!defined("__compilation_faust__"))
 
   if (session_id()=="") session_start();
 
-  require "inc/mess.inc";
+  // require "inc/mess.inc";
   require "php/functions.php";
   require "php/make_element.php";
 

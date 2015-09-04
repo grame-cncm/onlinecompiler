@@ -439,30 +439,36 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
   /*make_navigation: This function is used to move the frame on the navigation div to indicate
     to the user its location in the online compiler*/
 
-  function make_navigation($html)
-  {
-    require "php/functions.php";
+    function make_navigation($html)
+    {
+        require "php/functions.php";
 
-    $navigation = get_section($html, "navigation");
-    $large = "";
-    if (session_id()=="") session_start();
-    if($_SESSION['fullScreenMode'] == 1) $large = "-large";
-    if ($_SESSION['goto'] == "faust")
-      $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre2\" alt=\"cadre\"/></a>";
-    else if ($_SESSION['goto'] == "faustCode")
-      $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre1\" alt=\"cadre\"/></a>";
-    else if ($_SESSION['goto'] == "exec")
-      $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre3\" alt=\"cadre\"/></a>";
-    else if ($_SESSION['goto'] == "svg")
-      $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre4\" alt=\"cadre\"/></a>";
-    else if ($_SESSION['goto'] == "mdoc")
-      $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre5\" alt=\"cadre\"/></a>";
-    else
-      $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre1\" alt=\"cadre\"/></a>";
+        $navigation = get_section($html, "navigation");
+        $large = "";
+        if (session_id()=="") session_start();
+        if($_SESSION['fullScreenMode'] == 1) $large = "-large";
+        if ($_SESSION['goto'] == "faust") {
+            $assoc['__active2__'] = "class='active'";
+            $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre2\" alt=\"cadre\"/></a>";
+        } else if ($_SESSION['goto'] == "faustCode") {
+            $assoc['__active1__'] = "class='active'";
+            $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre1\" alt=\"cadre\"/></a>";
+        } else if ($_SESSION['goto'] == "exec") {
+            $assoc['__active5__'] = "class='active'";
+            $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre3\" alt=\"cadre\"/></a>";
+        } else if ($_SESSION['goto'] == "svg") {
+            $assoc['__active3__'] = "class='active'";
+            $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre4\" alt=\"cadre\"/></a>";
+        } else if ($_SESSION['goto'] == "mdoc") {
+            $assoc['__active4__'] = "class='active'";
+            $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre5\" alt=\"cadre\"/></a>";
+        } else {
+            $assoc['__active1__'] = "class='active'";
+            $assoc['__cadre__'] = "<a><img src=\"images/frame".$large.".png\" id=\"cadre1\" alt=\"cadre\"/></a>";
+        }
+        return $assoc;
 
-    return $assoc;
-
-  }
+    }
 
   /*display_navigation: this function build the navigation menu depending on the user's location.
    The first argument should be the array containing compiler.html. The second argument gives the
@@ -477,22 +483,38 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
     $large = "";
     if($_SESSION['fullScreenMode'] == 1) $large = "-large";
     if ($version == 1){
+        $assoc['__link1__']   = "javascript:goto_codeFaust()";
+        $assoc['__link2__']   = "javascript:goto_codeC2()";
+        $assoc['__link3__']   = "javascript:goto_SVG2()";
+        $assoc['__link4__']   = "javascript:goto_mdoc2()";
+        $assoc['__link5__']   = "javascript:goto_exec2()";
+
       $assoc['__seeCPP__'] = "<div id=\"see-cpp\"><a href=\"javascript:goto_codeC2()\"><img src=\"images/CppCode".$large.".png\"></a></div>";
       $assoc['__edFaust__'] = "<div id=\"ed-faust\"><a href=\"javascript:goto_codeFaust()\"><img src=\"images/FaustCode".$large.".png\"></a></div>";
       $assoc['__seeSVG__'] = "<div id=\"see-svg\"><a href=\"javascript:goto_SVG2()\"><img src=\"images/SvgDiag".$large.".png\"></a></div>";
       $assoc['__autoDoc__'] = "<div id=\"auto-doc\"><a href=\"javascript:goto_mdoc2()\"><img src=\"images/AutoDoc".$large.".png\"></a></div>";
       $assoc['__getExec__'] = "<div id=\"exec-file\"><a href=\"javascript:goto_exec2()\"><img src=\"images/ExecFile".$large.".png\"></a></div>";
       $assoc['__navigForm__'] = "";
-    }
-    else if ($version == 2){
+    } else if ($version == 2) {
+        $assoc['__link1__']   = "javascript:goto_codeFaust()";
+        $assoc['__link2__']   = "javascript:goto_codeC()";
+        $assoc['__link3__']   = "javascript:goto_SVG()";
+        $assoc['__link4__']   = "javascript:goto_mdoc()";
+        $assoc['__link5__']   = "javascript:goto_exec()";
+
       $assoc['__seeCPP__'] = "<div id=\"see-cpp\"><a href=\"javascript:goto_codeC()\"><img src=\"images/CppCode".$large.".png\"></a></div>";
       $assoc['__edFaust__'] = "<div id=\"ed-faust\"><a href=\"javascript:goto_codeFaust()\"><img src=\"images/FaustCode".$large.".png\"></a></div>";
       $assoc['__seeSVG__'] = "<div id=\"see-svg\"><a href=\"javascript:goto_SVG()\"><img src=\"images/SvgDiag".$large.".png\"></a></div>";
       $assoc['__autoDoc__'] = "<div id=\"auto-doc\"><a href=\"javascript:goto_mdoc()\"><img src=\"images/AutoDoc".$large.".png\"></a></div>";
       $assoc['__getExec__'] = "<div id=\"exec-file\"><a href=\"javascript:goto_exec()\"><img src=\"images/ExecFile".$large.".png\"></a></div>";
       $assoc['__navigForm__'] = "";
-    }
-    else{
+    } else {
+        $assoc['__link1__']   = "javascript:goto_codeFaust3()";
+        $assoc['__link2__']   = "javascript:goto_codeC3()";
+        $assoc['__link3__']   = "javascript:goto_SVG3()";
+        $assoc['__link4__']   = "javascript:goto_mdoc3()";
+        $assoc['__link5__']   = "javascript:goto_exec3()";
+
       $assoc['__seeCPP__'] = "<div id=\"see-cpp\"><a href=\"javascript:goto_codeC3()\"><img src=\"images/CppCode".$large.".png\"></a></div>";
       $assoc['__edFaust__'] = "<div id=\"ed-faust\"><a href=\"javascript:goto_codeFaust3()\"><img src=\"images/FaustCode".$large.".png\"></a></div>";
       $assoc['__seeSVG__'] = "<div id=\"see-svg\"><a href=\"javascript:goto_SVG3()\"><img src=\"images/SvgDiag".$large.".png\"></a></div>";
@@ -500,6 +522,9 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
       $assoc['__getExec__'] = "<div id=\"exec-file\"><a href=\"javascript:goto_exec3()\"><img src=\"images/ExecFile".$large.".png\"></a></div>";
       $assoc['__navigForm__'] = "<form name=\"formNavigation\" method = \"post\"><input type=\"hidden\" name=\"catalogDisplay1\" id=\"catalogDisplay1\"/></form>";
     }
+    /*  */
+
+
     $navigation = fill_template($navigation, $assoc);
     print $navigation;
   }
@@ -567,7 +592,7 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
     $assoc['__options__'] = "<a>&nbsp;&nbsp;Opts<span>".$options."</span></a>" ;
     $assoc['__name__'] = "<a>Name<span>Enter a name for your program</span></a>" ;
     $assoc['__enrobage__'] = "<a>Architecture<span>Choose an architecture to generate a compilable C++ file or an executable</span></a>" ;
-    $assoc['__OSC__'] = "<a>&nbsp;&nbsp;OSC</a>";
+    $assoc['__OSC__'] = "<a>OSC</a>";
     $assoc['__refreshGoto__'] = $goto;
 
     //processor architecture menu and os menu are built

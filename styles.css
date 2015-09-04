@@ -1,40 +1,87 @@
 body {
-margin :5px;
-/*background-color: #F0F0F0;*/
-background-color: #FAFAFA;
-font-family: arial, sans-serif;
-font-size: 12px;
+    background-color: #FAFAFA;
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    min-width: 700px;
+}
+
+/*****************************************************************************
+    navigation bar style
+******************************************************************************/
+
+nav {
+    width: auto;
+    height: 31px;
+    border-bottom: 1px solid #09b0f2;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+nav > ul {
+    background: #ffffff;
+    list-style: none;
+    padding-left: 1px;
+    margin: 0px;
+}
+
+nav > ul > li {
+    float: left;
+}
+
+nav > ul > li > a {
+    display: inline-block;
+    text-align: center;
+    padding: 8px;
+    margin-right: 1px;
+    color: #666;
+    width: 121px;
+    text-decoration: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background: #EEEEEE;
+}
+
+nav > ul > li.active > a,
+nav > ul > li.active > a:hover {
+    background: #09b0f2;
+    color: white;
+}
+
+nav > ul > li > a:hover {
+    background: #A8DEF4;
 }
 
 #special{
-font-size: 16px;
+    font-size: 16px;
 }
 
 #global {
-/*width : 712px;*/
-position: relative;
-/*background-color: #F0F0F0;*/
+    /*width : 712px;*/
+    position: relative;
+    /*background-color: #F0F0F0;*/
 }
 
 #filedrag
 {
-	/*display: none;*/
-	font-weight: bold;
-	text-align: center;
-	padding: 1em 0;
-	margin: 1em 0;
-	color: #888;
-	border: 1px dashed #888;
-	border-radius: 5px;
-	cursor: default;
+    /*display: none;*/
+    font-weight: bold;
+    text-align: center;
+    margin: 1px;
+    padding: 10px;
+    /*padding: 1em 0;
+    margin: 1em 0;*/
+    color: #888;
+    border: 1px dashed #888;
+    border-radius: 3px;
+    cursor: default;
 }
 
 #filedrag.hover
 {
-	border: 1px solid #1FB2FF;
+    border: 1px solid #1FB2FF;
 
-	/*border-style: solid;
-	box-shadow: inset 0 3px 4px #888;*/
+    /*border-style: solid;
+    box-shadow: inset 0 3px 4px #888;*/
 }
 
 /***********************************************************
@@ -42,301 +89,302 @@ EXAMPLE SAVER
 ***********************************************************/
 
 #exampleSaver{
-/*height: 200px;*/
-text-align: left;
-background-color: #E8E8E8;
-position: relative;
-top: 5px;
-width: 690px;
-left: 10px;
-border: 1px solid #555555;
-margin-bottom: 10px;
+    /*height: 200px;*/
+    text-align: left;
+    background-color: #E8E8E8;
+    position: relative;
+    top: 5px;
+    width: 690px;
+    left: 10px;
+    border: 1px solid #555555;
+    margin-bottom: 10px;
 }
 
 #hideExampleSaver{
-color: #C44B16;
-position: relative;
-height: 25px;
-top: 5px;
-cursor: pointer;
-left: 35px;
-float: left;
-width: 200px;
+    color: #C44B16;
+    position: relative;
+    height: 25px;
+    top: 5px;
+    cursor: pointer;
+    left: 35px;
+    float: left;
+    width: 200px;
 }
 
 #hideExampleSaver:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #showExampleSaver{
-color: #C44B16;
-position: relative;
-height: 25px;
-top: 5px;
-cursor: pointer;
-left: 35px;
-float: left;
-width: 200px;
+    color: #C44B16;
+    position: relative;
+    height: 25px;
+    top: 5px;
+    cursor: pointer;
+    left: 35px;
+    float: left;
+    width: 200px;
 }
 
 #showExampleSaver:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #exampleSaverContent{
-margin:8px;
+    margin:8px;
 }
 
 #descriptionArea{
-width : 668px;
-height : 100px;
+    width : 668px;
+    height : 100px;
 }
 
 #saveButton{
-position: relative;
-float: right;
-top: 2px;
+    position: relative;
+    float: right;
+    top: 2px;
 }
 
 #saveButton:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #saverHelpButton{
-position: relative;
-float: right;
-cursor: pointer;
+    position: relative;
+    float: right;
+    cursor: pointer;
 }
 
 #saverHelpButton:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 /***********************************************************
-CATALOG STYLE
+    CATALOG STYLE
 ***********************************************************/
 
 #catalog{
-height: 200px;
-text-align: left;
-background-color: #FFFFFF;
-position: relative;
-margin-bottom: 5px;
-width: 690px;
-left: 10px;
-border: 1px solid #555555;
+    height: 200px;
+    text-align: left;
+    background-color: #FFFFFF;
+    position: relative;
+    margin-bottom: 5px;
+    width: 690px;
+    left: 10px;
+    border: 1px solid #555555;
 }
 
 .catalogStaticTitle{
-font-size:14px;
-font-weight: bold;
-font-family:Arial;
-color: #C44B16;
+    font-size:14px;
+    font-weight: bold;
+    font-family:Arial;
+    color: #C44B16;
 }
 
 .catalogChooseElement{
-position: relative;
+    position: relative;
 }
 
 .catalogSectionTitle{
-font-family: arial;
-cursor: pointer;
+    font-family: arial;
+    cursor: pointer;
 }
 
 #catalogSectionTitles{
-margin-top: 7px;
+    margin-top: 7px;
 }
 
 #catalogNavigation{
-position: relative;
-width: 150px;
-height: 200px;
-max-width: 150px;
-overflow: auto;
-float: left;
-border-right: solid 1px;
+    position: relative;
+    width: 150px;
+    height: 200px;
+    max-width: 150px;
+    overflow: auto;
+    float: left;
+    border-right: solid 1px;
 }
 
 #catalogSectionContent{
-position: relative;
-width: 190px;
-max-width: 190px;
-height: 200px;
-overflow: auto;
-float: left;
-border-right: solid 1px;
+    position: relative;
+    width: 190px;
+    max-width: 190px;
+    height: 200px;
+    overflow: auto;
+    float: left;
+    border-right: solid 1px;
 }
 
 #catalogSectionItemsTop{
-margin-top: 7px;
+    margin-top: 7px;
 }
 
 .catalogItem{
-cursor: pointer;
-left: 5px;
-position: relative;
-width: 170px;
+    cursor: pointer;
+    left: 5px;
+    position: relative;
+    width: 170px;
 }
 
 #catalogItemDescriptionSec{
-overflow:auto;
-width: 348px;
-/*max-width: 344px;*/
-height:200px;
+    overflow:auto;
+    width: 348px;
+    /*max-width: 344px;*/
+    height:200px;
 }
 
 .catalogItemDescriptionContent{
-position: relative;
-left: 5px;
-max-width: 328px;
-margin-top: 7px;
+    position: relative;
+    left: 5px;
+    max-width: 328px;
+    margin-top: 7px;
 }
 
 #voteButton{
-position: relative;
-float: right;
-/*left: 3px;*/
-width: 75px;
+    position: relative;
+    float: right;
+    /*left: 3px;*/
+    width: 75px;
 }
 
 .catalogImg{
-float: left;
-margin-right: 5px;
+    float: left;
+    margin-right: 5px;
 }
 
 #showCatalog{
-font-family: arial;
-color: #C44B16;
-position: relative;
-height: 25px;
-width: 150px;
-/*text-align: center;*/
-top: 5px;
-cursor: pointer;
-float: left;
+    font-family: arial;
+    color: #C44B16;
+    position: relative;
+    height: 25px;
+    width: 150px;
+    /*text-align: center;*/
+    top: 5px;
+    cursor: pointer;
+    float: left;
 }
 
 #showCatalog:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #hideCatalog{
-font-family: arial;
-color: #C44B16;
-position: relative;
-height: 25px;
-width: 150px;
-/*text-align: center;*/
-top: 5px;
-cursor: pointer;
-float: left;
+    font-family: arial;
+    color: #C44B16;
+    position: relative;
+    height: 25px;
+    width: 150px;
+    /*text-align: center;*/
+    top: 5px;
+    cursor: pointer;
+    float: left;
 }
 
 #hideCatalog:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 .CodeMirror {
-background-color: #FFFFFF;
-/*border: 1px solid #555555;*/
-/*height: 780px;*/
-text-align: left;
-/*width: 690px;*/
-position: relative;
-/*left: 9px;*/
-top: 10px;
-height: calc(100% - 10px);
+    background-color: #FFFFFF;
+    /*border: 1px solid #555555;*/
+    /*height: 780px;*/
+    text-align: left;
+    /*width: 690px;*/
+    position: relative;
+    /*left: 9px;*/
+    /*top: 10px;*/
+    /*height: calc(100% - 10px);*/
+    height: 100%;
 }
 
 #catalogHelpButton{
-position: relative;
-cursor: pointer;
-float: left;
-top: 5px;
-left: 2px;
+    position: relative;
+    cursor: pointer;
+    float: left;
+    top: 5px;
+    left: 2px;
 }
 
 #catalogHelpButton:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #fullScreen{
-position: relative;
-height: 25px;
-top: 5px;
-cursor: pointer;
-float: right;
-right:20px;
+    position: relative;
+    height: 25px;
+    top: 5px;
+    cursor: pointer;
+    float: right;
+    right:20px;
 }
 
 #fullScreen:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #displayModes{
-position: relative;
-height: 35px;
-text-align: center;
-left: 10px;
+    position: relative;
+    height: 35px;
+    text-align: center;
+    left: 10px;
 }
 
 /********************************************************
-NAVIGATION BAR
+    NAVIGATION BAR
 ********************************************************/
 
 #navigation{
-/*width: 710px;*/
-height: 26px;
-position: relative;
-/*left: 1px;*/
-border-bottom-width: 1px;
-border-bottom-style: solid;
-border-bottom-color: #1FB2FF;
+    /*width: 710px;*/
+    height: 0px;
+    position: relative;
+    /*left: 1px;*/
+    /*border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #1FB2FF;*/
 }
 
 
 #ed-faust {
-position : absolute;
+    position : absolute;
 }
 
 #ed-faust:hover {
-opacity:0.5;
+    opacity:0.5;
 }
 
 #see-cpp {
-position : absolute;
-left:141px;
+    position : absolute;
+    left:141px;
 }
 
 #see-cpp:hover {
-opacity:0.5;
+    opacity:0.5;
 }
 
 #see-svg {
-position : absolute;
-left:283px;
+    position : absolute;
+    left:283px;
 }
 
 #see-svg:hover {
-opacity:0.5;
+    opacity:0.5;
 }
 
 #auto-doc {
-position : absolute;
-left:425px;
+    position : absolute;
+    left:425px;
 }
 
 #auto-doc:hover {
-opacity:0.5;
+    opacity:0.5;
 }
 
 #exec-file {
-position : absolute;
-left:567px;
+    position : absolute;
+    left:567px;
 }
 
 #exec-file:hover {
-opacity:0.5;
+    opacity:0.5;
 }
 
 #exec-java {
@@ -349,100 +397,110 @@ opacity:0.5;
 /*Frame Position*/
 
 #cadre1 {
-position : relative;
-left:0px;
+    position : relative;
+    left:0px;
 }
 
 #cadre2 {
-left: 142px;
-position: relative;
+    left: 142px;
+    position: relative;
 }
 
 #cadre3 {
-position : relative;
-left:568px;
-top: 0px;
+    position : relative;
+    left:568px;
+    top: 0px;
 }
 
 #cadre4 {
-position : relative;
-left:284px;
-top: 0px;
+    position : relative;
+    left:284px;
+    top: 0px;
 }
 
 #cadre5 {
-position : relative;
-left:426px;
-top: 0px;
+    position : relative;
+    left:426px;
+    top: 0px;
 }
 
 /******************************************************
-PAGE CONTENT
+    PAGE CONTENT
 ******************************************************/
 
 #welcome{
-text-align: justify;
+    text-align: justify;
 }
 
 #optionName{
-position: relative;
-float: left;
+    position: relative;
+    float: left;
+    margin-left: 4px;
+    margin-right: 12px;
 }
 
 #optionEnrob{
-position: relative;
-float: left;
+    position: relative;
+    float: left;
+    margin-right: 12px;
 }
 
 #optionArch{
-position: relative;
-float: left;
+    position: relative;
+    float: left;
+    margin-right: 12px;
 }
 
 #optionOS{
-position: relative;
-float: left;
+    position: relative;
+    float: left;
+    margin-right: 12px;
 }
 
 #optionLang{
-position: relative;
-float: left;
+    position: relative;
+    float: left;
+    margin-right: 12px;
 }
 
 #optionOSC{
-position: relative;
-float: left;
+    position: relative;
+    float: left;
+    margin-right: 12px;
 }
 
 #optionOptions{
-position: relative;
-float: left;
+    position: relative;
+    float: left;
+    margin-right: 12px;
 }
 
+
 #options {
-position: relative;
-top: 4px;
-/*left: 8px;*/
-height: 12px;
+    position: relative;
+    height: 40px;
+    background: rgba(9, 176, 242, 0.09) none repeat scroll 0% 0%;
+    padding-bottom: 10px;
+    padding-top: 4px;
 }
 
 #impLength {
-width: 52px;
+    width: 52px;
 }
 
 #spectDuration {
-width: 52px;
+    width: 52px;
 }
 
 #winSize{
-width: 52px;
+    width: 52px;
 }
 
 #edit {
-	/*background-color: #F0F0F0;*/
-	background-color: #FAFAFA;
-/*width: 710px;
-border: 1px solid #555555;*/
+    /*background-color: #F0F0F0;*/
+    background-color: #FAFAFA;
+    /*width: 710px;
+    border: 1px solid #555555;*/
 }
 
 /*
@@ -455,111 +513,111 @@ box-shadow: inset 0 3px 4px #888;
 */
 
 #codefaust {
-/*width : 710px;
-height : 800px;*/
-position: absolute;
-width: 100%;
-height: calc(100vh - 100px);
+    /*width : 710px;
+    height : 800px;*/
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 100px);
 }
 
 #codecompiled {
-/*width : 710px;
-height : 800px;*/
-position: absolute;
-width: 100%;
-height: calc(100vh - 135px);
+    /*width : 710px;
+    height : 800px;*/
+    /*position: absolute;*/
+    width: 100%;
+    height: calc(100vh - 155px);
 }
 
 #faustForm {
-	position: relative;
-	height:100%;
+    position: relative;
+    height:100%;
 }
 
 #resultat-file {
-position : relative ;
-top: 10px;
-left: 8px;
-text-align : left;
-height: 30px;
+    position : relative ;
+    top: 10px;
+    left: 8px;
+    text-align : left;
+    height: 30px;
 }
 
 #codeC {
-position: relative;
-text-align : left;
-overflow : auto;
-/*width : 690px;*/
-/*min-height : 780px;
-max-height : 780px;*/
-left: 9px;
-top: 20px;
-/*margin-top: 10px;
-background-color: #FFFFFF;*/
+    position: relative;
+    text-align : left;
+    overflow : auto;
+    /*width : 690px;*/
+    /*min-height : 780px;
+    max-height : 780px;*/
+    left: 9px;
+    top: 20px;
+    /*margin-top: 10px;
+    background-color: #FFFFFF;*/
 }
 
 #mdoc-title{
-position : absolute;
-top: 130px;
+    position : absolute;
+    top: 130px;
 }
 
 #mdoc-viewer {
-position : relative;
-width : 690px;
+    position : relative;
+    width : 690px;
 }
 
 #cadre_svg{
-	position : relative;
-	top: 15px;
-	/*left : 5px;
-	width : 680px;
-	height : 635px;*/
-	/*max-height : 635px;*/
-	width : 80%;
-	/*max-width : 80%;*/
-	padding : 10px;
-	margin-left: auto;
-	margin-right: auto;
+    position : relative;
+    top: 15px;
+    /*left : 5px;
+    width : 680px;
+    height : 635px;*/
+    /*max-height : 635px;*/
+    width : 80%;
+    /*max-width : 80%;*/
+    padding : 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 embed {
-	/*border-width: 1px;
-	border-style: solid;
-	border-color: #999;*/
-	background-color: white;
-	padding:20px;
-	width: 90%;
-	box-shadow: 1px 1px 5px 2px #C8C8C8;
-	box-sizing: border-box;
-	margin-left: 5%;
-	margin-top: 40px;
+    /*border-width: 1px;
+    border-style: solid;
+    border-color: #999;*/
+    background-color: white;
+    padding:20px;
+    width: 90%;
+    box-shadow: 1px 1px 5px 2px #C8C8C8;
+    box-sizing: border-box;
+    margin-left: 5%;
+    margin-top: 40px;
 }
 
 
 iframe {
-	/*border-width: 1px;
-	border-style: solid;
-	border-color: #999;*/
-	background-color: white;
-	padding:20px;
-	width: 90%;
-	box-shadow: 1px 1px 5px 2px #C8C8C8;
-	box-sizing: border-box;
-	margin-left: 5%;
-	margin-top: 40px;
+    /*border-width: 1px;
+    border-style: solid;
+    border-color: #999;*/
+    background-color: white;
+    padding:20px;
+    width: 90%;
+    box-shadow: 1px 1px 5px 2px #C8C8C8;
+    box-sizing: border-box;
+    margin-left: 5%;
+    margin-top: 40px;
 }
 
 a {
     text-decoration: none;
     color: #555555;
-  }
+}
 a img {
-  border : 0 ;
+    border : 0 ;
 }
 a:hover {
     background: none;
 }
 a span {
     display: none;
-  }
+}
 a:hover span {
     display: block;
     position: absolute;
@@ -574,64 +632,64 @@ a:hover span {
 }
 
 #refresh{
-position:relative;
-float: left;
-height: 30px;
-width: 30px;
-left: 3px;
-top: 11px;
-cursor: pointer;
+    position:relative;
+    float: left;
+    height: 30px;
+    width: 30px;
+    left: 3px;
+    top: 11px;
+    cursor: pointer;
 }
 
 #refresh:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #helpOpt{
-position:relative;
-float: right;
-height: 20px;
-width: 20px;
-right: 18px;
-cursor: pointer;
+    position:relative;
+    float: right;
+    height: 20px;
+    width: 20px;
+    right: 18px;
+    cursor: pointer;
 }
 
 #helpOpt:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #menuOptionSVG{
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 #helpButtonDiagram{
-position:relative;
-float: right;
-height: 20px;
-width: 20px;
-right: 8px;
-top: 2px;
-cursor: pointer;
+    position:relative;
+    float: right;
+    height: 20px;
+    width: 20px;
+    right: 8px;
+    top: 2px;
+    cursor: pointer;
 }
 
 #helpButtonDiagram:hover{
-opacity: 0.5;
+    opacity: 0.5;
 }
 
 #helpCatalog{
-text-align: justify;
+    text-align: justify;
 }
 
 #helpSaver{
-text-align: justify;
+    text-align: justify;
 }
 
 #helpCompiler{
-text-align: justify;
+    text-align: justify;
 }
 
 #helpDiagram{
-text-align: justify;
+    text-align: justify;
 }
 
 /*colors for C++ code*/

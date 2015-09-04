@@ -12,7 +12,7 @@ body {
 nav {
     width: auto;
     height: 31px;
-    border-bottom: 1px solid #09b0f2;
+    /*border-bottom: 1px solid #09b0f2;*/
     font-family: Arial, sans-serif;
     box-sizing: border-box;
 }
@@ -38,7 +38,7 @@ nav > ul > li > a {
     text-decoration: none;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    background: #EEEEEE;
+    background: #D6D6D6;
 }
 
 nav > ul > li.active > a,
@@ -64,21 +64,22 @@ nav > ul > li > a:hover {
 #filedrag
 {
     /*display: none;*/
-    font-weight: bold;
+    /*font-weight: bold;*/
     text-align: center;
-    margin: 1px;
+    margin: 2px;
     padding: 10px;
     /*padding: 1em 0;
     margin: 1em 0;*/
-    color: #888;
-    border: 1px dashed #888;
-    border-radius: 3px;
+    color: #999;
+    border: 4px dashed #DDD;
+    border-radius: 4px;
     cursor: default;
 }
 
 #filedrag.hover
 {
-    border: 1px solid #1FB2FF;
+    color: #444;
+    border: 4px dashed #888;
 
     /*border-style: solid;
     box-shadow: inset 0 3px 4px #888;*/
@@ -515,9 +516,9 @@ box-shadow: inset 0 3px 4px #888;
 #codefaust {
     /*width : 710px;
     height : 800px;*/
-    position: absolute;
+    /*position: absolute;*/
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 90px);
 }
 
 #codecompiled {
@@ -525,7 +526,7 @@ box-shadow: inset 0 3px 4px #888;
     height : 800px;*/
     /*position: absolute;*/
     width: 100%;
-    height: calc(100vh - 155px);
+    height: calc(100vh - 145px);
 }
 
 #faustForm {

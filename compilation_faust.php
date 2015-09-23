@@ -46,9 +46,8 @@ if (!defined("__compilation_faust__"))
   //if the faust code area is empty, an error message is returned
   if ( $codeAcompiler == "" | $codeAcompiler == "$mess_code" ){
     $_SESSION['resultat_faust'] = -1;
-  }
-  //otherwise the compilation is carried out
-  else {
+  } else {
+      //otherwise the compilation is carried out
     $sessiondirname = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id']."/";
     $workdirname = $sessiondirname."workdir/";
     $fileName = $workdirname.$_SESSION['appli_name'].".dsp";

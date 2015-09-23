@@ -65,8 +65,13 @@ if ($_SESSION['htmlCode'] != "" ){
     if ($ret == 0) {
       $_SESSION['resultat_C'] = 1;
       $_SESSION['exec_file'] = substr(read_firstline("$workdirname/binaryfilename.txt"),0,-1);
+      $qrcodeurl = "tmp/".$_SESSION['id']."/workdir/qr.png";
       $fileURL = $workdirurl."/".$_SESSION['exec_file'];
-      $_SESSION['reponse_g++'] = "The file <a href=\"".$fileURL."\">". $_SESSION['exec_file'] . "</a> as been succesfuly generated and can now be downloaded";
+      exec("qrencode -o " . $qrcodeurl . " \"" . $fileURL . "\"");
+      $_SESSION['reponse_g++'] =
+      "The file <a href='" . $fileURL . "'>"
+      . $_SESSION['exec_file'] . "</a> as been succesfuly generated and can now be downloaded."
+      . "<div id='qrcode'> <a href='" . $fileURL . "'> <img src='" . $qrcodeurl . "'alt='qrcode face'> </a> </div>";
     //   echo "<script type=\"text/javascript\">";
     //   echo "document.location.replace(\"result_compilation_C.php\")";
     //   echo "</script> ";

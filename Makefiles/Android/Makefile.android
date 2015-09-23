@@ -15,7 +15,6 @@ binaryfile 	:= $(applname).apk
 
 binary : $(binaryfile)
 	echo $(binaryfile) > binaryfilename.txt
-	#echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)
 
@@ -42,6 +41,3 @@ $(svgfile) : $(cppfile)
 
 $(binaryfile) : $(cppfile)
 	faust2android $(OPT) $(faustfile) > list.log
-	qrize $(applname)
-	#zip -r $(compBinaryfile) $(binaryfile)
-	#rm $(binaryfile)

@@ -50,7 +50,6 @@ if ($_SESSION['htmlCode'] != "" ){
   //the g++ compilation is processed
   if ($_SESSION['comp_C_done'] != 1){
     $workdirname = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id']."/workdir";
-    $workdirurl = "tmp/".$_SESSION['id']."/workdir";
     $dspdepts = "DSPDEPTS=\"".$_SESSION['dspDept']."\"";
     $logfile = "$workdirname/errors.log";
     $pconfpath = "/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/kde3/lib/pkgconfig:/opt/gnome/lib/pkgconfig:/opt/gnome/lib/pkgconfig:/opt/gnome/share/pkgconfig";
@@ -66,7 +65,7 @@ if ($_SESSION['htmlCode'] != "" ){
       $_SESSION['resultat_C'] = 1;
       $_SESSION['exec_file'] = substr(read_firstline("$workdirname/binaryfilename.txt"),0,-1);
       $qrcodeurl = "tmp/".$_SESSION['id']."/workdir/qr.png";
-      $fileURL = $workdirurl."/".$_SESSION['exec_file'];
+      $fileURL = "http://".$_SERVER['SERVER_NAME']."/onlinecompiler/tmp/".$_SESSION['id']."/workdir/".$_SESSION['exec_file'];
       exec("qrencode -o " . $qrcodeurl . " \"" . $fileURL . "\"");
       $_SESSION['reponse_g++'] =
       "The file <a href='" . $fileURL . "'>"

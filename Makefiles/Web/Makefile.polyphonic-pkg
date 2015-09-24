@@ -2,6 +2,7 @@
 ### only one .dsp file exists in the folder
 
 applname := $(faustfile:.dsp=)
+webpage := $(faustfile:.dsp=.html)
 cppfile := $(faustfile:.dsp=.cpp)
 pkgdir := $(faustfile:.dsp=-pkg)
 pkgfile := $(pkgdir).zip
@@ -9,7 +10,7 @@ svgdir := $(faustfile)-svg
 svgfile := $(svgdir)/process.svg
 
 ### Customize these elements
-binaryfile 	:= $(applname).html
+binaryfile 	:= $(applname).zip
 #compBinaryfile 	:= $(applname).zip
 ### End Customize
 
@@ -40,4 +41,5 @@ $(svgfile) : $(cppfile)
 	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
 
 $(binaryfile) : $(faustfile)
-	faust2webaudioasm $(OPT) $(faustfile) > list.log
+	faust2webaudioasm -links -poly $(OPT) $(faustfile) > list.log
+	zip $(binaryfile) $(faustfile) $(applname).html -r $(applname)-svg

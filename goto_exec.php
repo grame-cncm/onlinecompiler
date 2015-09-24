@@ -68,9 +68,9 @@ if ($_SESSION['htmlCode'] != "" ){
       $fileURL = "http://".$_SERVER['SERVER_NAME']."/onlinecompiler/tmp/".$_SESSION['id']."/workdir/".$_SESSION['exec_file'];
       exec("qrencode -o " . $qrcodeurl . " \"" . $fileURL . "\"");
       $_SESSION['reponse_g++'] =
-      "The file <a href='" . $fileURL . "'>"
+      "The file <a href='" . $fileURL . "' target='_blank'>"
       . $_SESSION['exec_file'] . "</a> as been succesfuly generated and can now be downloaded."
-      . "<div id='qrcode'> <a href='" . $fileURL . "'> <img src='" . $qrcodeurl . "'alt='qrcode face'> </a> </div>";
+      . "<div id='qrcode'> <a href='" . $fileURL . "' target='_blank'> <img src='" . $qrcodeurl . "'alt='qrcode face'> </a> </div>";
     //   echo "<script type=\"text/javascript\">";
     //   echo "document.location.replace(\"result_compilation_C.php\")";
     //   echo "</script> ";

@@ -128,6 +128,7 @@ function update()
     else if($_SESSION['osMenu'] == "Raspberry") exec("scripts/liste_enrobages Raspberry",$list,$ret);
     else if($_SESSION['osMenu'] == "Android") exec("scripts/liste_enrobages Android",$list,$ret);
     else if($_SESSION['osMenu'] == "Ros") exec("scripts/liste_enrobages Ros",$list,$ret);
+    else if($_SESSION['osMenu'] == "Web") exec("scripts/liste_enrobages Web",$list,$ret);
     else exec("scripts/liste_enrobages Linux",$list,$ret);
     $list[0] = "none";
     $_SESSION['list_enrob_compil'] = $list;

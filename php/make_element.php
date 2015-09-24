@@ -602,6 +602,8 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
     $osList[3] = "Raspberry";
     $osList[4] = "Android";
     $osList[5] = "Ros";
+    $osList[6] = "Web";
+
     $assoc = array_merge ($assoc, make_menu("__osMenu__","osMenu",$_SESSION['osMenu'],$osMenuOnChange,$osList,"cat", $disOthers));
 
     //displayed language

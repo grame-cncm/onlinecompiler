@@ -88,12 +88,18 @@ if ($_SESSION['htmlCode'] != "" ){
       exec("scripts/faust2impulse ".$appliName." ".$_SESSION['spectDuration']." Spectrogram ".$_SESSION['winSize'], $none, $ret);
     }
 
-    exec("cd ".$workdirname." && zip diagram.zip ".$zipedDiagram,$none, $ret);
-
-    $_SESSION['diagramDone'] = 1;
-    $_SESSION['resultat_faust'] = 1;
-    require "display_svg.php";
-  }
+    ### check for faust error
+    if ($ret != 0) {
+        $_SESSION['diagramDone'] = 0;
+        $_SESSION['resultat_faust'] = 0;
+        require "index.php";
+    } else {
+        exec("cd ".$workdirname." && zip diagram.zip ".$zipedDiagram,$none, $ret);
+        $_SESSION['diagramDone'] = 1;
+        $_SESSION['resultat_faust'] = 1;
+        require "display_svg.php";
+    }
+ }
 
 } else {
   require "index.php";

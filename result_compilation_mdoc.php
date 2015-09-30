@@ -61,15 +61,16 @@ else $boxWidth = 690;
 //the html page is filled, google doc viewer is used to display the pdf file
 if ($_SESSION['resultat_mdoc'] == 1)
 {
-error_log("SERVER : ".$_SERVER['DOCUMENT_ROOT'],0);
-  $mdoc = get_section ($html, "mdoc");
-  $googleViewer = "<iframe src=\"http://docs.google.com/viewer?url=http%3A%2F%2Ffaust.grame.fr%2Fonlinecompiler%2Ftmp%2F".$_SESSION['id']."%2Fworkdir%2F".$_SESSION['appli_name']."-mdoc%2Fpdf%2F".$_SESSION['appli_name'].$_SESSION['randMdoc'].".pdf&embedded=true\" height=\"780\" style=\"border: none;\"></iframe>";
-  $assoc['__resultat__'] =  $googleViewer;
-}
-else
-{
-  if($_SESSION['code_faust'] == "Enter Faust code here") $assoc['__resultat__'] = "Please, enter some Faust code in the \"Faust Code\" tab or drag a Faust file in the area above.";
-  else $assoc['__resultat__'] =  "Woops, something went wrong... Please try again.";
+    error_log("SERVER : ".$_SERVER['DOCUMENT_ROOT'],0);
+    $mdoc = get_section ($html, "mdoc");
+    $googleViewer = "<iframe src=\"http://docs.google.com/viewer?url=http%3A%2F%2Ffaust.grame.fr%2Fonlinecompiler%2Ftmp%2F".$_SESSION['id']."%2Fworkdir%2F".$_SESSION['appli_name']."-mdoc%2Fpdf%2F".$_SESSION['appli_name'].$_SESSION['randMdoc'].".pdf&embedded=true\" height=\"780\" style=\"border: none;\"></iframe>";
+    $assoc['__resultat__'] =  $googleViewer;
+} else {
+  if($_SESSION['code_faust'] == "Enter Faust code here") {
+      $assoc['__resultat__'] = "Please, enter some Faust code in the \"Faust Code\" tab or drag a Faust file in the area above.";
+  } else {
+      $assoc['__resultat__'] =  "Woops, something went wrong... Please check the Faust code.";
+  }
 }
 $resultat = fill_template($resultat, $assoc);
 

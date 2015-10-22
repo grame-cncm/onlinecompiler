@@ -43,7 +43,8 @@ function update()
 
     //client os is detected
     if($_POST['firstCodeSubmit'] == 1 && $_SESSION['firstSubmitDone'] != 1){
-        $browser_info = get_browser(null, true);
+        #$browser_info = get_browser(null, true);
+        $browser_info['platform'] = "MacOSX";
         if ($browser_info['platform'] == "Linux") $_POST['osMenu'] = "Linux";
         if ($browser_info['platform'] == "Windows") $_POST['osMenu'] = "Windows";
         if ($browser_info['platform'] == "MacOSX") $_POST['osMenu'] = "OSX";

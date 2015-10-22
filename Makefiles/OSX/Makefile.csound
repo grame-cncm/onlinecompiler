@@ -13,7 +13,7 @@ ARCH		:= csound.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	remoteOSX faust2csound $(faustfile)
+	faust2csound $(faustfile)
 	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 

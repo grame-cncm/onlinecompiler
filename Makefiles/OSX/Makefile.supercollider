@@ -13,7 +13,7 @@ ARCH		:= supercollider.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	remoteOSX faust2supercollider $(faustfile) $(oscOPT) $(httpdOPT)
+	faust2supercollider $(faustfile) $(oscOPT) $(httpdOPT)
 	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 

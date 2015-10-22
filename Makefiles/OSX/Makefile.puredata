@@ -17,8 +17,8 @@ binpkg     := $(faustfile:.dsp=-bin.zip)
 
 
 binary :
-	remoteOSX faust2puredata $(faustfile) $(oscOPT) $(httpdOPT)
-	mv binary.zip $(compBinaryfile)
+	faust2puredata $(faustfile) $(oscOPT) $(httpdOPT)
+	zip -r $(compBinaryfile) *.pd_darwin *.pd
 	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)

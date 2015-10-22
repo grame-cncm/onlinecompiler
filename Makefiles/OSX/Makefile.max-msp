@@ -13,8 +13,8 @@ ARCH		:= max-msp.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	remoteOSX faust2max6 $(faustfile) $(oscOPT) $(httpdOPT)
-	mv binary.zip $(compBinaryfile)
+	faust2max6 $(faustfile) $(oscOPT) $(httpdOPT)
+	zip -r $(compBinaryfile) *.mxo *.maxpat
 	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)

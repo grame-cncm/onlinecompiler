@@ -93,10 +93,10 @@ $listSVG[4] = "Spectrogram (Instrument)";
 $imptype[0] = "Impulse-Response";
 $imptype[1] = "FFT";
 
-$assoc = array_merge ($assoc, make_menu("__menuOptionSVG__","svgtype",$_SESSION['svgtype'],"ONCHANGE=\"submitOptionSVG()\"",$listSVG,"cat"));
+$assoc = array_merge ($assoc, make_menu("__menuOptionSVG__","svgtype",$_SESSION['svgtype'],"ONCHANGE=\"submitOptionSVG()\"",$listSVG,"cat","enabled"));
 $assoc['__downloadFig__'] = "<input type=\"button\" id=\"downloadFig\" name=\"downloadFig\" onclick=\"window.location.href='$zipedDiagram'\" value=\"Download Figure\">";
 if($_SESSION['svgtype'] == "Impulse-Response (Effect)"){
-  $assoc = array_merge ($assoc, make_menu("__impType__","imptype",$_SESSION['imptype'],"ONCHANGE=\"submitOptionSVG()\"",$imptype,"cat"));
+  $assoc = array_merge ($assoc, make_menu("__impType__","imptype",$_SESSION['imptype'],"ONCHANGE=\"submitOptionSVG()\"",$imptype,"cat","enabled"));
   $assoc['__impulseParam__'] = "<a>Signal Length</a><input type=\"text\" onchange=\"submitOptionSVG()\" id=\"impLength\" name=\"impLength\" value=\"".$_SESSION['impLength']."\">";
   $assoc['__spectDuration__'] = "";
   $assoc['__winSize__'] = "";

@@ -20,12 +20,12 @@
 		x;
 
 		// Analyze what was dropped
-		console.log("TYPES : " + e.dataTransfer.types);
-		for (x = 0; x < e.dataTransfer.types.length; x = x + 1) {
-			var type = e.dataTransfer.types.item(x);
-			console.log("Type " + x + " : " + type);
-			console.log("Data " + x + " : " + e.dataTransfer.getData(type));
-		}
+		// console.log("TYPES : " + e.dataTransfer.types);
+		// for (x = 0; x < e.dataTransfer.types.length; x = x + 1) {
+		// 	var type = e.dataTransfer.types.item(x);
+		// 	console.log("Type " + x + " : " + type);
+		// 	console.log("Data " + x + " : " + e.dataTransfer.getData(type));
+		// }
 
 		// if (e.dataTransfer.files.length == 0) {
 		// 	// we are not droping a file, but maybe a text or an URL

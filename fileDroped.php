@@ -15,8 +15,10 @@ if(!empty($_FILES['file']['name'][0])){
 				// check if file content is a valid URL
 				$content = file($filepath);
 				//file_put_contents('php://stderr', print_r($content, TRUE));
-				if (!filter_var($content[0], FILTER_VALIDATE_URL) === false) {
+				if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $content[0])) {
+				//if (!filter_var($content[0], FILTER_VALIDATE_URL) === false) {
 					// Valid URL: we read the content of the URL and save it
+					//file_put_contents('php://stderr', $content[0]);
 					$urlcontent = file($content[0]);
 					file_put_contents($filepath, $urlcontent);
 				} else {

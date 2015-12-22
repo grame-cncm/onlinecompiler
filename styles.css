@@ -355,7 +355,7 @@ EXAMPLE SAVER
 
 #navigation{
     /*width: 710px;*/
-    height: 0px;
+    height: 1px;
     position: relative;
     /*left: 1px;*/
     /*border-bottom-width: 1px;

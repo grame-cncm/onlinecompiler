@@ -23,8 +23,8 @@ ARCH		:= jack-qt.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	aust2jaqt $(faustfile) $oscOPT $httpdOPT
-	mv binary.zip $(compBinaryfile)
+	faust2jaqt $(faustfile) $oscOPT $httpdOPT
+	zip -r $(compBinaryfile) $(binaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)

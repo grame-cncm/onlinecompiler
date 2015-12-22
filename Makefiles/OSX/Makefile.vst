@@ -13,7 +13,7 @@ TMP 		:= ./tmp/$(applname)
 
 binary :
 	faust2vst $(faustfile) $(oscOPT) $(httpdOPT)
-	mv binary.zip $(compBinaryfile)
+	zip -r $(compBinaryfile) $(binaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)

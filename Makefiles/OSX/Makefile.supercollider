@@ -14,7 +14,7 @@ TMP 		:= ./tmp/$(applname)
 
 binary :
 	faust2supercollider $(faustfile) $(oscOPT) $(httpdOPT)
-	mv binary.zip $(compBinaryfile)
+	zip -r $(compBinaryfile) $(binaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)

@@ -12,7 +12,7 @@ svgfile := $(svgdir)/process.svg
 
 ### Customize these elements
 binaryfile 		:= $(applname).lv2.tgz
-ARCH			:= lv2synth.cpp 
+ARCH			:= lv2.cpp
 
 system			:= $(shell uname -s)
 
@@ -28,7 +28,7 @@ binary : $(binaryfile)
 
 source : $(cppfile)
 
-source-pkg : $(cppfile) 
+source-pkg : $(cppfile)
 
 highlighted : $(cppfile)
 	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
@@ -44,14 +44,13 @@ clean :
 $(cppfile) : $(faustfile)
 	if test -d $(DSPDEPTS);then dep=0;else cp $(DSPDEPTS) .;fi
 	faust -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
-	
+
 $(svgfile) : $(cppfile)
 	faust $(faustfile) -svg $(OPT) >/dev/null 2> errors.log
 
 $(binaryfile) : $(faustfile)
 	rm -f "$(binaryfile)"
-	faust2lv2synth $(OPT) $(ARCHPROC) $(faustfile)
+	faust2lv2 -nvoices 8 $(OPT) $(ARCHPROC) $(faustfile)
 	tar czf "$(binaryfile)" "$(applname).lv2"
 	rm -rf "$(applname).lv2"
 	echo $(binaryfile) > binaryfilename.txt
-

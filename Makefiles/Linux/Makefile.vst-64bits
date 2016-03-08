@@ -11,8 +11,8 @@ svgdir := $(faustfile)-svg
 svgfile := $(svgdir)/process.svg
 
 ### Customize these elements
-binaryfile 		:= $(applname).lv2.tgz
-ARCH			:= lv2.cpp
+binaryfile 		:= $(applname).vst.tgz
+ARCH			:= faustvst.cpp
 
 system			:= $(shell uname -s)
 
@@ -50,7 +50,7 @@ $(svgfile) : $(cppfile)
 
 $(binaryfile) : $(faustfile)
 	rm -f "$(binaryfile)"
-	faust2lv2 -nvoices 8 $(OPT) $(ARCHPROC) $(faustfile)
-	tar czf "$(binaryfile)" "$(applname).lv2"
-	rm -rf "$(applname).lv2"
+	faust2faustvst $(OPT) $(ARCHPROC) $(faustfile)
+	tar czf "$(binaryfile)" "$(applname).so"
+	rm -rf "$(applname).so"
 	echo $(binaryfile) > binaryfilename.txt

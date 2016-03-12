@@ -44,6 +44,7 @@ $(svgfile) : $(cppfile)
 $(binaryfile) : $(cppfile)
 	rm -f "$(binaryfile)"
 	faust2bela $(OPT) $(faustfile) > list.log
-    tar czf "$(binaryfile)" "BeagleRT"
+	tar czf "$(binaryfile)" "BeagleRT"
 	rm -rf "BeagleRT"
 	echo $(binaryfile) > binaryfilename.txt
+

@@ -603,6 +603,7 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
     $osList[4] = "Android";
     $osList[5] = "Ros";
     $osList[6] = "Web";
+    $osList[7] = "Bela";
 
     $assoc = array_merge ($assoc, make_menu("__osMenu__","osMenu",$_SESSION['osMenu'],$osMenuOnChange,$osList,"cat", $disOthers));
 

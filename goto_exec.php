@@ -69,7 +69,7 @@ if ($_SESSION['htmlCode'] != "" ){
       exec("qrencode -o " . $qrcodeurl . " \"" . $fileURL . "\"");
       $_SESSION['reponse_g++'] =
       "The file <a href='" . $fileURL . "' target='_blank'>"
-      . $_SESSION['exec_file'] . "</a> as been succesfuly generated and can now be downloaded."
+      . $_SESSION['exec_file'] . "</a> as been successfully generated and can now be downloaded."
       . "<div id='qrcode'> <a href='" . $fileURL . "' target='_blank'> <img src='" . $qrcodeurl . "'alt='qrcode face'> </a> </div>";
     //   echo "<script type=\"text/javascript\">";
     //   echo "document.location.replace(\"result_compilation_C.php\")";

@@ -26,6 +26,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 //if no session is found, a new one is started
 if (session_id()=="") session_start();
 
+require("php/env.php");
 require "php/functions.php";
 require "php/make_element.php";
 

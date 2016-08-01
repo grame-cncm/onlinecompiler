@@ -21,6 +21,7 @@
 
 if (session_id() == "") session_start();
 
+require("php/env.php");
 require "php/functions.php";
 require "php/make_element.php";
 require "php/form.php";

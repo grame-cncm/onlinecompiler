@@ -23,7 +23,7 @@ ARCH		:= jack-qt.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	remoteOSX faust2jaqt -deploy $(faustfile) $(OSCOPT) $(HTTPOPT)
+	remoteOSX faust2jaqt $(faustfile) -deploy $(OSCOPT) $(HTTPOPT)
 	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 

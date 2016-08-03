@@ -12,18 +12,18 @@ binaryfile 	:= $(applname).app
 compBinaryfile 	:= $(applname).zip
 
 ifeq ($(OSC),1)
-oscOPT := -osc
+OSCOPT := -osc
 endif
 
 ifeq ($(HTTPD),1)
-httpdOPT := -httpd
+HTTPOPT := -httpd
 endif
 
 ARCH		:= jack-qt.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	remoteOSX faust2jaqt $(faustfile) $oscOPT $httpdOPT
+	remoteOSX faust2jaqt $(faustfile) $(OSCOPT) $(HTTPOPT)
 	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 
@@ -52,7 +52,7 @@ $(svgfile) : $(cppfile)
 $(binaryfile) : $(cppfile)
 	ssh faust@macyann "mkdir onlineComp/$(SESSIONID)"
 	scp $(faustfile) faust@macyann:onlineComp/$(SESSIONID)
-	ssh faust@macyann "source /etc/profile; /usr/local/bin/faust2jaqt $(OPT) $(oscOPT) onlineComp/$(SESSIONID)/$(faustfile)"
+	ssh faust@macyann "source /etc/profile; /usr/local/bin/faust2jaqt $(OPT) $(OSCOPT) onlineComp/$(SESSIONID)/$(faustfile)"
 	scp -r faust@macyann:onlineComp/$(SESSIONID)/$(binaryfile) .
 	ssh faust@macyann "rm -rf onlineComp/$(SESSIONID)"
 	zip -r $(compBinaryfile) $(binaryfile)

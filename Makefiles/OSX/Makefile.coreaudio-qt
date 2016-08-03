@@ -48,12 +48,3 @@ $(cppfile) : $(faustfile)
 
 $(svgfile) : $(cppfile)
 	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
-
-$(binaryfile) : $(cppfile)
-	ssh faust@macyann "mkdir onlineComp/$(SESSIONID)"
-	scp $(faustfile) faust@macyann:onlineComp/$(SESSIONID)
-	ssh faust@macyann "source /etc/profile; /usr/local/bin/faust2caqt $(OPT) $(oscOPT) onlineComp/$(SESSIONID)/$(faustfile)"
-	scp -r faust@macyann:onlineComp/$(SESSIONID)/$(binaryfile) .
-	ssh faust@macyann "rm -rf onlineComp/$(SESSIONID)"
-	zip -r $(compBinaryfile) $(binaryfile)
-	rm -r $(binaryfile)

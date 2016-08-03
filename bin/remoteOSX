@@ -3,6 +3,7 @@
 # settings
 #SERVER='faust@macyann.grame.fr'
 SERVER='yannorlarey@localhost'
+SSHOPTIONS='-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
 
 # parameters SCRIPT=$1 FILE=$2 OPT=remaining
@@ -15,15 +16,15 @@ OPT=$*
 #echo script=$SCRIPT file=$FILE options=$OPT
 
 # produce binary.zip on remote server
-TMP=`ssh $SERVER "mktemp -d fwtemp.XXXXXX"`
+TMP=`ssh $SSHOPTIONS $SERVER "mktemp -d fwtemp.XXXXXX"`
 CMD="cd $TMP; /usr/local/bin/runInFaustEnv $SCRIPT $OPT $FILE"
 
 #echo command="$CMD"
 
-scp "$FILE" "$SERVER:$TMP/"
-ssh "$SERVER" "$CMD"
-ssh "$SERVER" "rm $TMP/$FILE"
-ssh "$SERVER" "cd $TMP; zip -r binary.zip *"
-scp "$SERVER:$TMP/binary.zip" .
-ssh "$SERVER" "rm -rf $TMP"
+scp $SSHOPTIONS "$FILE" "$SERVER:$TMP/"
+ssh $SSHOPTIONS "$SERVER" "$CMD"
+ssh $SSHOPTIONS "$SERVER" "rm $TMP/$FILE"
+ssh $SSHOPTIONS "$SERVER" "cd $TMP; zip -r binary.zip *"
+scp $SSHOPTIONS "$SERVER:$TMP/binary.zip" .
+ssh $SSHOPTIONS "$SERVER" "rm -rf $TMP"
 

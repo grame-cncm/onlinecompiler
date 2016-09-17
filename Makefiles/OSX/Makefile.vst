@@ -12,7 +12,7 @@ ARCH		:= vst.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	remoteOSX faust2vst $(faustfile) $(oscOPT) $(httpdOPT)
+	remoteOSX faust2faustvst $(faustfile) $(oscOPT) $(httpdOPT)
 	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 

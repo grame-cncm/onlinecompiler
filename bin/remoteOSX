@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # settings
-#SERVER='faust@macyann.grame.fr'
-SERVER='yannorlarey@localhost'
+SERVER='faust@macfaust.grame.fr'
+#SERVER='yannorlarey@localhost'
 SSHOPTIONS='-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
 

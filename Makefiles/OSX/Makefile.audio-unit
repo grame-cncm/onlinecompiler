@@ -1,0 +1,39 @@
+### The behaviour of this Makefile will only be correct if
+### only one .dsp file exists in the folder
+
+applname 	:= $(faustfile:.dsp=)
+cppfile 	:= $(faustfile:.dsp=.cpp)
+svgdir 		:= $(faustfile)-svg
+svgfile 	:= $(svgdir)/process.svg
+binaryfile 	:= $(applname).vst
+compBinaryfile 	:= $(applname).zip
+
+ARCH		:= vst.cpp
+TMP 		:= ./tmp/$(applname)
+
+binary :
+	remoteOSX faust2au $(faustfile) $(oscOPT) $(httpdOPT)
+	mv binary.zip $(compBinaryfile)
+	echo $(compBinaryfile) > binaryfilename.txt
+
+source : $(cppfile)
+
+source-pkg : $(cppfile)
+
+highlighted : $(cppfile)
+	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
+
+svg : $(svgfile)
+
+mdoc : $(cppfile)
+	faust2mathdoc $(faustfile)
+
+clean :
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(compBinaryfile) $(cppfile) $(binaryfile)-svg
+
+$(cppfile) : $(faustfile)
+	if test -d $(DSPDEPTS);then dep=0;else cp $(DSPDEPTS) .;fi
+	faust -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
+
+$(svgfile) : $(cppfile)
+	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log

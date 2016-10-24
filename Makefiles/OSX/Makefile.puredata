@@ -10,6 +10,7 @@ pkgfile := $(pkgdir).zip
 svgdir := $(faustfile)-svg
 svgfile := $(svgdir)/process.svg
 compBinaryfile 	:= $(applname).zip
+ARCH		:= puredata.cpp
 
 
 #binpkgdir  := $(faustfile:.dsp=-bin)

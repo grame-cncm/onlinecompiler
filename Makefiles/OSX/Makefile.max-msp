@@ -9,7 +9,7 @@ svgfile 	:= $(svgdir)/process.svg
 binaryfile 	:= $(applname)~.mxo
 compBinaryfile 	:= $(applname).zip
 
-ARCH		:= max-msp.cpp
+ARCH		:= max-msp/max-msp64.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :

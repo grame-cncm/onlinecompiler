@@ -2,6 +2,7 @@
 //if no session is found, a new one is started
 if (session_id()=="") session_start();
 
+require("php/env.php");
 require "php/update.php";
 
 $_SESSION['fullScreenMode'] = $_POST['fullScreenMode'];

@@ -1,5 +1,6 @@
 <?php
 
+require("php/env.php");
 require "php/functions.php";
 require "php/update.php";
 

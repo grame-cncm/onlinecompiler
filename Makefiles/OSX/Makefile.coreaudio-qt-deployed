@@ -23,7 +23,7 @@ ARCH		:= ca-qt.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	remoteOSX faust2caqt $(faustfile) $(oscOPT) $(httpdOPT) 
+	remoteOSX faust2caqt $(faustfile) -deploy $(oscOPT) $(httpdOPT) 
 	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 

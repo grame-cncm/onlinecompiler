@@ -28,6 +28,7 @@
 //session is started
 if (session_id()=="") session_start();
 
+require("php/env.php");
 require "php/functions.php";
 require "php/update.php";
 require "php/make_element.php";

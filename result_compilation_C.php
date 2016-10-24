@@ -28,6 +28,7 @@ architecture section is not modified.
 //session is started
 if (session_id()=="") session_start();
 
+require("php/env.php");
 require "php/functions.php";
 require "php/form.php";
 require "php/getfile.php";

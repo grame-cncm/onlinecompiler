@@ -1,29 +1,18 @@
-#OSC_ALLOWED
-#HTTPD_ALLOWED
 ### The behaviour of this Makefile will only be correct if
 ### only one .dsp file exists in the folder
 
-system 		:= $(shell uname -s)
 applname 	:= $(faustfile:.dsp=)
 cppfile 	:= $(faustfile:.dsp=.cpp)
 svgdir 		:= $(faustfile)-svg
 svgfile 	:= $(svgdir)/process.svg
-binaryfile 	:= $(applname).app
+binaryfile 	:= $(applname).vst
 compBinaryfile 	:= $(applname).zip
 
-ifeq ($(OSC),1)
-oscOPT := -osc
-endif
-
-ifeq ($(HTTPD),1)
-httpdOPT := -httpd
-endif
-
-ARCH		:= ca-qt.cpp
+ARCH		:= vst.cpp
 TMP 		:= ./tmp/$(applname)
 
 binary :
-	remoteOSX faust2caqt $(faustfile) $(oscOPT) $(httpdOPT) 
+	remoteOSX faust2au $(faustfile) $(oscOPT) $(httpdOPT)
 	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 

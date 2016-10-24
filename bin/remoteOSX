@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# settings
+SERVER='faust@macfaust.grame.fr'
+
+# parameters SCRIPT=$1 FILE=$2 OPT=remaining
+SCRIPT=$1
+FILE=$2
+shift 
+shift
+OPT=$*
+
+#echo script=$SCRIPT file=$FILE options=$OPT
+
+# produce binary.zip on remote server
+TMP=`ssh $SERVER "mktemp -d fwtemp.XXXXXX"`
+CMD="source /etc/profile; cd $TMP; $SCRIPT $OPT $FILE"
+#echo command="$CMD"
+
+scp "$FILE" "$SERVER:$TMP/"
+ssh "$SERVER" "$CMD"
+ssh "$SERVER" "rm $TMP/$FILE"
+ssh "$SERVER" "cd $TMP; zip -r binary.zip *"
+scp "$SERVER:$TMP/binary.zip" .
+ssh "$SERVER" "rm -rf $TMP"
+

@@ -3,43 +3,33 @@
 ### The behaviour of this Makefile will only be correct if
 ### only one .dsp file exists in the folder
 
-PROCARCH := 64bits
-
-applname := $(faustfile:.dsp=)
-cppfile := $(faustfile:.dsp=.cpp)
-pkgdir := $(faustfile:.dsp=-pkg)
-pkgfile := $(pkgdir).zip
-svgdir := $(faustfile)-svg
-svgfile := $(svgdir)/process.svg
-
-localPath := pwd
-
-### Customize these elements
-binaryfile 	:= $(applname).chug
+system 		:= $(shell uname -s)
+applname 	:= $(faustfile:.dsp=)
+cppfile 	:= $(faustfile:.dsp=.cpp)
+svgdir 		:= $(faustfile)-svg
+svgfile 	:= $(svgdir)/process.svg
+binaryfile 	:= $(applname).app
 compBinaryfile 	:= $(applname).zip
-ARCH		:= jack-gtk.cpp 
-### End Customize
 
 ifeq ($(OSC),1)
-oscOPT := -osc
+OSCOPT := -osc
 endif
 
 ifeq ($(HTTPD),1)
-httpdOPT := -httpd
+HTTPOPT := -httpd
 endif
 
-ifeq ($(PROCARCH), 32bits)
-ARCHPROC := -arch32
-else
-ARCHPROC := -arch64
-endif
+ARCH		:= jack-qt.cpp
+TMP 		:= ./tmp/$(applname)
 
-binary : $(binaryfile)
+binary :
+	remoteOSX faust2jaqt $(faustfile) -deploy $(OSCOPT) $(HTTPOPT)
+	mv binary.zip $(compBinaryfile)
 	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)
 
-source-pkg : $(cppfile) 
+source-pkg : $(cppfile)
 
 highlighted : $(cppfile)
 	highlight -V -t 4 -S cpp -i $(cppfile) -o highlighted
@@ -50,22 +40,20 @@ mdoc : $(cppfile)
 	faust2mathdoc $(faustfile)
 
 clean :
-	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(compBinaryfile) $(cppfile) $(svgdir)
+	rm -rf $(svgdir) $(pkgdir) $(binaryfile) $(compBinaryfile) $(cppfile) $(binaryfile)-svg
 
 $(cppfile) : $(faustfile)
 	if test -d $(DSPDEPTS);then dep=0;else cp $(DSPDEPTS) .;fi
 	faust -a $(ARCH) $(faustfile) $(OPT) -o $(cppfile) 2> errors.log
-	
+
 $(svgfile) : $(cppfile)
 	faust $(faustfile) $(OPT) -svg >/dev/null 2> errors.log
-	
+
 $(binaryfile) : $(cppfile)
 	ssh faust@macyann "mkdir onlineComp/$(SESSIONID)"
 	scp $(faustfile) faust@macyann:onlineComp/$(SESSIONID)
-	ssh faust@macyann "source /etc/profile; cd onlineComp/$(SESSIONID) && /usr/local/bin/faust2ck $(OPT) $(faustfile)"
+	ssh faust@macyann "source /etc/profile; /usr/local/bin/faust2jaqt $(OPT) $(OSCOPT) onlineComp/$(SESSIONID)/$(faustfile)"
 	scp -r faust@macyann:onlineComp/$(SESSIONID)/$(binaryfile) .
 	ssh faust@macyann "rm -rf onlineComp/$(SESSIONID)"
 	zip -r $(compBinaryfile) $(binaryfile)
 	rm -r $(binaryfile)
-
-

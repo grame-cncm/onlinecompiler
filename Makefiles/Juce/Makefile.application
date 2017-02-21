@@ -17,7 +17,7 @@ endif
 ARCH		:= juce.cpp
 
 binary :
-	faust2juce $(faustfile) -midi $(oscOPT) 
+	faust2juce -midi -standalone $(faustfile) $(oscOPT) 
 	zip -r $(applname).zip $(applname)
 	rm -rf $(applname)
 	echo $(applname).zip > binaryfilename.txt

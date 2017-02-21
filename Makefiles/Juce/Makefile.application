@@ -14,7 +14,7 @@ ifeq ($(OSC),1)
 oscOPT := -osc
 endif
 
-ARCH		:= juce.cpp
+ARCH		:= juce-standalone.cpp
 
 binary :
 	faust2juce -midi -standalone $(faustfile) $(oscOPT) 

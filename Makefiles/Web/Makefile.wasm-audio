@@ -15,7 +15,7 @@ wasmfile 	:= $(applname).wasm
 ### End Customize
 
 binary : $(binaryfile)
-	echo "$(binaryfile);  $(wasmfile);" > binaryfilename.txt
+	echo "$(binaryfile)" > binaryfilename.txt
 
 source : $(cppfile)
 

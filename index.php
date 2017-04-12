@@ -40,7 +40,7 @@ $_SESSION['id'] = session_id();
 $_SESSION['path'] = $_SERVER['DOCUMENT_ROOT']."/onlinecompiler/tmp/".$_SESSION['id'];
 // and another one
 system("scripts/new_session {$_SESSION['path']}", $ret);
-if ($ret != 0) {erreur("index.php: Unable to start a new session. Please, try later."); return 1;}
+if ($ret != 0) {erreur("index.php: Unable to start a new session {$_SESSION['path']}. Please, try later."); return 1;}
 
 //get the code of compiler.html
 if ($_SESSION['htmlCode'] == "" || $_SESSION['fullScreenModeTest'] == 1){

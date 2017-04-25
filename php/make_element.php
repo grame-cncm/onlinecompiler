@@ -605,6 +605,7 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
     $osList[6] = "Web";
     $osList[7] = "Bela";
     $osList[8] = "Juce";
+    $osList[9] = "Unity";
 
     $assoc = array_merge ($assoc, make_menu("__osMenu__","osMenu",$_SESSION['osMenu'],$osMenuOnChange,$osList,"cat", $disOthers));
 

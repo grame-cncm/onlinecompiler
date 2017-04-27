@@ -19,8 +19,11 @@ binpkg     := $(faustfile:.dsp=-bin.zip)
 
 binary :
 	remoteOSX faust2puredata $(faustfile) $(oscOPT) $(httpdOPT)
-	zip -j binary.zip $(wildcard /usr/lib/pd/extra/faust*.pd  /usr/local/lib/pd/extra/faust*.pd /opt/lib/pd/extra/faust*.pd)
+	faust -xml $(faustfile) -o /dev/null
+	faust2pd $(faustfile).xml
+	zip -j binary.zip $(wildcard *.pd /usr/lib/pd/extra/faust*.pd  /usr/local/lib/pd/extra/faust*.pd /opt/lib/pd/extra/faust*.pd)
 	mv binary.zip $(compBinaryfile)
+	rm *.xml *.pd
 	echo $(compBinaryfile) > binaryfilename.txt
 
 source : $(cppfile)

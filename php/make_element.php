@@ -613,7 +613,7 @@ $('#catalogItem$i-$j').click(function(){ $('#catalogItemDescription$i-$j').show(
     $langList[0] = "C++";
     $langList[1] = "c";
     $langList[2] = "java";
-    $langList[3] = "js";
+    $langList[3] = "wast";
     $langList[4] = "llvm";
     $assoc = array_merge ($assoc, make_menu("__langMenu__","langMenu",$_SESSION['langMenu'],"ONCHANGE=\"$goto\"",$langList,"cat", $disLang));
 

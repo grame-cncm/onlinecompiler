@@ -54,7 +54,7 @@ if (!defined("__compilation_faust__"))
     $fileName = $workdirname.$_SESSION['appli_name'].".dsp";
     $cppFileName = $workdirname.$_SESSION['appli_name'].".cpp";
     $javaFileName = $workdirname.$_SESSION['appli_name'].".java";
-    $jsFileName = $workdirname.$_SESSION['appli_name'].".js";
+    $wastFileName = $workdirname.$_SESSION['appli_name'].".wast";
     $cFileName = $workdirname.$_SESSION['appli_name'].".c";
     $llvmFileName = $workdirname.$_SESSION['appli_name'].".llvm";
     $logfile = $workdirname."errors.log";
@@ -72,9 +72,9 @@ if (!defined("__compilation_faust__"))
       $_SESSION['codeJava'] = read_file($javaFileName);
     }
 
-    if($_SESSION['langMenu'] == "js"){
-      exec("faust -lang ".$_SESSION['langMenu']." $fileName >> ".$jsFileName);
-      $_SESSION['codeJs'] = read_file($jsFileName);
+    if($_SESSION['langMenu'] == "wast"){
+      exec("faust -lang ".$_SESSION['langMenu']." $fileName >> ".$wastFileName);
+      $_SESSION['codeJs'] = read_file($wastFileName);
     }
 
     if($_SESSION['langMenu'] == "c"){

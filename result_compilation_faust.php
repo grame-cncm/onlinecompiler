@@ -65,9 +65,9 @@ if ($_SESSION['resultat_faust'] == 1) {
     $assoc['__mode__'] = "\"text/x-java\"";
     $dis = "disableOthers";
   }
-  elseif($_SESSION['langMenu'] == "js"){
+  elseif($_SESSION['langMenu'] == "wast"){
     $assoc['__resultat__'] = $_SESSION['codeJs'];
-    $assoc['__mode__'] = "\"text/javascript\"";
+    $assoc['__mode__'] = "\"application/wasm\"";
     $dis = "disableOthers";
   }
   elseif($_SESSION['langMenu'] == "c"){

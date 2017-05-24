@@ -131,6 +131,7 @@ function update()
         else if($_SESSION['osMenu'] == "Web") exec("scripts/liste_enrobages Web",$list,$ret);
         else if($_SESSION['osMenu'] == "Bela") exec("scripts/liste_enrobages Bela",$list,$ret);
         else if($_SESSION['osMenu'] == "Juce") exec("scripts/liste_enrobages Juce",$list,$ret);
+        else if($_SESSION['osMenu'] == "Unity") exec("scripts/liste_enrobages Unity",$list,$ret);
         else exec("scripts/liste_enrobages Linux",$list,$ret);
         $list[0] = "none";
         $_SESSION['list_enrob_compil'] = $list;

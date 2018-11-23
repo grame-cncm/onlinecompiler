@@ -234,22 +234,46 @@ if (!defined("__functions__"))
     \return The list of options.
 */
 
-        function extract_options($options)
-        {
-          $i=0;
-          $opt="";
-          while($options[$i]!="---------") $i=$i+1;
-          $i=$i+1;
-          while($options[$i]!="")
-          {
-            if (substr_count($options[$i], "-h") == 0 && substr_count($options[$i], "-o") == 0
-                && substr_count($options[$i], "-a") == 0 && substr_count($options[$i], "-svg")== 0
-                && substr_count($options[$i], "-v") == 0)
-              $opt = $opt.str_replace("<n>","",$options[$i]."<br>");
-            $i=$i+1;
-          }
-          return $opt;
-        }
+	function extract_options($options)
+	{
+		$i=0;
+		$opt="";
+		$n = count ($options);
+		while($options[$i]!="") {
+		// the first empty line is expected to separate the 'usage' part and the options enumeration
+			 $i=$i+1;
+			 if (($i > 10) || ($i > $n)) return "Failed to extract faust options<br />";
+		}
+		while ($i < $n) {
+			
+			if ($options[$i] == "Example:") break;						// skip the examples
+			$tmp = preg_replace ('/</', '&lt;' ,$options[$i]);			// replace '<' to avoid html syntax
+			$tmp = preg_replace ('/^([A-Za-a]..*)$/', '<h3>$1</h3> ', $tmp);	// sections headers
+			$tmp = preg_replace ('/^--*$/', '<hr> <ul> ', $tmp);		// separation line and indent (<ul>)
+			$tmp = preg_replace ('/^  *(-..*)$/', '$1<br> ', $tmp);		// option: add a <br>
+			$tmp = preg_replace ('/^[ 	]*$/', '</ul> ', $tmp);			// empty lines: unindent (</ul>)
+			$opt = $opt . " " . $tmp;
+			$i = $i + 1;
+		} 
+		return $opt;
+	}
+        
+//         function old_extract_options($options)
+//         {
+//           $i=0;
+//           $opt="";
+//           while($options[$i]!="---------") $i=$i+1;
+//           $i=$i+1;
+//           while($options[$i]!="")
+//           {
+//             if (substr_count($options[$i], "-h") == 0 && substr_count($options[$i], "-o") == 0
+//                 && substr_count($options[$i], "-a") == 0 && substr_count($options[$i], "-svg")== 0
+//                 && substr_count($options[$i], "-v") == 0)
+//               $opt = $opt.str_replace("<n>","",$options[$i]."<br>");
+//             $i=$i+1;
+//           }
+//           return $opt;
+//         }
 
 	function cutEnrobagemenu($stringToCut){
 	  $cutPosition32 = strpos($stringToCut,"3");
